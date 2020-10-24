@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/HypernovaAHitchhikersAdventure.iml" filepath="$PROJECT_DIR$/HypernovaAHitchhikersAdventure.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/launcherNoFred9/launcherNoFred9.iml" filepath="$PROJECT_DIR$/launcherNoFred9/launcherNoFred9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/unityLibraryNoFred9/unityLibraryNoFred9.iml" filepath="$PROJECT_DIR$/unityLibraryNoFred9/unityLibraryNoFred9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/unityconnectionlibrary/unityconnectionlibrary.iml" filepath="$PROJECT_DIR$/unityconnectionlibrary/unityconnectionlibrary.iml" />
+    </modules>
+  </component>
+</project>

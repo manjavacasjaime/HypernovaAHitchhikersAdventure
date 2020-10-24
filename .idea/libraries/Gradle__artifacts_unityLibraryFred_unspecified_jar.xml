@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: artifacts:unityLibraryFred:unspecified@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f28e6bcebb95e001dd601eea3142eb78/jars/libs/classes-2.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f28e6bcebb95e001dd601eea3142eb78/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f28e6bcebb95e001dd601eea3142eb78/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f28e6bcebb95e001dd601eea3142eb78/jars/libs/unity-classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
