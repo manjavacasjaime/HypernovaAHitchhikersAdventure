@@ -1106,6 +1106,9 @@ public class MainActivity extends AppCompatActivity {
         } else if (myobjx.matches("hypernova")) {
             secondtext.setText("That's the game title.");
             linearLayout.addView(secondtext);
+        } else if (myobjx.matches("a")) {
+            secondtext.setText(".");
+            startPlatform();
         } else if (myobjx.matches("the answer to life the universe and everything") || myobjx.matches("the answer to life, the universe and everything")) {
             secondtext.setText("42.");
             linearLayout.addView(secondtext);
