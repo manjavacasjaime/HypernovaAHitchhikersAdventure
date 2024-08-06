@@ -1,1 +1,1 @@
-include ':app', ':unityconnectionlibrary', ':launcherNoFred9', ':unityLibraryNoFred9'
+include ':app'

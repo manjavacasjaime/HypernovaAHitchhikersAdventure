@@ -3,7 +3,6 @@ package hypernova.hithchhiker.guide.galaxy;
 import android.content.Context;
 import android.text.Editable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.EditText;
 
@@ -43,5 +42,4 @@ public class CustomEditText extends EditText {
 
         return false;
     }
-
 }
