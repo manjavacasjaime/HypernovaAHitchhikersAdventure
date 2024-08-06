@@ -1,6 +1,5 @@
 package hypernova.hithchhiker.guide.galaxy;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Handler;
@@ -29,8 +28,6 @@ import java.util.Set;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-
-import hypernova.hithchhiker.myguide.unityconnectionlibrary.UnityConnectionActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
     int prevStringLength = 2;
     boolean capsLocked = false;
     boolean matchSaved = false;
-    boolean savedAfterPlatform = false;
     Handler handlerFred;
     Runnable runnableFred;
 
@@ -133,8 +129,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        UnityConnectionActivity.setMainActivityContext(getApplicationContext());
-
 
         //splash();
         earth(); //this will be removed
@@ -173,8 +167,6 @@ public class MainActivity extends AppCompatActivity {
         dropHouseDesert32.clear();
 
         obj=1; // EN QUÉ OBJ ESTOY. SI VALE 0, ES QUE ES GAME OVER
-        UnityConnectionActivity.platformFinished = false;
-        savedAfterPlatform = false;
         name = "Alex";
 
         helpobj1 = 0;
@@ -223,8 +215,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = getSharedPreferences("hypernova.save", MODE_PRIVATE).edit();
         editor.putBoolean("matchSaved", true);
         editor.putInt("obj", obj);
-        editor.putBoolean("UnityConnectionActivity.platformFinished", UnityConnectionActivity.platformFinished);
-        editor.putBoolean("savedAfterPlatform", savedAfterPlatform);
         editor.putString("name", name);
 
         editor.putInt("score", score);
@@ -314,13 +304,11 @@ public class MainActivity extends AppCompatActivity {
     public void restore() {
         SharedPreferences sharedPrefs = this.getSharedPreferences("hypernova.save", MODE_PRIVATE);
         obj = sharedPrefs.getInt("obj", 1);
-        UnityConnectionActivity.platformFinished = sharedPrefs.getBoolean("UnityConnectionActivity.platformFinished", false);
-        savedAfterPlatform = sharedPrefs.getBoolean("savedAfterPlatform", false);
         name = sharedPrefs.getString("name", "Alex");
 
         score = sharedPrefs.getInt("score", 0);
         TextView mymoves = (TextView) findViewById(R.id.moves);
-        mymoves.setText("Moves: " + String.valueOf(score));
+        mymoves.setText("Moves: " + score);
 
         String locSaved = sharedPrefs.getString("locSaved", "Just playing");
         TextView mylocation = (TextView) findViewById(R.id.location);
@@ -409,8 +397,6 @@ public class MainActivity extends AppCompatActivity {
         final Typeface typeface = ResourcesCompat.getFont(MainActivity.this, R.font.lucida_console);
 
         SharedPreferences sharedPrefs = this.getSharedPreferences("hypernova.save", MODE_PRIVATE);
-        UnityConnectionActivity.platformFinished = sharedPrefs.getBoolean("UnityConnectionActivity.platformFinished", false);
-        savedAfterPlatform = sharedPrefs.getBoolean("savedAfterPlatform", false);
         appColor = sharedPrefs.getInt("appColor", 1);
         switch (appColor) {
             case 1:
@@ -429,38 +415,17 @@ public class MainActivity extends AppCompatActivity {
         TextView firstText = new TextView(this);
         firstText.setTypeface(typeface);
 
-        if (!UnityConnectionActivity.platformFinished || savedAfterPlatform) {
-            UnityConnectionActivity.platformFinished = false;
-            savedAfterPlatform = false;
-            savedAfterPlatform = false;
-            mymoves.setText("Moves: " + String.valueOf(score));
-            mylocation.setText("Just playing");
-            firstText.setText(name + ".\nIt's April 16, 2019. You are in B903, one of the Bubbles regulated by the Space Federation.\nIt's been 298 years, 5 months and 13 days since the last hitchhiker, now referred to as Traveller, died.\n\nBasement\nYou find yourself sat down playing video games. Your eyes aren't able to stop looking at the screen.\n\n-Say COMMANDS if you need help.\n(Click below the text to write)");
-            linearLayout.addView(firstText);
-            obj1();
-        } else {
-            restore();
-            score8=score;
-            mylocation.setText("Ludlow Library");
-            mymoves.setText("Moves: " + String.valueOf(score));
-            firstText.setText("You both enter the library.\n\n'I need to talk with someone here. I'll be back in a minute. Find the book, " + name + ".'\nFred enters the office door of the library and closes it behind him. Look around.\n\nNote: Whenever you want to speak with someone say SPEAK (and the name of the person).");
-            linearLayout.addView(firstText);
-            obj=8;
-            save();
-            obj8();
-        }
-
+        mymoves.setText("Moves: " + score);
+        mylocation.setText("Just playing");
+        firstText.setText(name + ".\nIt's April 16, 2019. You are in B903, one of the Bubbles regulated by the Space Federation.\nIt's been 298 years, 5 months and 13 days since the last hitchhiker, now referred to as Traveller, died.\n\nBasement\nYou find yourself sat down playing video games. Your eyes aren't able to stop looking at the screen.\n\n-Say COMMANDS if you need help.\n(Click below the text to write)");
+        linearLayout.addView(firstText);
+        obj1();
     }
 
 
     public void exitApp() {
         this.finish();
         System.exit(0);
-    }
-
-    public void startPlatform() {
-        save();
-        startActivity(new Intent(MainActivity.this, UnityHolderNoFred.class));
     }
 
     public void changeAppColor(LinearLayout linearLayout, int newColor) {
@@ -1106,6 +1071,8 @@ public class MainActivity extends AppCompatActivity {
         } else if (myobjx.matches("hypernova")) {
             secondtext.setText("That's the game title.");
             linearLayout.addView(secondtext);
+        } else if (myobjx.matches("a")) {
+            secondtext.setText(".");
         } else if (myobjx.matches("the answer to life the universe and everything") || myobjx.matches("the answer to life, the universe and everything")) {
             secondtext.setText("42.");
             linearLayout.addView(secondtext);
@@ -1138,7 +1105,6 @@ public class MainActivity extends AppCompatActivity {
             linearLayout.addView(secondtext);
         } else if (myobjx.matches("save")){
             matchSaved = true;
-            if (obj >= 8) savedAfterPlatform = true;
             save();
             secondtext.setText("GAME SAVED.\nYou can keep playing if you want to.");
             linearLayout.addView(secondtext);
@@ -2957,13 +2923,20 @@ public class MainActivity extends AppCompatActivity {
                             runnableFred = new Runnable() {
                                 @Override
                                 public void run() {
-                                    startPlatform();
+                                    mylocation.setText("Ludlow Library");
+                                    secondtext.setText("You both enter the library.\n\n'I need to talk with someone here. I'll be back in a minute. Find the book, " + name + ".'\nFred enters the office door of the library and closes it behind him. Look around.\n\nNote: Whenever you want to speak with someone say SPEAK (and the name of the person).");
+                                    linearLayout.addView(secondtext);
+                                    obj=8;
+                                    obj8();
                                 }
                             };
                             handlerFred.postDelayed(runnableFred, 5750);
                         } else {
-                            secondtext.setText(".");
-                            startPlatform();
+                            mylocation.setText("Ludlow Library");
+                            secondtext.setText("You both enter the library.\n\n'I need to talk with someone here. I'll be back in a minute. Find the book, " + name + ".'\nFred enters the office door of the library and closes it behind him. Look around.\n\nNote: Whenever you want to speak with someone say SPEAK (and the name of the person).");
+                            linearLayout.addView(secondtext);
+                            obj=8;
+                            obj8();
                         }
                     }
                 }
@@ -3019,13 +2992,20 @@ public class MainActivity extends AppCompatActivity {
                             runnableFred = new Runnable() {
                                 @Override
                                 public void run() {
-                                    startPlatform();
+                                    mylocation.setText("Ludlow Library");
+                                    secondtext.setText("You both enter the library.\n\n'I need to talk with someone here. I'll be back in a minute. Find the book, " + name + ".'\nFred enters the office door of the library and closes it behind him. Look around.\n\nNote: Whenever you want to speak with someone say SPEAK (and the name of the person).");
+                                    linearLayout.addView(secondtext);
+                                    obj=8;
+                                    obj8();
                                 }
                             };
                             handlerFred.postDelayed(runnableFred, 5750);
                         } else {
-                            secondtext.setText(".");
-                            startPlatform();
+                            mylocation.setText("Ludlow Library");
+                            secondtext.setText("You both enter the library.\n\n'I need to talk with someone here. I'll be back in a minute. Find the book, " + name + ".'\nFred enters the office door of the library and closes it behind him. Look around.\n\nNote: Whenever you want to speak with someone say SPEAK (and the name of the person).");
+                            linearLayout.addView(secondtext);
+                            obj=8;
+                            obj8();
                         }
                     }
                 } else {
@@ -4521,7 +4501,6 @@ public class MainActivity extends AppCompatActivity {
                 case "save":
                     stoppeton=0;
                     matchSaved = true;
-                    savedAfterPlatform = true;
                     save();
                     secondtext.setText("GAME SAVED.\nYou can keep playing if you want to.");
                     linearLayout.addView(secondtext);
