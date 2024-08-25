@@ -1,4 +1,4 @@
-package hypernova.hithchhiker.guide.galaxy;
+package hypernova.hithchhiker.guide.galaxy.managers;
 
 import android.content.SharedPreferences;
 import android.os.Handler;
@@ -9,12 +9,17 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import hypernova.hithchhiker.guide.galaxy.R;
 import hypernova.hithchhiker.guide.galaxy.characters.Fred;
+import hypernova.hithchhiker.guide.galaxy.characters.Myself;
 
 public class ValueManager extends AppCompatActivity {
-    Fred fred = new Fred();
-    int score;
-    int scoreDuringObj1;
+    SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
+    public boolean isMatchSaved = sharedPrefs.getBoolean("isMatchSaved", false);
+    public Myself myself = new Myself();
+    public Fred fred = new Fred();
+    public int score;
+    public int scoreDuringObj1;
 
     ArrayList<String> myInventory = new ArrayList<String>();
     ArrayList<String> myInventoryPast = new ArrayList<String>();
@@ -32,11 +37,9 @@ public class ValueManager extends AppCompatActivity {
     ArrayList<String> dropHouseDesert23 = new ArrayList<String>();
     ArrayList<String> dropHouseDesert32 = new ArrayList<String>();
 
-    int obj=1; // EN QUÉ OBJ ESTOY. SI VALE 0, ES QUE ES GAME OVER
+    public int obj = 1; // EN QUÉ OBJ ESTOY. SI VALE 0, ES QUE ES GAME OVER
 
     int changeai = 0;
-    String name = "Alex";
-    String surname = " Peabody";
 
     int blinkcolor = 0; //0 black, 1 grey
     int pos = -1;
@@ -48,7 +51,6 @@ public class ValueManager extends AppCompatActivity {
     boolean callbacksRemoved;
     int prevStringLength = 2;
     boolean capsLocked = false;
-    boolean matchSaved = false;
 
     int killobjx = 0;
     int consultobjx = 0;
@@ -96,6 +98,7 @@ public class ValueManager extends AppCompatActivity {
     int brokenegg = 0;
 
     public void initiateVariables() {
+        myself.initiateVariables();
         fred.initiateVariables();
         score = 0;
         scoreDuringObj1 = 0;
@@ -117,7 +120,6 @@ public class ValueManager extends AppCompatActivity {
         dropHouseDesert32.clear();
 
         obj=1; // EN QUÉ OBJ ESTOY. SI VALE 0, ES QUE ES GAME OVER
-        name = "Alex";
 
         helpobj1 = 0;
 
@@ -157,12 +159,13 @@ public class ValueManager extends AppCompatActivity {
     }
 
     public void save() {
-        SharedPreferences.Editor editor = getSharedPreferences("hypernova.save", MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        myself.save();
         fred.save();
 
-        editor.putBoolean("matchSaved", true);
+        isMatchSaved = true;
+        editor.putBoolean("isMatchSaved", true);
         editor.putInt("obj", obj);
-        editor.putString("name", name);
 
         editor.putInt("score", score);
 
@@ -242,12 +245,11 @@ public class ValueManager extends AppCompatActivity {
         editor.commit();
     }
 
-    public void restore() {
-        SharedPreferences sharedPrefs = this.getSharedPreferences("hypernova.save", MODE_PRIVATE);
+    public void restore() {;
+        myself.restore();
         fred.restore();
 
         obj = sharedPrefs.getInt("obj", 1);
-        name = sharedPrefs.getString("name", "Alex");
 
         score = sharedPrefs.getInt("score", 0);
         TextView mymoves = (TextView) findViewById(R.id.moves);

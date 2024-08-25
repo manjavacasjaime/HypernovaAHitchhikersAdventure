@@ -35,7 +35,7 @@ public class Fred extends AppCompatActivity {
     }
 
     public void restore() {
-        SharedPreferences sharedPrefs = this.getSharedPreferences("hypernova.save", MODE_PRIVATE);
+        SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
 
         examineFredDuringObj7Count = sharedPrefs.getInt("fred.examineFredDuringObj7Count", 0);
         isDead = sharedPrefs.getBoolean("fred.isDead", false);
