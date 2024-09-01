@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
                           myobjxlow = myobjxlow.trim();
                           objx.setEnabled(false);
 
-                          switch (valueManager.obj) {
+                          switch (valueManager.currentObjective) {
                               case 0:
                                   if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("")) {
                                       secondText.setText("Type RESTART, RESTORE, COMMANDS or QUIT.");
@@ -299,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
                                   }
                                   break;
                               case 1:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj1Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && consultGuideX(myobjxlow).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.objectiveOne.checkObjAnswer(myobjxlow, MainActivity.this).matches("") && commonAnswersX(myobjxlow).matches("") && consultGuideX(myobjxlow).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
@@ -418,185 +418,6 @@ public class MainActivity extends AppCompatActivity {
 
         setInputListeners(obj, linearLayout, typeface, secondText);
     }
-
-    public String checkObj1Answer(String myobj1) {
-        TextView myMoves = (TextView) findViewById(R.id.moves);
-        TextView myLocation = (TextView) findViewById(R.id.location);
-
-        final LinearLayout linearLayout = (LinearLayout)findViewById(R.id.gameearth);
-        final Typeface typeface = ResourcesCompat.getFont(MainActivity.this, R.font.lucida_console);
-        TextView secondText = new TextView(MainActivity.this);
-        secondText.setTypeface(typeface);
-
-        if (myobj1.matches("test606 obj7")) {
-            valueManager.score = 12;
-            myMoves.setText("Moves: " + valueManager.score);
-            myLocation.setText("Library, door");
-            valueManager.fred.isPresent = true;
-            isstand = 1;
-            libraryobj7 = 1;
-            neckchip = 1;
-            obj=7;
-            obj();
-        }
-        // DIRECTIONS GO VERB 1
-        else if (myobj1.matches("north") || myobj1.matches("n") || myobj1.matches("go north") || myobj1.matches("go n") || myobj1.matches("go straight on") || myobj1.matches("south") || myobj1.matches("s") || myobj1.matches("go south") || myobj1.matches("go s") || myobj1.matches("go backwards") || myobj1.matches("east") || myobj1.matches("e") || myobj1.matches("go east") || myobj1.matches("go e") || myobj1.matches("go right") || myobj1.matches("west") || myobj1.matches("w") || myobj1.matches("go west") || myobj1.matches("go w") || myobj1.matches("go left") || myobj1.matches("northeast") || myobj1.matches("ne") || myobj1.matches("go northeast") || myobj1.matches("go ne") || myobj1.matches("northwest") || myobj1.matches("nw") || myobj1.matches("go northwest") || myobj1.matches("go nw") || myobj1.matches("southeast") || myobj1.matches("se") || myobj1.matches("go southeast") || myobj1.matches("go se") || myobj1.matches("southwest") || myobj1.matches("sw") || myobj1.matches("go southwest") || myobj1.matches("go sw") || myobj1.matches("down") || myobj1.matches("d") || myobj1.matches("go down") || myobj1.matches("downstairs") || myobj1.matches("go downstairs") || myobj1.matches("go d")) {
-            secondText.setText("You can't go that way.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.matches("up") || myobj1.matches("u") || myobj1.matches("go up") || myobj1.matches("upstairs") || myobj1.matches("go upstairs") || myobj1.matches("go u") || myobj1.matches("exit") || myobj1.matches("leave") || ((myobj1.contains("go") || myobj1.contains("get")) && myobj1.contains("out")) || (myobj1.contains("exit") && myobj1.contains("room"))) {
-            secondText.setText("You can't leave right now.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.contains("go")) {
-            secondText.setText("This verb needs to be used with a direction.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.contains("speak") || myobj1.contains("talk") || myobj1.contains("ask")) {  // SPEAK VERB 1
-            secondText.setText("There is no one here you can speak with.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.matches("stop")) { // STOP VERB 1
-            secondText.setText("This verb needs to be used with the action you wanna stop doing.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.contains("stop")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
-            if (myobj1.contains("voices")) {
-                secondText.setText("You are not hearing voices... Not yet.");
-                linearLayout.addView(secondText);
-                obj();
-            } else if (myobj1.contains("play")) {
-                valueManager.scoreDuringObj1 = valueManager.score;
-                myLocation.setText("Basement");
-                secondText.setText("A soft light bulb allows you to see your house basement.\nYou are sitting on the floor. There is a piece of furniture with a vinyl player and some discs on it. Your game console is next to you. There's a door leading UP.\nThere is a blanket here.\nThere is a pencil here.");
-                linearLayout.addView(secondText);
-                obj=2;
-                obj();
-            } else {
-                secondText.setText("This action cannot be stopped or you're not doing it.");
-                linearLayout.addView(secondText);
-                obj();
-            }
-        } else if (myobj1.contains("keep play")) {  // KEEP VERB, añadido por si acaso
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
-            secondText.setText("You keep playing.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.matches("close")) {  // CLOSE VERB 1
-            secondText.setText("This verb needs to be used with a noun.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.contains("close")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
-            if (myobj1.contains("eye")) {
-                secondText.setText("You try it hard... But it results to be impossible.");
-                linearLayout.addView(secondText);
-                obj();
-            } else {
-                secondText.setText("This thing cannot be closed or you don't see it because you're focused on the game.");
-                linearLayout.addView(secondText);
-                obj();
-            }
-        } else if (myobj1.matches("open")) {  // OPEN VERB 1
-            secondText.setText("This verb needs to be used with a noun.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.contains("open")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
-            if (myobj1.contains("eye")) {
-                secondText.setText("Your eyes are already wide open.");
-                linearLayout.addView(secondText);
-                obj();
-            } else {
-                secondText.setText("This thing cannot be opened or you don't see it because you're focused on the game.");
-                linearLayout.addView(secondText);
-                obj();
-            }
-        } else if (myobj1.matches("help")) {  // HELP VERB 1
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
-            if (helpobj1==0) {
-                helpobj1=1;
-                secondText.setText("No one is coming to help you. Ha Ha Ha!\n\nJust joking. Say STOP PLAYING.");
-            } else {
-                secondText.setText("Stop asking for help.");
-            }
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.contains("help")) {
-            secondText.setText("Just say HELP.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.contains("drink")) { // DRINK VERB 1
-            secondText.setText("There is nothing you can drink here.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.matches("i") || myobj1.matches("inventory")) {
-            secondText.setText("You have nothing.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.contains("inventory")) {
-            secondText.setText("Just write the letter I or say INVENTORY.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.contains("repeat")) {
-            secondText.setText("There is nothing you can repeat. You're playing video games in your basement.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if ((myobj1.contains("check") && myobj1.contains("out")) || myobj1.contains("find") || myobj1.contains("search")) {
-            secondText.setText("Try to LOOK AROUND or EXAMINE an object.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.contains("check") || myobj1.contains("review")) {
-            secondText.setText("Say EXAMINE and the object you want to check.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.contains("play")) { // PLAY VERB, añadido por si acaso
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
-            secondText.setText("You are already playing. Nice move...");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.matches("sleep") || myobj1.contains("jump") || myobj1.contains("climb") || myobj1.contains("stand") || myobj1.contains("turn") || myobj1.contains("shut") || myobj1.contains("get") || myobj1.contains("take") || myobj1.contains("pick") || myobj1.contains("grab") || myobj1.contains("lie") || myobj1.contains("sit") || myobj1.contains("look") || myobj1.contains("see") || myobj1.contains("watch") || myobj1.contains("play") || myobj1.contains("run") || myobj1.contains("walk") || myobj1.contains("move") || myobj1.contains("examine") || myobj1.contains("eat") || myobj1.contains("read") || myobj1.contains("drop") || myobj1.contains("put") || myobj1.contains("give") || myobj1.contains("offer") || myobj1.contains("enter") || myobj1.contains("attack") || myobj1.contains("hit") || myobj1.contains("break") || myobj1.contains("fight") || myobj1.contains("kick")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
-            secondText.setText("You cannot do that while you're still playing.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.contains("smell")) {
-            secondText.setText("It smells just like a basement.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.contains("listen")) {
-            secondText.setText("All you hear is retro video games music, which is nice.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.contains("wait")) {
-            secondText.setText("Time passes...");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.contains("what") && myobj1.contains("time") && myobj1.contains("is") || myobj1.matches("time") || myobj1.matches("the time")) {
-            secondText.setText("You cannot tell that from the basement.");
-            linearLayout.addView(secondText);
-            obj();
-        } else if (myobj1.matches("diagnostic") || myobj1.matches("diagnose")) {
-            secondText.setText("This is not available at the moment.");
-            linearLayout.addView(secondText);
-            obj();
-        }
-
-        return (String) secondText.getText();
-    }
-
-
-
-
-
 
     public String commonAnswersX(String myobjx) {
         TextView myLocation = (TextView) findViewById(R.id.location);

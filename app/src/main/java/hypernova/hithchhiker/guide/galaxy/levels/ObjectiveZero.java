@@ -13,15 +13,15 @@ import hypernova.hithchhiker.guide.galaxy.R;
 import hypernova.hithchhiker.guide.galaxy.managers.ValueManager;
 
 public class ObjectiveZero extends AppCompatActivity {
+    ValueManager valueManager;
     Handler handler;
     Runnable myRunnable;
-    ValueManager valueManager;
 
     public ObjectiveZero(ValueManager valManager) {
         valueManager = valManager;
     }
 
-    public String checkObjAnswer (String myObjZero, Activity activity, MechanicsManager mechanicsManager) {
+    public String checkObjAnswer(String myObjZero, Activity activity, MechanicsManager mechanicsManager) {
         TextView myMoves = (TextView) findViewById(R.id.moves);
         TextView myLocation = (TextView) findViewById(R.id.location);
 

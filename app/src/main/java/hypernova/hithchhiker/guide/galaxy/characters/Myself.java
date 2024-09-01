@@ -6,10 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 public class Myself extends AppCompatActivity {
     public String name;
     public String surname;
+    public boolean isStanding;
+    public boolean isNeckChipInstalled; // This device will be used to check which rooms is the character allowed to access
 
     public void initiateVariables() {
         name = "Alex";
         surname = "Peabody";
+        isStanding = false;
+        isNeckChipInstalled = false;
     }
 
     public void save() {
@@ -17,6 +21,8 @@ public class Myself extends AppCompatActivity {
 
         editor.putString("name", name);
         editor.putString("surname", surname);
+        editor.putBoolean("isStanding", isStanding);
+        editor.putBoolean("isNeckChipInstalled", isNeckChipInstalled);
 
         editor.commit();
     }
@@ -26,5 +32,7 @@ public class Myself extends AppCompatActivity {
 
         name = sharedPrefs.getString("name", "Alex");
         surname = sharedPrefs.getString("surname", "Peabody");
+        isStanding = sharedPrefs.getBoolean("isStanding", false);
+        isNeckChipInstalled = sharedPrefs.getBoolean("isNeckChipInstalled", false);
     }
 }

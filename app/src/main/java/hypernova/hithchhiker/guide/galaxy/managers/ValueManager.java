@@ -20,6 +20,7 @@ public class ValueManager extends AppCompatActivity {
     public Fred fred = new Fred();
     public int score;
     public int scoreDuringObj1;
+    public int currentObjective; // WHICH OBJECTIVE I AM DOING. ZERO IS GAME OVER
 
     ArrayList<String> myInventory = new ArrayList<String>();
     ArrayList<String> myInventoryPast = new ArrayList<String>();
@@ -37,8 +38,6 @@ public class ValueManager extends AppCompatActivity {
     ArrayList<String> dropHouseDesert23 = new ArrayList<String>();
     ArrayList<String> dropHouseDesert32 = new ArrayList<String>();
 
-    public int obj = 1; // EN QUÉ OBJ ESTOY. SI VALE 0, ES QUE ES GAME OVER
-
     int changeai = 0;
 
     int blinkcolor = 0; //0 black, 1 grey
@@ -54,9 +53,7 @@ public class ValueManager extends AppCompatActivity {
 
     int killobjx = 0;
     int consultobjx = 0;
-    int helpobj1 = 0;
 
-    int isstand = 0;
     int iscompoff = 0;
 
     int waterdrunkobj3 = 0;
@@ -66,7 +63,6 @@ public class ValueManager extends AppCompatActivity {
     int houseobj7 = 0;
     int streetobj7 = 0;
     int libraryobj7 = 0;
-    int neckchip = 0;
     int firsttimestreets = 1;
 
     int inreading = 0;
@@ -102,6 +98,7 @@ public class ValueManager extends AppCompatActivity {
         fred.initiateVariables();
         score = 0;
         scoreDuringObj1 = 0;
+        currentObjective = 1;
 
         myInventory.clear();
         myInventoryPast.clear();
@@ -119,11 +116,6 @@ public class ValueManager extends AppCompatActivity {
         dropHouseDesert23.clear();
         dropHouseDesert32.clear();
 
-        obj=1; // EN QUÉ OBJ ESTOY. SI VALE 0, ES QUE ES GAME OVER
-
-        helpobj1 = 0;
-
-        isstand = 0;
         iscompoff = 0;
 
         waterdrunkobj3 = 0;
@@ -133,7 +125,6 @@ public class ValueManager extends AppCompatActivity {
         houseobj7 = 0;
         streetobj7 = 0;
         libraryobj7 = 0;
-        neckchip = 0;
         firsttimestreets = 1;
 
         knowsarmoredpeople = 0; //pregunta y le habla de gente con armadura
@@ -165,12 +156,12 @@ public class ValueManager extends AppCompatActivity {
 
         isMatchSaved = true;
         editor.putBoolean("isMatchSaved", true);
-        editor.putInt("obj", obj);
+        editor.putInt("currentObjective", currentObjective);
 
         editor.putInt("score", score);
 
-        TextView mylocation = (TextView) findViewById(R.id.location);
-        String locSaved = mylocation.getText().toString();
+        TextView myLocation = (TextView) findViewById(R.id.location);
+        String locSaved = myLocation.getText().toString();
         editor.putString("locSaved", locSaved);
 
         editor.putInt("scoreDuringObj1", scoreDuringObj1);
@@ -206,9 +197,6 @@ public class ValueManager extends AppCompatActivity {
         Set<String> dropHouseDesert32Set = new HashSet<>(dropHouseDesert32);
         editor.putStringSet("dropHouseDesert32Set", dropHouseDesert32Set);
 
-        editor.putInt("helpobj1", helpobj1);
-
-        editor.putInt("isstand", isstand);
         editor.putInt("iscompoff", iscompoff);
 
         editor.putInt("waterdrunkobj3", waterdrunkobj3);
@@ -218,7 +206,6 @@ public class ValueManager extends AppCompatActivity {
         editor.putInt("houseobj7", houseobj7);
         editor.putInt("streetobj7", streetobj7);
         editor.putInt("libraryobj7", libraryobj7);
-        editor.putInt("neckchip", neckchip);
         editor.putInt("firsttimestreets", firsttimestreets);
 
         editor.putInt("knowsarmoredpeople", knowsarmoredpeople);
@@ -249,15 +236,15 @@ public class ValueManager extends AppCompatActivity {
         myself.restore();
         fred.restore();
 
-        obj = sharedPrefs.getInt("obj", 1);
+        currentObjective = sharedPrefs.getInt("currentObjective", 1);
 
         score = sharedPrefs.getInt("score", 0);
-        TextView mymoves = (TextView) findViewById(R.id.moves);
-        mymoves.setText("Moves: " + score);
+        TextView myMoves = (TextView) findViewById(R.id.moves);
+        myMoves.setText("Moves: " + score);
 
         String locSaved = sharedPrefs.getString("locSaved", "Just playing");
-        TextView mylocation = (TextView) findViewById(R.id.location);
-        mylocation.setText(locSaved);
+        TextView myLocation = (TextView) findViewById(R.id.location);
+        myLocation.setText(locSaved);
 
         scoreDuringObj1 = sharedPrefs.getInt("scoreDuringObj1", 0);
 
@@ -293,9 +280,6 @@ public class ValueManager extends AppCompatActivity {
         Set<String> dropHouseDesert32Set = sharedPrefs.getStringSet("dropHouseDesert32Set", emptyset);
         dropHouseDesert32 = new ArrayList<>(dropHouseDesert32Set);
 
-        helpobj1 = sharedPrefs.getInt("helpobj1", 0);
-
-        isstand = sharedPrefs.getInt("isstand", 0);
         iscompoff = sharedPrefs.getInt("iscompoff", 0);
 
         waterdrunkobj3 = sharedPrefs.getInt("waterdrunkobj3", 0);
@@ -305,7 +289,6 @@ public class ValueManager extends AppCompatActivity {
         houseobj7 = sharedPrefs.getInt("houseobj7", 0);
         streetobj7 = sharedPrefs.getInt("streetobj7", 0);
         libraryobj7 = sharedPrefs.getInt("libraryobj7", 0);
-        neckchip = sharedPrefs.getInt("neckchip", 0);
         firsttimestreets = sharedPrefs.getInt("firsttimestreets", 1);
 
         knowsarmoredpeople = sharedPrefs.getInt("knowsarmoredpeople", 0);
