@@ -15,12 +15,12 @@ import hypernova.hithchhiker.guide.galaxy.characters.Myself;
 
 public class ValueManager extends AppCompatActivity {
     SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
-    public boolean isMatchSaved = sharedPrefs.getBoolean("isMatchSaved", false);
     public Myself myself = new Myself();
     public Fred fred = new Fred();
+    public boolean isMatchSaved = sharedPrefs.getBoolean("isMatchSaved", false);
+    public int currentObjective; // WHICH OBJECTIVE I AM DOING. ZERO IS GAME OVER
     public int score;
     public int scoreDuringObj1;
-    public int currentObjective; // WHICH OBJECTIVE I AM DOING. ZERO IS GAME OVER
 
     ArrayList<String> myInventory = new ArrayList<String>();
     ArrayList<String> myInventoryPast = new ArrayList<String>();
@@ -52,7 +52,6 @@ public class ValueManager extends AppCompatActivity {
     boolean capsLocked = false;
 
     int killobjx = 0;
-    int consultobjx = 0;
 
     int iscompoff = 0;
 
@@ -96,9 +95,9 @@ public class ValueManager extends AppCompatActivity {
     public void initiateVariables() {
         myself.initiateVariables();
         fred.initiateVariables();
+        currentObjective = 1;
         score = 0;
         scoreDuringObj1 = 0;
-        currentObjective = 1;
 
         myInventory.clear();
         myInventoryPast.clear();

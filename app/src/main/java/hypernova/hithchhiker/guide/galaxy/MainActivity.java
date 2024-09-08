@@ -262,7 +262,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         objx.setOnKeyListener(new View.OnKeyListener() {
                   public boolean onKey(View v, int keyCode, KeyEvent event) {
                       //KeyListener pilla muy pocas teclas en android mobile,
@@ -299,49 +298,49 @@ public class MainActivity extends AppCompatActivity {
                                   }
                                   break;
                               case 1:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.objectiveOne.checkObjAnswer(myobjxlow, MainActivity.this).matches("") && commonAnswersX(myobjxlow).matches("") && consultGuideX(myobjxlow).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.objectiveOne.checkObjAnswer(myobjxlow, MainActivity.this).matches("") && commonAnswersX(myobjxlow).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 2:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj2Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && consultGuideX(myobjxlow).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj2Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 3:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj3Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && consultGuideX(myobjxlow).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj3Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 7:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj7Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && consultGuideX(myobjxlow).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj7Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 8:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj8Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && consultGuideX(myobjxlow).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj8Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 9:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj9Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && consultGuideX(myobjxlow).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj9Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 10:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj10Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && consultGuideX(myobjxlow).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj10Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
@@ -797,59 +796,6 @@ public class MainActivity extends AppCompatActivity {
             linearLayout.addView(secondText);
         } else if (myobjx.contains("have a nice day")) {
             secondText.setText("You too.");
-            linearLayout.addView(secondText);
-        }
-
-        if (!(((String) secondText.getText()).matches(""))) {
-            switch (obj) {
-                case 0:
-                    //GAME OVER
-                    break;
-                case 1:
-                    obj();
-                    break;
-                case 2:
-                    obj();
-                    break;
-                case 3:
-                    obj();
-                    break;
-                case 7:
-                    obj();
-                    break;
-                case 8:
-                    obj();
-                    break;
-                case 9:
-                    obj();
-                    break;
-                case 10:
-                    obj10();
-                    break;
-            }
-        }
-
-        return (String) secondText.getText();
-    }
-
-    public String consultGuideX(String myobjx) {
-        final LinearLayout linearLayout = (LinearLayout)findViewById(R.id.gameearth);
-        final Typeface typeface = ResourcesCompat.getFont(MainActivity.this, R.font.lucida_console);
-        TextView secondText = new TextView(MainActivity.this);
-        secondText.setTypeface(typeface);
-
-        if (myobjx.contains("consult") && myobjx.contains("guide")) {
-            secondText.setText("You can't see any Guide here!");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("consult")) {
-            consultobjx = 1;
-            secondText.setText("Consult what?");
-            linearLayout.addView(secondText);
-        } else if (consultobjx==1 && myobjx.contains("guide")) {
-            secondText.setText("You can't see any Guide here!");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("consult")) {
-            secondText.setText("There's nothing you can consult.");
             linearLayout.addView(secondText);
         }
 
