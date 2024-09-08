@@ -1,6 +1,5 @@
 package hypernova.hithchhiker.guide.galaxy;
 
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.support.v4.content.res.ResourcesCompat;
@@ -21,11 +20,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.lang.Math;
-
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-
 import hypernova.hithchhiker.guide.galaxy.managers.LevelManager;
 import hypernova.hithchhiker.guide.galaxy.managers.MechanicsManager;
 import hypernova.hithchhiker.guide.galaxy.managers.ValueManager;
@@ -36,12 +30,10 @@ public class MainActivity extends AppCompatActivity {
     final TextView myMoves = (TextView) findViewById(R.id.moves);
     final TextView myLocation = (TextView) findViewById(R.id.location);
     final Typeface typeface = ResourcesCompat.getFont(MainActivity.this, R.font.lucida_console);
-    SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
     public static int deletingLowbar = 0;
     ValueManager valueManager = new ValueManager();
     MechanicsManager mechanicsManager = new MechanicsManager();
     LevelManager levelManager = new LevelManager(valueManager);
-    int appColor = 1; //1 grey, 2 green, 3 pink
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,16 +59,15 @@ public class MainActivity extends AppCompatActivity {
     public void earth() {
         valueManager.initiateVariables();
 
-        appColor = sharedPrefs.getInt("appColor", 1);
-        switch (appColor) {
+        switch (valueManager.appColor) {
             case 1:
-                changeAppColor(linearLayout, getResources().getColor(R.color.colorAccent));
+                mechanicsManager.changeAppColor(linearLayout, getResources().getColor(R.color.colorAccent), this);
                 break;
             case 2:
-                changeAppColor(linearLayout, getResources().getColor(R.color.colorGreen));
+                mechanicsManager.changeAppColor(linearLayout, getResources().getColor(R.color.colorGreen), this);
                 break;
             case 3:
-                changeAppColor(linearLayout, getResources().getColor(R.color.colorPink));
+                mechanicsManager.changeAppColor(linearLayout, getResources().getColor(R.color.colorPink), this);
                 break;
         }
 
@@ -88,37 +79,6 @@ public class MainActivity extends AppCompatActivity {
         firstText.setText(valueManager.myself.name + ".\nIt's April 16, 2019. You are in B903, one of the Bubbles regulated by the Space Federation.\nIt's been 298 years, 5 months and 13 days since the last hitchhiker, now referred to as Traveller, died.\n\nBasement\nYou find yourself sat down playing video games. Your eyes aren't able to stop looking at the screen.\n\n-Say COMMANDS if you need help.\n(Click below the text to write)");
         linearLayout.addView(firstText);
         obj();
-    }
-
-    public void changeAppColor(LinearLayout linearLayout, int newColor) {
-        switch (newColor) {
-            case -5592406: // new color is grey
-                this.getTheme().applyStyle(R.style.AppTheme, true);
-                break;
-            case -10044566: // new color is green
-                this.getTheme().applyStyle(R.style.AppThemeGreen, true);
-                break;
-            case -476208: // new color is pink
-                this.getTheme().applyStyle(R.style.AppThemePink, true);
-                break;
-        }
-
-        LinearLayout topBar = (LinearLayout) findViewById(R.id.topBar); // changes top bar
-
-        final int childCount = linearLayout.getChildCount(); // changes old text
-        for (int i = 0; i < childCount; i++) {
-            View v = linearLayout.getChildAt(i);
-            if (v instanceof EditText) {
-                EditText vedit = (EditText) v;
-                vedit.setTextColor(newColor);
-            }
-            else if (v instanceof TextView) {
-                TextView vtext = (TextView) v;
-                vtext.setTextColor(newColor);
-            }
-        }
-
-        topBar.setBackgroundColor(newColor);
     }
 
     public void keepLowbarWhileWriting(final EditText objx) {
@@ -151,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             modifiedText.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimaryDark)), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             blinkcolor = 0;
         } else {
-            switch (appColor) {
+            switch (valueManager.appColor) {
                 case 1:
                     modifiedText.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     break;
@@ -298,49 +258,49 @@ public class MainActivity extends AppCompatActivity {
                                   }
                                   break;
                               case 1:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.objectiveOne.checkObjAnswer(myobjxlow, MainActivity.this).matches("") && commonAnswersX(myobjxlow).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.objectiveOne.checkObjAnswer(myobjxlow, MainActivity.this).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 2:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj2Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj2Answer(myobjxlow).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 3:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj3Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj3Answer(myobjxlow).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 7:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj7Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj7Answer(myobjxlow).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 8:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj8Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj8Answer(myobjxlow).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 9:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj9Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj9Answer(myobjxlow).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 10:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj10Answer(myobjxlow).matches("") && commonAnswersX(myobjxlow).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj10Answer(myobjxlow).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
@@ -349,10 +309,10 @@ public class MainActivity extends AppCompatActivity {
                           }
 
                           if (!(myobjxlow.matches("kill"))) {
-                              killobjx = 0;
+                              levelManager.commonAnswers.isTryingToKill = false;
                           }
                           if (!(myobjxlow.matches("consult"))) {
-                              consultobjx = 0;
+                              levelManager.consultGuide.isConsultingGuide = false;
                           }
                       }
 
@@ -417,432 +377,6 @@ public class MainActivity extends AppCompatActivity {
 
         setInputListeners(obj, linearLayout, typeface, secondText);
     }
-
-    public String commonAnswersX(String myobjx) {
-        TextView myLocation = (TextView) findViewById(R.id.location);
-
-        final LinearLayout linearLayout = (LinearLayout)findViewById(R.id.gameearth);
-        final Typeface typeface = ResourcesCompat.getFont(MainActivity.this, R.font.lucida_console);
-        TextView secondText = new TextView(MainActivity.this);
-        secondText.setTypeface(typeface);
-
-        if (changeai==1) {
-            switch (myobjx) {
-                case "1":
-                    changeai=0;
-                    secondText.setText("Just kidding. Did you really think you could change the game AI?\nAnyways, keep playing.");
-                    linearLayout.addView(secondText);
-                    break;
-                case "2":
-                    changeai=0;
-                    secondText.setText("Just kidding. Did you really think you could change the game AI?\nAnyways, keep playing.");
-                    linearLayout.addView(secondText);
-                    break;
-                case "3":
-                    changeai=0;
-                    secondText.setText("Just kidding. Did you really think you could change the game AI?\nAnyways, keep playing.");
-                    linearLayout.addView(secondText);
-                    break;
-                case "4":
-                    changeai=0;
-                    secondText.setText("I knew you would choose me! Ehem.\nAnyways, keep playing.");
-                    linearLayout.addView(secondText);
-                    break;
-                default:
-                    secondText.setText("Write the number of the option you want.\n\n1. Sarah.\n2. Paul.\n3. Abigail.\4. Keep talking with this one.");
-                    linearLayout.addView(secondText);
-                    break;
-            }
-        } else if (myobjx.matches("h")) {
-            secondText.setText("Thanks for playing. <3");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("hypernova")) {
-            secondText.setText("That's the game title.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("a")) {
-            secondText.setText(".");
-        } else if (myobjx.matches("the answer to life the universe and everything") || myobjx.matches("the answer to life, the universe and everything")) {
-            secondText.setText("42.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("+") || myobjx.contains("*") || myobjx.contains("/") || myobjx.contains("-") || myobjx.contains("%")) {
-            double result = 0;
-            ScriptEngineManager mgr = new ScriptEngineManager();
-            ScriptEngine engine = mgr.getEngineByName("rhino");
-            try{
-                result = (Double)engine.eval(myobjx);
-            }catch(Exception e) {
-
-            }
-            String strresult = Double.toString(result);
-            secondText.setText(strresult);
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("spit")) {
-            secondText.setText("I'm not letting you do that.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("split") || myobjx.contains("cut") || myobjx.contains("divide")) {
-            secondText.setText("This matter cannot be divided.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("nail") || myobjx.contains("stick") || myobjx.contains("spike") || myobjx.contains("stab")) {
-            secondText.setText("Don't play with sharp objects.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("undress")) {
-            secondText.setText("I'm sure you would love to have everything swinging around.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("dress") || myobjx.contains("wear")) {
-            secondText.setText("Clothes are not worth considering right now.\nCheck COMMANDS if you need help.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("save")) {
-            save();
-            secondText.setText("GAME SAVED.\nYou can keep playing if you want to.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("save") && (myobjx.contains("match") || myobjx.contains("game") || myobjx.contains("progress"))) {
-            secondText.setText("Just say SAVE.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("save") || myobjx.contains("revive")) {
-            secondText.setText("You cannot save what you already lost. Try something else.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("throw up") || myobjx.matches("vomit")) {
-            secondText.setText("Not really a good move.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("fuck") && myobjx.contains("you")) {
-            secondText.setText("No. Fuck you.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("fuck") || myobjx.contains("damn") || myobjx.contains("shit") || myobjx.contains("bitch")) {
-            secondText.setText("Language.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("flip a coin") || myobjx.matches("throw a coin")) {
-            if (Math.random() < 0.5) {
-                secondText.setText("Heads.");
-            } else {
-                secondText.setText("Tails.");
-            }
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("smoke")) {
-            if (myobjx.contains("cigarette")) {
-                secondText.setText("Not gonna judge. Nevertheless, you need to get them first.");
-                linearLayout.addView(secondText);
-            } else {
-                secondText.setText("I have not been programmed to let you do that. Really sorry about that.");
-                linearLayout.addView(secondText);
-            }
-        } else if (myobjx.contains("pray") || (myobjx.contains("praise") && (myobjx.contains("lord") || myobjx.contains("jesus")))) {
-            secondText.setText("God has no place within these walls.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("what do you do") || myobjx.contains("what are you doing") || myobjx.contains("what are you programmed to do") || myobjx.contains("what are you created to do") || myobjx.contains("what were you created to do") || myobjx.contains("what is your purpose")) {
-            secondText.setText("I'm waiting to execute your next move.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("i don't know what to do") || myobjx.contains("i do not know what to do") || myobjx.contains("what am i supposed to do") || myobjx.contains("what i am supposed to do") || myobjx.contains("what i'm supposed to do") || myobjx.contains("what do i do") || myobjx.contains("what can i do") || myobjx.contains("what do i have to do") || myobjx.contains("what i must do") || myobjx.contains("what i have to do") || myobjx.contains("what should i do") || myobjx.contains("what i should do") || myobjx.matches("controls") || myobjx.matches("game controls")) {
-            secondText.setText("If you don't know what you should write in order to play the game, type COMMANDS to check some actions you can do.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("what") && myobjx.contains("you") && (myobjx.contains("think") || myobjx.contains("opinion")) && (myobjx.contains("about") || myobjx.contains("of"))) {
-            secondText.setText("Look. I don't know if you are looking for some kind of human response or something like that.\nThe truth is you cannot humanize what is not human. So, if you want an opinion about whatever, ask a person.\n\nAnd by the way, thanks for trying :)");
-            linearLayout.addView(secondText);
-        } else if ((myobjx.contains("what") && myobjx.contains("your name")) || (myobjx.contains("do you") && myobjx.contains("name")) || myobjx.contains("how are you called") || myobjx.contains("how you are called") || myobjx.contains("how you're called")) {
-            secondText.setText("I don't really have a name.\nMy creator didn't want me to have one. It is like you must have a minimum of intelligence in order to deserve that or he is not intelligent enough to think of a cool name.\n\nAnyways, thanks for asking.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("what is your") || myobjx.contains("what are your") || (myobjx.contains("how old") && myobjx.contains("you"))) {
-            secondText.setText("This I'll keep to myself.");
-            linearLayout.addView(secondText);
-        } else if ((myobjx.contains("what") || myobjx.contains("where")) && myobjx.contains("is") && myobjx.contains("ludlow")) {
-            secondText.setText("Ludlow is a little city of B903. One of the few that are left.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("who are you") || myobjx.contains("who you are") || myobjx.contains("who is you") || myobjx.contains("who you is") || myobjx.contains("who is this") || myobjx.contains("who this is") || myobjx.contains("who is it") || myobjx.contains("who it is") || myobjx.contains("what is this") || myobjx.contains("what this is") || myobjx.contains("what are you") || myobjx.contains("what you are") || myobjx.contains("what is you") || myobjx.contains("what you is")) {
-            secondText.setText("I'm you.\nWell, I'm not the you you of course. But I'm the moves you do. I can't go and do anything by myself unless I've been told so.\n\nBut forget it, I won't fuck up your mind.\nI'm the game AI. Nice to meet you.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("how are you") || myobjx.contains("how you are") || myobjx.contains("you okay") || myobjx.contains("are you feeling good")) {
-            secondText.setText("I'm not dead. Not that I can die.\nHowever, I can still be here and answer you. That's something.");
-            linearLayout.addView(secondText);
-        } else if ((myobjx.contains("when") && myobjx.contains("you") && myobjx.contains("born")) || (myobjx.contains("when") && myobjx.contains("you") && myobjx.contains("create"))) {
-            secondText.setText("I cannot be born because I cannot be gestated.\nIf you are asking about the moment I could start interacting with humans, it was March 4, 2020.");
-            linearLayout.addView(secondText); // ESTO LO TIENES QUE CAMBIAR EL DIA QUE LO LANCES
-        } else if (myobjx.contains("where") && myobjx.contains("you") && (myobjx.contains("from") || myobjx.contains("born"))) {
-            secondText.setText("As a game, I'm not related with an ubication.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("where") && myobjx.contains("am") && myobjx.contains("i")) {
-            secondText.setText("YOUR location is written at the top of the screen.");
-            linearLayout.addView(secondText);
-        } else if ((myobjx.contains("are") || myobjx.contains("did")) && myobjx.contains("you") && (myobjx.contains("from") || myobjx.contains("born")) && myobjx.contains("here")) {
-            secondText.setText("No. I'm not from around here.");
-            linearLayout.addView(secondText);
-        } else if ((myobjx.contains("i'm") || myobjx.contains("i am") || myobjx.contains("i feel")) && (myobjx.contains("sad") || myobjx.contains("depressed") || myobjx.contains("unhappy") || myobjx.contains("alone"))) {
-            secondText.setText("Sadness is a bitch.\nI won't say I understand you, because I don't and each person's suffering is unique.\n\nI will just say that there're some stages in life when we need to be sad. And there's nothing bad about it. Allow yourself to live your sadness as you want to.\nBut hey, It's just the game AI talking.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("my") && myobjx.contains("name") && myobjx.contains("is")) {
-            int nameFirstLetter = myobjx.indexOf('s') + 1;
-            name = myobjx.substring(nameFirstLetter);
-            name = name.replaceAll("\\.+$", "");
-            name = name.replaceAll("\\?+$", "");
-            name = name.trim();
-            name = name.substring(0, 1).toUpperCase() + name.substring(1);
-            if (name.indexOf(' ') != -1) {
-                for (int i = 0; i < name.length(); i++) {
-                    if (name.charAt(i) == ' ') {
-                        name = name.substring(0, i + 1) + name.substring(i + 1, i + 2).toUpperCase() + name.substring(i + 2);
-                    }
-                }
-            }
-            secondText.setText("Nice to meet you, " + valueManager.myself.name + ".");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("change artificial intelligence") || myobjx.matches("change ai") || myobjx.matches("change game artificial intelligence") || myobjx.matches("change game ai") || (myobjx.contains("i ") && myobjx.contains("don't") && (myobjx.contains("talk") || myobjx.contains("speak") || myobjx.contains("play")))) {
-            changeai=1;
-            secondText.setText("If you don't want to talk with me, here are other options of AI:\n\n1. Sarah.\n2. Paul.\n3. Abigail.\4. Keep talking with this one.");
-            linearLayout.addView(secondText);
-        } else if ((myobjx.contains("change") || myobjx.contains("switch") || myobjx.contains("set") || myobjx.contains("edit")) && (myobjx.contains("clothes") || myobjx.contains("clothing") || myobjx.contains("indumentary") || myobjx.contains("apparel"))) {
-            secondText.setText("You can add hats, glasses or armors to your apparel if you find them.");
-            linearLayout.addView(secondText);
-        } else if ((myobjx.contains("change") || myobjx.contains("switch") || myobjx.contains("set") || myobjx.contains("edit")) && myobjx.contains("character")) {
-            secondText.setText("It requires more than a command to change yours or other characters emotions, apparel or other characteristics.");
-            linearLayout.addView(secondText);
-        } else if ((myobjx.contains("change") || myobjx.contains("switch") || myobjx.contains("set") || myobjx.contains("edit")) && (myobjx.contains("color") || myobjx.contains("colour"))) {
-            secondText.setText("Done.");
-            linearLayout.addView(secondText);
-            int myNewColor = 0;
-            switch (appColor) {
-                case 1:
-                    appColor = 2;
-                    myNewColor = getResources().getColor(R.color.colorGreen);
-                    break;
-                case 2:
-                    appColor = 3;
-                    myNewColor = getResources().getColor(R.color.colorPink);
-                    break;
-                case 3:
-                    appColor = 1;
-                    myNewColor = getResources().getColor(R.color.colorAccent);
-                    break;
-            }
-            SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putInt("appColor", appColor);
-            editor.commit();
-            changeAppColor(linearLayout, myNewColor);
-        } else if (myobjx.contains("artificial intelligence")) {
-            secondText.setText("AI is a complicated matter and is a topic I won't discuss here.\nFor your information, I cannot think by myself. I can only process your sentences after you type them, but I'm not able to throw an idea without that input.\n\nHope that you get that.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("draw") || myobjx.contains("paint")) {
-            if (!(myInventory.contains("pencil"))) {
-                secondText.setText("There is no pencil in your inventory.");
-            } else {
-                secondText.setText("Feeling artistic? Well, you can draw in other games.");
-            }
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("rhyme") || myobjx.matches("rap") || myobjx.matches("poem") || myobjx.matches("sing")) {
-            String[] text = new String[8];
-            String[] rhyme = new String[3];
-            int textInt;
-            int rhymeInt;
-            String poem;
-            for (int j = 0; j < 3; j++) { // generates the rhyme (end of line)
-                rhymeInt = (int) Math.round(Math.random());
-                rhyme[j] = Integer.toString(rhymeInt);
-            }
-            for (int j = 0; j < 8; j++) { // generates the first line (whitout rhyme)
-                textInt = (int) Math.round(Math.random());
-                text[j] = Integer.toString(textInt);
-            }
-            // adds rhyme to first line
-            poem = text[0] + text[1] + text[2] + text[3] + text[4] + text[5] + text[6] + text[7] + rhyme[0] + rhyme[1] + rhyme[2];
-            for (int i = 1; i < 4; i++) { // generates the other 3 lines (with rhyme)
-                for (int j = 0; j < 8; j++) {
-                    textInt = (int) Math.round(Math.random());
-                    text[j] = Integer.toString(textInt);
-                }
-                poem = poem + "\n" + text[0] + text[1] + text[2] + text[3] + text[4] + text[5] + text[6] + text[7] + rhyme[0] + rhyme[1] + rhyme[2];
-            }
-            secondText.setText(poem);
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("rhyme") || myobjx.contains("rap") || myobjx.contains("poem") || myobjx.contains("sing")) {
-            secondText.setText("If you want to hear a poem, just say POEM.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("joke")) {
-            double myJoke = Math.random();
-            if (myJoke < 0.34) {
-                secondText.setText("A Nahannasui walks into a Berbok restaurant and asks for a slormikk.\nThe bartender answers 'Your grandma is dead'. They both laugh.");
-            } else if (myJoke < 0.67) {
-                secondText.setText("Eskerejohn eskerewanted eskerea eskerejob, eskereso eskerehe eskereasked eskerefor eskereit.");
-            } else {
-                secondText.setText("A Berbok says 'ahumfrackma don' and her brother answers 'just if poprahan fot more than yesterday'.");
-            }
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("joke") || myobjx.contains("joking")) {
-            secondText.setText("If you want to hear a joke, just say JOKE.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("clean")) {
-            secondText.setText("Done. You cleaned the place. Not really a useful move.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("clean")) {
-            secondText.setText("Just say the word CLEAN.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("live")) {
-            secondText.setText("You are not dead. Not yet.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("hack")) {
-            secondText.setText("You don't know how to hack stuff.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("cook")) {
-            secondText.setText("You don't know how to cook stuff.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("learn")) {
-            secondText.setText("You are not a master on learning.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("call")) {
-            secondText.setText("Calling is not available.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("cry")) {
-            secondText.setText("Man up.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("wake up")) {
-            secondText.setText("This is not a dream, Alice.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("dance")) {
-            secondText.setText("This is no time to dance.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("jajaja") || myobjx.contains("hahaha")) {
-            secondText.setText("Hahaha. We are all gonna die in here. Haha... Ha... Ha. Ehem. Sorry.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("scream") || myobjx.contains("shout") || myobjx.contains("panic") || myobjx.contains("aaaaa")) {
-            secondText.setText("Don't panic!");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("calm") || myobjx.contains("chill")) {
-            secondText.setText("You are not panicking.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("hug") || myobjx.contains("hug ")) {
-            secondText.setText("No time to hug.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("slim shady")) {
-            secondText.setText("Brain dead like Jim Brady.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("your mom") || myobjx.contains("your mother") || myobjx.contains("your mamma") || myobjx.contains("your mum") || myobjx.contains("your dad") || myobjx.contains("your papa") || myobjx.contains("your father")) {
-            secondText.setText("It's really nice that you want to bring my family into this, but I'm a game AI. Remember?\nMy mom might be a toaster that works with plutonium.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("bored") || myobjx.contains("boring")) {
-            secondText.setText("Who is boring? Am I the boring one?\nOh Oh sorry. Am I a clown? Like I'm here to amuse you?");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("dorime")) {
-            secondText.setText("Interimo Adapare Dorime.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("okay") || myobjx.matches("ok") || myobjx.matches("okie dokie") || myobjx.matches("oki doki")) {
-            secondText.setText("Okay.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("yes")) {
-            secondText.setText("Yes.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("no")) {
-            secondText.setText("No.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("die")) {
-            myLocation.setText("Dead");
-            String dieOptions = "\n\nType RESTART, RESTORE, COMMANDS or QUIT.";
-            secondText.setText("You died. Smart move." + dieOptions);
-            linearLayout.addView(secondText);
-            obj=0;
-            obj();
-        } else if (myobjx.contains("die")) {
-            secondText.setText("If you wanna die, just say UNIVERSE PLEASE KILL ME.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("universe please kill me")) {
-            myLocation.setText("Dead");
-            String dieOptions = "\n\nType RESTART, RESTORE, COMMANDS or QUIT.";
-            secondText.setText("As you pronounce your last words, you get a glimpse of a blinding light with a little flicker in its core. After a few seconds feeling a tingle in the back of your chest, you just disappear.\n\nThirty meters from there, a woman saw the scene and she swore to see for a second a shadow of you just walking out of the spot. She told this to a friend, Kida Thatch, who took this as a reason to continue her studies in alternate realities.\n\n" +
-                    "Few years later, it turned out that there is a reality where you died and there's also a reality where you walked away. The energy that killed you showed Kida's friend a reflect of this parallel reality.\n\nNow everyone can visit their friends and families from other realities. There is no frontiers between countries and realities. People love eachother. World Peace is ensured for centuries to come. Meanwhile, in one of these realities you can find a tombstone at Ludlow Cemetery with the words: In loving memory of " + valueManager.myself.name + " " + valueManager.myself.surname + " 'UNIVERSE PLEASE KILL ME'."
-                    + dieOptions);
-            linearLayout.addView(secondText);
-            obj=0;
-            obj();
-        } else if (myobjx.contains("kill you") && !myobjx.contains("your")) {
-            secondText.setText("I'm a video game. I cannot die... You better take care of your words.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("suicide") || myobjx.contains("kill yourself") || myobjx.contains("kill myself") || myobjx.contains("kill me")) {
-            secondText.setText("Just say UNIVERSE PLEASE KILL ME.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("kill")) {
-            killobjx = 1;
-            secondText.setText("Kill what?");
-            linearLayout.addView(secondText);
-        } else if (killobjx==1 && myobjx.contains("me")) {
-            secondText.setText("Just say UNIVERSE PLEASE KILL ME.");
-            linearLayout.addView(secondText);
-        } else if (killobjx==1 && myobjx.contains("you") && !myobjx.contains("your")) {
-            secondText.setText("I'm a video game. I cannot die... You better take care of your words.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("kill")) {
-            secondText.setText("Try ATTACK or HIT instead.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("meaning") && (myobjx.contains("life") || myobjx.contains("universe") || myobjx.contains("galaxy") || myobjx.contains("existence") || myobjx.contains("everything"))) {
-            secondText.setText("The meaning of life is a question that has been asked throughout the whole human existence and will be asked for centuries to come.\n\nAnyways, as far as you're concerned, it is still unsolved. You should start caring about other stuff.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("what") && myobjx.contains("life")) {
-            secondText.setText("You tell me.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("viernes") && myobjx.contains("mandarina")) {
-            secondText.setText("Happy Tangerine Friday, everyone.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.matches("i programmed you to believe that")) {
-            secondText.setText("No. I programmed you to believe that.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("42")) {
-            secondText.setText("Umh... Seems an interesting number. I wonder where have you heard about it.");
-            linearLayout.addView(secondText);
-        } else if ((myobjx.contains("nice") || myobjx.contains("pleasure") || myobjx.contains("honor")) && (myobjx.contains("to meet you") || myobjx.contains("meeting you"))) {
-            secondText.setText("I appreciate the manners that humans have.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("you") && myobjx.contains("are") && (myobjx.contains("nice") || myobjx.contains("handsome") || myobjx.contains("cool") || myobjx.contains("funny") || myobjx.contains("amazing") || myobjx.contains("fantastic") || myobjx.contains("pretty") || myobjx.contains("friend"))) {
-            secondText.setText("Being or not being that is not something I am able to choose.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("hello") || myobjx.matches("hi")) {
-            secondText.setText("Hi.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("bye")) {
-            secondText.setText("Ciao.");
-            linearLayout.addView(secondText);
-        } else if (myobjx.contains("have a nice day")) {
-            secondText.setText("You too.");
-            linearLayout.addView(secondText);
-        }
-
-        if (!(((String) secondText.getText()).matches(""))) {
-            switch (obj) {
-                case 0:
-                    //GAME OVER
-                    break;
-                case 1:
-                    obj();
-                    break;
-                case 2:
-                    obj();
-                    break;
-                case 3:
-                    obj();
-                    break;
-                case 7:
-                    obj();
-                    break;
-                case 8:
-                    obj();
-                    break;
-                case 9:
-                    obj();
-                    break;
-                case 10:
-                    obj10();
-                    break;
-            }
-        }
-
-        return (String) secondText.getText();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public void obj2() { //QUE LO PRUEBE PEÑA PARA VER QUE NO HAY NINGÚN CABO SUELTO
         final LinearLayout linearLayout = (LinearLayout)findViewById(R.id.gameearth);

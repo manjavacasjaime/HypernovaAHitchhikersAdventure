@@ -10,7 +10,7 @@ import android.widget.TextView;
 import hypernova.hithchhiker.guide.galaxy.R;
 
 public class ConsultGuide extends AppCompatActivity {
-    boolean isConsultingGuide = false;
+    public boolean isConsultingGuide = false;
 
     public ConsultGuide() {}
 

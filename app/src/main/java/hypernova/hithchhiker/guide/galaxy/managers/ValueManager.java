@@ -1,7 +1,6 @@
 package hypernova.hithchhiker.guide.galaxy.managers;
 
 import android.content.SharedPreferences;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -14,15 +13,15 @@ import hypernova.hithchhiker.guide.galaxy.characters.Fred;
 import hypernova.hithchhiker.guide.galaxy.characters.Myself;
 
 public class ValueManager extends AppCompatActivity {
-    SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
+    public SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
     public Myself myself = new Myself();
     public Fred fred = new Fred();
     public boolean isMatchSaved = sharedPrefs.getBoolean("isMatchSaved", false);
+    public int appColor = sharedPrefs.getInt("appColor", 1); //1 grey, 2 green, 3 pink
     public int currentObjective; // WHICH OBJECTIVE I AM DOING. ZERO IS GAME OVER
     public int score;
     public int scoreDuringObj1;
 
-    ArrayList<String> myInventory = new ArrayList<String>();
     ArrayList<String> myInventoryPast = new ArrayList<String>();
     ArrayList<String> dropBasement = new ArrayList<String>();
     ArrayList<String> dropHall = new ArrayList<String>();
@@ -38,20 +37,14 @@ public class ValueManager extends AppCompatActivity {
     ArrayList<String> dropHouseDesert23 = new ArrayList<String>();
     ArrayList<String> dropHouseDesert32 = new ArrayList<String>();
 
-    int changeai = 0;
-
     int blinkcolor = 0; //0 black, 1 grey
     int pos = -1;
     int edittouched = 0;
     int firstclicked = 0;
     int lastposselected = 0;
-    Handler handler;
-    Runnable myRunnable;
     boolean callbacksRemoved;
     int prevStringLength = 2;
     boolean capsLocked = false;
-
-    int killobjx = 0;
 
     int iscompoff = 0;
 
@@ -99,7 +92,6 @@ public class ValueManager extends AppCompatActivity {
         score = 0;
         scoreDuringObj1 = 0;
 
-        myInventory.clear();
         myInventoryPast.clear();
         dropBasement.clear();
         dropHall.clear();
@@ -165,8 +157,6 @@ public class ValueManager extends AppCompatActivity {
 
         editor.putInt("scoreDuringObj1", scoreDuringObj1);
 
-        Set<String> myInventorySet = new HashSet<>(myInventory);
-        editor.putStringSet("myInventorySet", myInventorySet);
         Set<String> myInventoryPastSet = new HashSet<>(myInventoryPast);
         editor.putStringSet("myInventoryPastSet", myInventoryPastSet);
         Set<String> dropBasementSet = new HashSet<>(dropBasement);
@@ -248,8 +238,6 @@ public class ValueManager extends AppCompatActivity {
         scoreDuringObj1 = sharedPrefs.getInt("scoreDuringObj1", 0);
 
         Set<String> emptyset = new HashSet<>();
-        Set<String> myInventorySet = sharedPrefs.getStringSet("myInventorySet", emptyset);
-        myInventory = new ArrayList<>(myInventorySet);
         Set<String> myInventoryPastSet = sharedPrefs.getStringSet("myInventoryPastSet", emptyset);
         myInventoryPast = new ArrayList<>(myInventoryPastSet);
         Set<String> dropBasementSet = sharedPrefs.getStringSet("dropBasementSet", emptyset);
