@@ -330,8 +330,7 @@ public class CommonAnswers extends AppCompatActivity {
             linearLayout.addView(secondText);
         } else if (myObjX.matches("die")) {
             myLocation.setText("Dead");
-            String dieOptions = "\n\nType RESTART, RESTORE, COMMANDS or QUIT.";
-            secondText.setText("You died. Smart move." + dieOptions);
+            secondText.setText("You died. Smart move." + valueManager.dieOptions);
             linearLayout.addView(secondText);
             valueManager.currentObjective = 0;
         } else if (myObjX.contains("die")) {
@@ -339,10 +338,9 @@ public class CommonAnswers extends AppCompatActivity {
             linearLayout.addView(secondText);
         } else if (myObjX.contains("universe please kill me")) {
             myLocation.setText("Dead");
-            String dieOptions = "\n\nType RESTART, RESTORE, COMMANDS or QUIT.";
             secondText.setText("As you pronounce your last words, you get a glimpse of a blinding light with a little flicker in its core. After a few seconds feeling a tingle in the back of your chest, you just disappear.\n\nThirty meters from there, a woman saw the scene and she swore to see for a second a shadow of you just walking out of the spot. She told this to a friend, Kida Thatch, who took this as a reason to continue her studies in alternate realities.\n\n" +
                     "Few years later, it turned out that there is a reality where you died and there's also a reality where you walked away. The energy that killed you showed Kida's friend a reflect of this parallel reality.\n\nNow everyone can visit their friends and families from other realities. There is no frontiers between countries and realities. People love eachother. World Peace is ensured for centuries to come. Meanwhile, in one of these realities you can find a tombstone at Ludlow Cemetery with the words: In loving memory of " + valueManager.myself.name + " " + valueManager.myself.surname + " 'UNIVERSE PLEASE KILL ME'."
-                    + dieOptions);
+                    + valueManager.dieOptions);
             linearLayout.addView(secondText);
             valueManager.currentObjective = 0;
         } else if (myObjX.contains("kill you") && !myObjX.contains("your")) {

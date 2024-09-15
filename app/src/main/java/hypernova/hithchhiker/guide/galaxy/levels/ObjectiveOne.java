@@ -60,10 +60,10 @@ public class ObjectiveOne extends AppCompatActivity {
                 secondText.setText("You are not hearing voices... Not yet.");
                 linearLayout.addView(secondText);
             } else if (myObjOne.contains("play")) {
-                valueManager.scoreDuringObj1 = valueManager.score;
                 myLocation.setText("Basement");
                 secondText.setText("A soft light bulb allows you to see your house basement.\nYou are sitting on the floor. There is a piece of furniture with a vinyl player and some discs on it. Your game console is next to you. There's a door leading UP.\nThere is a blanket here.\nThere is a pencil here.");
                 linearLayout.addView(secondText);
+                valueManager.scoreDuringObj1 = valueManager.score;
                 valueManager.currentObjective = 2;
             } else {
                 secondText.setText("This action cannot be stopped or you're not doing it.");

@@ -18,12 +18,14 @@ public class ValueManager extends AppCompatActivity {
     public Fred fred = new Fred();
     public boolean isMatchSaved = sharedPrefs.getBoolean("isMatchSaved", false);
     public int appColor = sharedPrefs.getInt("appColor", 1); //1 grey, 2 green, 3 pink
+    public String dieOptions = "\n\nType RESTART, RESTORE, COMMANDS or QUIT.";
     public int currentObjective; // WHICH OBJECTIVE I AM DOING. ZERO IS GAME OVER
     public int score;
     public int scoreDuringObj1;
+    public boolean isComputerOffDuringObj2 = false;
+    public ArrayList<String> objectsDroppedDuringObj2 = new ArrayList<>();
 
     ArrayList<String> myInventoryPast = new ArrayList<String>();
-    ArrayList<String> dropBasement = new ArrayList<String>();
     ArrayList<String> dropHall = new ArrayList<String>();
     ArrayList<String> dropStreet = new ArrayList<String>();
     ArrayList<String> dropLibraryDoor = new ArrayList<String>();
@@ -45,8 +47,6 @@ public class ValueManager extends AppCompatActivity {
     boolean callbacksRemoved;
     int prevStringLength = 2;
     boolean capsLocked = false;
-
-    int iscompoff = 0;
 
     int waterdrunkobj3 = 0;
     int housedooropen = 0;
@@ -91,9 +91,10 @@ public class ValueManager extends AppCompatActivity {
         currentObjective = 1;
         score = 0;
         scoreDuringObj1 = 0;
+        isComputerOffDuringObj2 = false;
+        objectsDroppedDuringObj2.clear();
 
         myInventoryPast.clear();
-        dropBasement.clear();
         dropHall.clear();
         dropStreet.clear();
         dropLibraryDoor.clear();
@@ -106,8 +107,6 @@ public class ValueManager extends AppCompatActivity {
         dropHouseDesert22.clear();
         dropHouseDesert23.clear();
         dropHouseDesert32.clear();
-
-        iscompoff = 0;
 
         waterdrunkobj3 = 0;
         housedooropen = 0;
@@ -156,11 +155,12 @@ public class ValueManager extends AppCompatActivity {
         editor.putString("locSaved", locSaved);
 
         editor.putInt("scoreDuringObj1", scoreDuringObj1);
+        editor.putBoolean("isComputerOffDuringObj2", isComputerOffDuringObj2);
+        Set<String> objectsDroppedDuringObj2Set = new HashSet<>(objectsDroppedDuringObj2);
+        editor.putStringSet("objectsDroppedDuringObj2Set", objectsDroppedDuringObj2Set);
 
         Set<String> myInventoryPastSet = new HashSet<>(myInventoryPast);
         editor.putStringSet("myInventoryPastSet", myInventoryPastSet);
-        Set<String> dropBasementSet = new HashSet<>(dropBasement);
-        editor.putStringSet("dropBasementSet", dropBasementSet);
         Set<String> dropHallSet = new HashSet<>(dropHall);
         editor.putStringSet("dropHallSet", dropHallSet);
         Set<String> dropStreetSet = new HashSet<>(dropStreet);
@@ -185,8 +185,6 @@ public class ValueManager extends AppCompatActivity {
         editor.putStringSet("dropHouseDesert23Set", dropHouseDesert23Set);
         Set<String> dropHouseDesert32Set = new HashSet<>(dropHouseDesert32);
         editor.putStringSet("dropHouseDesert32Set", dropHouseDesert32Set);
-
-        editor.putInt("iscompoff", iscompoff);
 
         editor.putInt("waterdrunkobj3", waterdrunkobj3);
         editor.putInt("housedooropen", housedooropen);
@@ -221,7 +219,8 @@ public class ValueManager extends AppCompatActivity {
         editor.commit();
     }
 
-    public void restore() {;
+    public void restore() {
+        Set<String> emptyset = new HashSet<>();
         myself.restore();
         fred.restore();
 
@@ -236,12 +235,12 @@ public class ValueManager extends AppCompatActivity {
         myLocation.setText(locSaved);
 
         scoreDuringObj1 = sharedPrefs.getInt("scoreDuringObj1", 0);
+        isComputerOffDuringObj2 = sharedPrefs.getBoolean("isComputerOffDuringObj2", false);
+        Set<String> objectsDroppedDuringObj2Set = sharedPrefs.getStringSet("objectsDroppedDuringObj2Set", emptyset);
+        objectsDroppedDuringObj2 = new ArrayList<>(objectsDroppedDuringObj2Set);
 
-        Set<String> emptyset = new HashSet<>();
         Set<String> myInventoryPastSet = sharedPrefs.getStringSet("myInventoryPastSet", emptyset);
         myInventoryPast = new ArrayList<>(myInventoryPastSet);
-        Set<String> dropBasementSet = sharedPrefs.getStringSet("dropBasementSet", emptyset);
-        dropBasement = new ArrayList<>(dropBasementSet);
         Set<String> dropHallSet = sharedPrefs.getStringSet("dropHallSet", emptyset);
         dropHall = new ArrayList<>(dropHallSet);
         Set<String> dropStreetSet = sharedPrefs.getStringSet("dropStreetSet", emptyset);
@@ -266,8 +265,6 @@ public class ValueManager extends AppCompatActivity {
         dropHouseDesert23 = new ArrayList<>(dropHouseDesert23Set);
         Set<String> dropHouseDesert32Set = sharedPrefs.getStringSet("dropHouseDesert32Set", emptyset);
         dropHouseDesert32 = new ArrayList<>(dropHouseDesert32Set);
-
-        iscompoff = sharedPrefs.getInt("iscompoff", 0);
 
         waterdrunkobj3 = sharedPrefs.getInt("waterdrunkobj3", 0);
         housedooropen = sharedPrefs.getInt("housedooropen", 0);
