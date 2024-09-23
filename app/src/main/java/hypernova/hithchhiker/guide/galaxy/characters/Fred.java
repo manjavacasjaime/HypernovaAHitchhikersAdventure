@@ -6,21 +6,20 @@ import android.support.v7.app.AppCompatActivity;
 
 public class Fred extends AppCompatActivity {
     SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
+    // 0 no conversation, XY being X the objective and Y the conversation stage
+    public int conversationStatus = 0;
     public Handler handlerFred;
     public Runnable runnableFred;
     public int examineFredDuringObj7Count;
     public boolean isDead;
     public int scoreDuringFredKilling;
     public boolean isPresent;
-    public int scoreDuringFredWaiting;
-    public int conversationStatus = 0;
 
     public void initiateVariables() {
         examineFredDuringObj7Count = 0;
         isDead = false;
         scoreDuringFredKilling = 0;
         isPresent = false;
-        scoreDuringFredWaiting = 0;
     }
 
     public void save() {
@@ -30,7 +29,6 @@ public class Fred extends AppCompatActivity {
         editor.putBoolean("fred.isDead", isDead);
         editor.putInt("fred.scoreDuringFredKilling", scoreDuringFredKilling);
         editor.putBoolean("fred.isPresent", isPresent);
-        editor.putInt("fred.scoreDuringFredWaiting", scoreDuringFredWaiting);
 
         editor.commit();
     }
@@ -40,6 +38,5 @@ public class Fred extends AppCompatActivity {
         isDead = sharedPrefs.getBoolean("fred.isDead", false);
         scoreDuringFredKilling = sharedPrefs.getInt("fred.scoreDuringFredKilling", 0);
         isPresent = sharedPrefs.getBoolean("fred.isPresent", false);
-        scoreDuringFredWaiting = sharedPrefs.getInt("fred.scoreDuringFredWaiting", 0);
     }
 }

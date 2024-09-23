@@ -11,38 +11,40 @@ public class Myself extends AppCompatActivity {
     SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
     public String name;
     public String surname;
-    public ArrayList<String> inventory = new ArrayList<>();
     public boolean isStanding;
     public boolean isNeckChipInstalled; // This device will be used to check which rooms is the character allowed to access
+    public ArrayList<String> inventory = new ArrayList<>();
 
     public void initiateVariables() {
         name = "Alex";
         surname = "Peabody";
-        inventory.clear();
         isStanding = false;
         isNeckChipInstalled = false;
+        inventory.clear();
     }
 
     public void save() {
         SharedPreferences.Editor editor = sharedPrefs.edit();
 
-        editor.putString("name", name);
-        editor.putString("surname", surname);
+        editor.putString("myself.name", name);
+        editor.putString("myself.surname", surname);
+        editor.putBoolean("myself.isStanding", isStanding);
+        editor.putBoolean("myself.isNeckChipInstalled", isNeckChipInstalled);
+
         Set<String> inventorySet = new HashSet<>(inventory);
-        editor.putStringSet("inventorySet", inventorySet);
-        editor.putBoolean("isStanding", isStanding);
-        editor.putBoolean("isNeckChipInstalled", isNeckChipInstalled);
+        editor.putStringSet("myself.inventorySet", inventorySet);
 
         editor.commit();
     }
 
     public void restore() {
-        name = sharedPrefs.getString("name", "Alex");
-        surname = sharedPrefs.getString("surname", "Peabody");
         Set<String> emptySet = new HashSet<>();
-        Set<String> inventorySet = sharedPrefs.getStringSet("inventorySet", emptySet);
+        name = sharedPrefs.getString("myself.name", "Alex");
+        surname = sharedPrefs.getString("myself.surname", "Peabody");
+        isStanding = sharedPrefs.getBoolean("myself.isStanding", false);
+        isNeckChipInstalled = sharedPrefs.getBoolean("myself.isNeckChipInstalled", false);
+
+        Set<String> inventorySet = sharedPrefs.getStringSet("myself.inventorySet", emptySet);
         inventory = new ArrayList<>(inventorySet);
-        isStanding = sharedPrefs.getBoolean("isStanding", false);
-        isNeckChipInstalled = sharedPrefs.getBoolean("isNeckChipInstalled", false);
     }
 }

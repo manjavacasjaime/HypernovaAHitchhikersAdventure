@@ -26,7 +26,7 @@ public class ObjectiveTwo extends AppCompatActivity {
         TextView secondText = new TextView(activity.getBaseContext());
         secondText.setTypeface(typeface);
         
-        if ((valueManager.score - valueManager.scoreDuringObj1 >= 8) && !valueManager.isComputerOffDuringObj2) {
+        if ((valueManager.score - valueManager.myBasement.scoreWhenStopPlaying >= 8) && !valueManager.myBasement.isComputerOff) {
             myLocation.setText("Dead");
             secondText.setText("While you were trying to figure out how to get out of the basement, you started to feel sick as you have never been before. This is due to the electromagnetic waves that computers emit nowadays to avoid players being AFK. Not really a great system, but it works.\n\nTo sum up, you died. Remember to turn off your computer next time you are not playing."
                     + valueManager.dieOptions);
@@ -41,7 +41,7 @@ public class ObjectiveTwo extends AppCompatActivity {
             if (!valueManager.myself.isStanding) {
                 secondText.setText("You'll have to stand up first to go there.");
                 linearLayout.addView(secondText);
-            } else if (!valueManager.isComputerOffDuringObj2) {
+            } else if (!valueManager.myBasement.isComputerOff) {
                 valueManager.score++;
                 myMoves.setText("Moves: " + valueManager.score);
                 secondText.setText("You almost get out of the basement, but the dizziness has increased.\nOne of the things you have in the room is making you feel sick.");
@@ -77,7 +77,7 @@ public class ObjectiveTwo extends AppCompatActivity {
                 secondText.setText("You already stopped playing.");
                 linearLayout.addView(secondText);
             } else {
-                if (valueManager.isComputerOffDuringObj2) {
+                if (valueManager.myBasement.isComputerOff) {
                     secondText.setText("This action cannot be stopped or you're not doing it.");
                 } else {
                     secondText.setText("One of your things is making you feel sick. Take care of that.");
@@ -101,7 +101,7 @@ public class ObjectiveTwo extends AppCompatActivity {
             valueManager.score++;
             myMoves.setText("Moves: " + valueManager.score);
             if (myObjTwo.contains("eye")) {
-                if (valueManager.isComputerOffDuringObj2) {
+                if (valueManager.myBasement.isComputerOff) {
                     secondText.setText("This is not really useful right now.");
                 } else {
                     secondText.setText("This is not really useful right now. It feels like the room is spinning.");
@@ -118,7 +118,7 @@ public class ObjectiveTwo extends AppCompatActivity {
             valueManager.score++;
             myMoves.setText("Moves: " + valueManager.score);
             if (myObjTwo.contains("eye")) {
-                if (valueManager.isComputerOffDuringObj2) {
+                if (valueManager.myBasement.isComputerOff) {
                     secondText.setText("You already see.");
                 } else {
                     secondText.setText("You already see and it feels like the room is spinning.");
@@ -127,7 +127,7 @@ public class ObjectiveTwo extends AppCompatActivity {
             } else if (myObjTwo.contains("door")) {
                 if (!valueManager.myself.isStanding) {
                     secondText.setText("You'll have to stand up first.");
-                } else if (!valueManager.isComputerOffDuringObj2) {
+                } else if (!valueManager.myBasement.isComputerOff) {
                     secondText.setText("You can't because the headache is killing you and you feel too weak.\nOne of the things you have in the room is making you feel sick.");
                 } else {
                     secondText.setText("You must just say the direction you want to go. (NORTH, UP, etc)");
@@ -145,15 +145,15 @@ public class ObjectiveTwo extends AppCompatActivity {
             valueManager.score++;
             myMoves.setText("Moves: " + valueManager.score);
             if (myObjTwo.contains("computer") || myObjTwo.contains("console") || myObjTwo.contains("game")) {
-                if (!valueManager.isComputerOffDuringObj2) {
-                    valueManager.isComputerOffDuringObj2 = true;
+                if (!valueManager.myBasement.isComputerOff) {
+                    valueManager.myBasement.isComputerOff = true;
                     secondText.setText("Once it is off, you don't feel dizzy anymore. You don't know it, but you could have just died.");
                 } else {
                     secondText.setText("You already turned it off.");
                 }
                 linearLayout.addView(secondText);
             } else if (myObjTwo.contains("tv") || myObjTwo.contains("television")) {
-                if (valueManager.isComputerOffDuringObj2) {
+                if (valueManager.myBasement.isComputerOff) {
                     secondText.setText("The TV is off now.");
                 } else {
                     secondText.setText("The game console is still on.");
@@ -170,7 +170,7 @@ public class ObjectiveTwo extends AppCompatActivity {
             valueManager.score++;
             myMoves.setText("Moves: " + valueManager.score);
             if (myObjTwo.contains("computer") || myObjTwo.contains("console") || myObjTwo.contains("game")) {
-                if (!valueManager.isComputerOffDuringObj2) {
+                if (!valueManager.myBasement.isComputerOff) {
                     secondText.setText("It is on and it's giving you a headache.");
                 } else {
                     secondText.setText("You have just turned that off.");
@@ -204,7 +204,7 @@ public class ObjectiveTwo extends AppCompatActivity {
         } else if (myObjTwo.contains("stand") || myObjTwo.contains("get up")) {  // STAND VERB
             valueManager.score++;
             myMoves.setText("Moves: " + valueManager.score);
-            if (valueManager.isComputerOffDuringObj2 || valueManager.myself.isStanding) {
+            if (valueManager.myBasement.isComputerOff || valueManager.myself.isStanding) {
                 valueManager.myself.isStanding = true;
                 secondText.setText("You are standing now.");
                 linearLayout.addView(secondText);
@@ -218,7 +218,7 @@ public class ObjectiveTwo extends AppCompatActivity {
             myMoves.setText("Moves: " + valueManager.score);
             if (valueManager.myself.isStanding) {
                 valueManager.myself.isStanding = false;
-                if (valueManager.isComputerOffDuringObj2) {
+                if (valueManager.myBasement.isComputerOff) {
                     secondText.setText("Now you're on the floor again.");
                 } else {
                     secondText.setText("You're on the floor again. The ceiling is spinning.");
@@ -235,7 +235,7 @@ public class ObjectiveTwo extends AppCompatActivity {
             if (myObjTwo.contains("vinyl") || myObjTwo.contains("player") || myObjTwo.contains("cd") || myObjTwo.contains("disc")) {
                 if (!valueManager.myself.isStanding) {
                     secondText.setText("You'll have to stand up first.");
-                } else if (valueManager.isComputerOffDuringObj2) {
+                } else if (valueManager.myBasement.isComputerOff) {
                     secondText.setText("It says 'ENTER THE WU-TANG'.");
                 } else {
                     secondText.setText("It says 'ENTER THE WU-TANG'.\nThe dizziness is still increasing.");
@@ -263,7 +263,7 @@ public class ObjectiveTwo extends AppCompatActivity {
                 }
                 linearLayout.addView(secondText);
             } else if (myObjTwo.contains("console") || myObjTwo.contains("computer")) {
-                if (valueManager.isComputerOffDuringObj2) {
+                if (valueManager.myBasement.isComputerOff) {
                     secondText.setText("You can recognize that it is your classic game console.");
                 } else {
                     secondText.setText("You can recognize that it is your classic game console and... Ouch! the dizziness gets worse when you look at it.");
@@ -281,10 +281,10 @@ public class ObjectiveTwo extends AppCompatActivity {
         } else if (myObjTwo.contains("take") || myObjTwo.contains("get") || myObjTwo.contains("pick") || myObjTwo.contains("grab")) {
             valueManager.score++;
             myMoves.setText("Moves: " + valueManager.score);
-            if ((myObjTwo.contains("cd") || myObjTwo.contains("disc")) && !valueManager.objectsDroppedDuringObj2.contains("cd")) {
+            if ((myObjTwo.contains("cd") || myObjTwo.contains("disc")) && !valueManager.myBasement.objectsDropped.contains("cd")) {
                 if (!valueManager.myself.isStanding) {
                     secondText.setText("You'll have to stand up first.");
-                } else if (valueManager.isComputerOffDuringObj2) {
+                } else if (valueManager.myBasement.isComputerOff) {
                     if (valueManager.myself.inventory.contains("cd")) {
                         secondText.setText("You already took it.");
                     } else {
@@ -300,10 +300,10 @@ public class ObjectiveTwo extends AppCompatActivity {
                     }
                 }
                 linearLayout.addView(secondText);
-            } else if (myObjTwo.contains("blanket") && !valueManager.objectsDroppedDuringObj2.contains("blanket")) {
+            } else if (myObjTwo.contains("blanket") && !valueManager.myBasement.objectsDropped.contains("blanket")) {
                 if (!valueManager.myself.isStanding) {
                     secondText.setText("You'll have to stand up first.");
-                } else if (valueManager.isComputerOffDuringObj2) {
+                } else if (valueManager.myBasement.isComputerOff) {
                     if (valueManager.myself.inventory.contains("blanket")) {
                         secondText.setText("You already took it.");
                     } else {
@@ -319,10 +319,10 @@ public class ObjectiveTwo extends AppCompatActivity {
                     }
                 }
                 linearLayout.addView(secondText);
-            } else if (myObjTwo.contains("pencil") && !valueManager.objectsDroppedDuringObj2.contains("pencil")) {
+            } else if (myObjTwo.contains("pencil") && !valueManager.myBasement.objectsDropped.contains("pencil")) {
                 if (!valueManager.myself.isStanding) {
                     secondText.setText("You'll have to stand up first.");
-                } else if (valueManager.isComputerOffDuringObj2) {
+                } else if (valueManager.myBasement.isComputerOff) {
                     if (valueManager.myself.inventory.contains("pencil")) {
                         secondText.setText("You already took it.");
                     } else {
@@ -341,7 +341,7 @@ public class ObjectiveTwo extends AppCompatActivity {
             } else if (myObjTwo.contains("console") || myObjTwo.contains("computer")) {
                 secondText.setText("You cannot take that.");
                 linearLayout.addView(secondText);
-            } else if (!valueManager.objectsDroppedDuringObj2.isEmpty()) {
+            } else if (!valueManager.myBasement.objectsDropped.isEmpty()) {
                 int n;
                 if (myObjTwo.contains("take") || myObjTwo.contains("pick") || myObjTwo.contains("grab")) {
                     n = 4;
@@ -355,16 +355,16 @@ public class ObjectiveTwo extends AppCompatActivity {
                 s = s.replace(" a ","");
                 s = s.replace(" an ","");
                 s = s.trim();
-                if (valueManager.objectsDroppedDuringObj2.contains(s)) {
-                    valueManager.objectsDroppedDuringObj2.remove(s);
+                if (valueManager.myBasement.objectsDropped.contains(s)) {
+                    valueManager.myBasement.objectsDropped.remove(s);
                     valueManager.myself.inventory.add(s);
-                    if (valueManager.isComputerOffDuringObj2) {
+                    if (valueManager.myBasement.isComputerOff) {
                         secondText.setText("Taken.");
                     } else {
                         secondText.setText("Taken... Ufff... But the headache hasn't stopped.");
                     }
                 } else {
-                    if (valueManager.isComputerOffDuringObj2) {
+                    if (valueManager.myBasement.isComputerOff) {
                         secondText.setText("You can't see any " + s + " here!");
                     } else {
                         secondText.setText("You can't see any " + s + " here... and the headache is still increasing.");
@@ -389,7 +389,7 @@ public class ObjectiveTwo extends AppCompatActivity {
             s = s.trim();
             if (valueManager.myself.inventory.contains(s)) {
                 valueManager.myself.inventory.remove(s);
-                valueManager.objectsDroppedDuringObj2.add(s);
+                valueManager.myBasement.objectsDropped.add(s);
                 secondText.setText("Dropped.");
                 linearLayout.addView(secondText);
             } else {
@@ -399,7 +399,7 @@ public class ObjectiveTwo extends AppCompatActivity {
         } else if (myObjTwo.matches("help")) {  // HELP VERB
             valueManager.score++;
             myMoves.setText("Moves: " + valueManager.score);
-            if (valueManager.isComputerOffDuringObj2) {
+            if (valueManager.myBasement.isComputerOff) {
                 secondText.setText("You may wanna GO UPSTAIRS now that you can.");
             } else {
                 secondText.setText("Don't ask for help.\n\nType COMMANDS to get a list of some actions you can do.");
@@ -417,23 +417,20 @@ public class ObjectiveTwo extends AppCompatActivity {
                 intro = intro + ". You are sitting on the floor.";
             }
             intro = intro + "\nThere is a piece of furniture with a vinyl player and some discs on it. Your game console is next to you. There's a door leading UP.";
-            if (!valueManager.myself.inventory.contains("blanket") && !valueManager.objectsDroppedDuringObj2.contains("blanket")) {
+            if (!valueManager.myself.inventory.contains("blanket") && !valueManager.myBasement.objectsDropped.contains("blanket")) {
                 intro = intro + "\nThere is a blanket here.";
             }
-            if (!valueManager.myself.inventory.contains("pencil") && !valueManager.objectsDroppedDuringObj2.contains("pencil")) {
+            if (!valueManager.myself.inventory.contains("pencil") && !valueManager.myBasement.objectsDropped.contains("pencil")) {
                 intro = intro + "\nThere is a pencil here.";
             }
-            if (!valueManager.objectsDroppedDuringObj2.isEmpty()) {
-                int n = valueManager.objectsDroppedDuringObj2.size();
+            if (!valueManager.myBasement.objectsDropped.isEmpty()) {
+                int n = valueManager.myBasement.objectsDropped.size();
                 for (int i=0; i<n; i++) {
-                    intro = intro + "\nThere's the " + valueManager.objectsDroppedDuringObj2.get(i) + " here.";
+                    intro = intro + "\nThere's the " + valueManager.myBasement.objectsDropped.get(i) + " here.";
                 }
-                secondText.setText(intro);
-                linearLayout.addView(secondText);
-            } else {
-                secondText.setText(intro);
-                linearLayout.addView(secondText);
             }
+            secondText.setText(intro);
+            linearLayout.addView(secondText);
         } else if (myObjTwo.matches("i") || myObjTwo.matches("inventory")) {
             String inventory = "You have:";
             if (!valueManager.myself.inventory.isEmpty()) {
@@ -441,13 +438,11 @@ public class ObjectiveTwo extends AppCompatActivity {
                 for (int i=0; i<n; i++) {
                     inventory = inventory + "\n    " + valueManager.myself.inventory.get(i) + ".";
                 }
-                secondText.setText(inventory);
-                linearLayout.addView(secondText);
             } else {
                 inventory = "You have nothing.";
-                secondText.setText(inventory);
-                linearLayout.addView(secondText);
             }
+            secondText.setText(inventory);
+            linearLayout.addView(secondText);
         } else if (myObjTwo.contains("inventory")) {
             secondText.setText("Just write the letter I or say INVENTORY.");
             linearLayout.addView(secondText);
@@ -479,7 +474,7 @@ public class ObjectiveTwo extends AppCompatActivity {
             secondText.setText("It smells just like a basement.");
             linearLayout.addView(secondText);
         } else if (myObjTwo.contains("listen")) {
-            if (!valueManager.isComputerOffDuringObj2) {
+            if (!valueManager.myBasement.isComputerOff) {
                 secondText.setText("The silence has never felt better.");
             } else {
                 secondText.setText("The game's music results to be annoying now.");
