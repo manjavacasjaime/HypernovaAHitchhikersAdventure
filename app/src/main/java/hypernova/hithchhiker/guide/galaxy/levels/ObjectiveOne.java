@@ -11,11 +11,11 @@ import hypernova.hithchhiker.guide.galaxy.R;
 import hypernova.hithchhiker.guide.galaxy.managers.ValueManager;
 
 public class ObjectiveOne extends AppCompatActivity {
-    ValueManager valueManager;
+    ValueManager vm;
     boolean hasAskedForHelp = false;
 
     public ObjectiveOne(ValueManager valManager) {
-        valueManager = valManager;
+        vm = valManager;
     }
 
     public String checkObjAnswer(String myObjOne, Activity activity) {
@@ -28,14 +28,14 @@ public class ObjectiveOne extends AppCompatActivity {
         secondText.setTypeface(typeface);
 
         if (myObjOne.matches("test606 obj7")) {
-            valueManager.score = 12;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score = 12;
+            myMoves.setText("Moves: " + vm.score);
             myLocation.setText("Library, door");
-            valueManager.fred.isPresent = true;
-            valueManager.myself.isStanding = true;
-            libraryobj7 = 1; // CHECK LATER WHEN NEW NAVIGATION SYSTEM IS DEVELOPED IN OBJ7
-            valueManager.myself.isNeckChipInstalled = true;
-            valueManager.currentObjective = 7;
+            vm.fred.isPresent = true;
+            vm.myself.isStanding = true;
+            vm.ludlow.currentLocation = "library";
+            vm.myself.isNeckChipInstalled = true;
+            vm.currentObjective = 4;
         }
         // DIRECTIONS GO VERB
         else if (myObjOne.matches("north") || myObjOne.matches("n") || myObjOne.matches("go north") || myObjOne.matches("go n") || myObjOne.matches("go straight on") || myObjOne.matches("south") || myObjOne.matches("s") || myObjOne.matches("go south") || myObjOne.matches("go s") || myObjOne.matches("go backwards") || myObjOne.matches("east") || myObjOne.matches("e") || myObjOne.matches("go east") || myObjOne.matches("go e") || myObjOne.matches("go right") || myObjOne.matches("west") || myObjOne.matches("w") || myObjOne.matches("go west") || myObjOne.matches("go w") || myObjOne.matches("go left") || myObjOne.matches("northeast") || myObjOne.matches("ne") || myObjOne.matches("go northeast") || myObjOne.matches("go ne") || myObjOne.matches("northwest") || myObjOne.matches("nw") || myObjOne.matches("go northwest") || myObjOne.matches("go nw") || myObjOne.matches("southeast") || myObjOne.matches("se") || myObjOne.matches("go southeast") || myObjOne.matches("go se") || myObjOne.matches("southwest") || myObjOne.matches("sw") || myObjOne.matches("go southwest") || myObjOne.matches("go sw") || myObjOne.matches("down") || myObjOne.matches("d") || myObjOne.matches("go down") || myObjOne.matches("downstairs") || myObjOne.matches("go downstairs") || myObjOne.matches("go d")) {
@@ -54,8 +54,8 @@ public class ObjectiveOne extends AppCompatActivity {
             secondText.setText("This verb needs to be used with the action you wanna stop doing.");
             linearLayout.addView(secondText);
         } else if (myObjOne.contains("stop")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             if (myObjOne.contains("voices")) {
                 secondText.setText("You are not hearing voices... Not yet.");
                 linearLayout.addView(secondText);
@@ -63,23 +63,23 @@ public class ObjectiveOne extends AppCompatActivity {
                 myLocation.setText("Basement");
                 secondText.setText("A soft light bulb allows you to see your house basement.\nYou are sitting on the floor. There is a piece of furniture with a vinyl player and some discs on it. Your game console is next to you. There's a door leading UP.\nThere is a blanket here.\nThere is a pencil here.");
                 linearLayout.addView(secondText);
-                valueManager.myBasement.scoreWhenStopPlaying = valueManager.score;
-                valueManager.currentObjective = 2;
+                vm.myBasement.scoreWhenStopPlaying = vm.score;
+                vm.currentObjective = 2;
             } else {
                 secondText.setText("This action cannot be stopped or you're not doing it.");
                 linearLayout.addView(secondText);
             }
         } else if (myObjOne.contains("keep play")) {  // KEEP VERB, added just in case
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             secondText.setText("You keep playing.");
             linearLayout.addView(secondText);
         } else if (myObjOne.matches("close")) {  // CLOSE VERB
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
         } else if (myObjOne.contains("close")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             if (myObjOne.contains("eye")) {
                 secondText.setText("You try it hard... But it results to be impossible.");
                 linearLayout.addView(secondText);
@@ -91,8 +91,8 @@ public class ObjectiveOne extends AppCompatActivity {
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
         } else if (myObjOne.contains("open")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             if (myObjOne.contains("eye")) {
                 secondText.setText("Your eyes are already wide open.");
                 linearLayout.addView(secondText);
@@ -101,8 +101,8 @@ public class ObjectiveOne extends AppCompatActivity {
                 linearLayout.addView(secondText);
             }
         } else if (myObjOne.matches("help")) {  // HELP VERB
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             if (!hasAskedForHelp) {
                 hasAskedForHelp = true;
                 secondText.setText("No one is coming to help you. Ha Ha Ha!\n\nJust joking. Say STOP PLAYING.");
@@ -132,13 +132,13 @@ public class ObjectiveOne extends AppCompatActivity {
             secondText.setText("Say EXAMINE and the object you want to check.");
             linearLayout.addView(secondText);
         } else if (myObjOne.contains("play")) {  // PLAY VERB, added just in case
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             secondText.setText("You are already playing. Nice move...");
             linearLayout.addView(secondText);
         } else if (myObjOne.matches("sleep") || myObjOne.contains("jump") || myObjOne.contains("climb") || myObjOne.contains("stand") || myObjOne.contains("turn") || myObjOne.contains("shut") || myObjOne.contains("get") || myObjOne.contains("take") || myObjOne.contains("pick") || myObjOne.contains("grab") || myObjOne.contains("lie") || myObjOne.contains("sit") || myObjOne.contains("look") || myObjOne.contains("see") || myObjOne.contains("watch") || myObjOne.contains("play") || myObjOne.contains("run") || myObjOne.contains("walk") || myObjOne.contains("move") || myObjOne.contains("examine") || myObjOne.contains("eat") || myObjOne.contains("read") || myObjOne.contains("drop") || myObjOne.contains("put") || myObjOne.contains("give") || myObjOne.contains("offer") || myObjOne.contains("enter") || myObjOne.contains("attack") || myObjOne.contains("hit") || myObjOne.contains("break") || myObjOne.contains("fight") || myObjOne.contains("kick")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             secondText.setText("You cannot do that while you're still playing.");
             linearLayout.addView(secondText);
         } else if (myObjOne.contains("smell")) {

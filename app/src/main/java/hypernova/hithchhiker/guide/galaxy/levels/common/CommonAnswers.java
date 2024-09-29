@@ -16,12 +16,12 @@ import hypernova.hithchhiker.guide.galaxy.managers.MechanicsManager;
 import hypernova.hithchhiker.guide.galaxy.managers.ValueManager;
 
 public class CommonAnswers extends AppCompatActivity {
-    ValueManager valueManager;
+    ValueManager vm;
     int changeAiConversationStatus = 0;
     public boolean isTryingToKill = false;
 
     public CommonAnswers(ValueManager valManager) {
-        valueManager = valManager;
+        vm = valManager;
     }
 
     public String checkObjAnswer(String myObjX, Activity activity, MechanicsManager mechanicsManager) {
@@ -91,7 +91,7 @@ public class CommonAnswers extends AppCompatActivity {
             secondText.setText("Clothes are not worth considering right now.\nCheck COMMANDS if you need help.");
             linearLayout.addView(secondText);
         } else if (myObjX.matches("save")) {
-            valueManager.save();
+            vm.save();
             secondText.setText("GAME SAVED.\nYou can keep playing if you want to.");
             linearLayout.addView(secondText);
         } else if (myObjX.contains("save") && (myObjX.contains("match") || myObjX.contains("game") || myObjX.contains("progress"))) {
@@ -168,19 +168,19 @@ public class CommonAnswers extends AppCompatActivity {
             linearLayout.addView(secondText);
         } else if (myObjX.contains("my") && myObjX.contains("name") && myObjX.contains("is")) {
             int nameFirstLetter = myObjX.indexOf('s') + 1;
-            valueManager.myself.name = myObjX.substring(nameFirstLetter);
-            valueManager.myself.name = valueManager.myself.name.replaceAll("\\.+$", "");
-            valueManager.myself.name = valueManager.myself.name.replaceAll("\\?+$", "");
-            valueManager.myself.name = valueManager.myself.name.trim();
-            valueManager.myself.name = valueManager.myself.name.substring(0, 1).toUpperCase() + valueManager.myself.name.substring(1);
-            if (valueManager.myself.name.indexOf(' ') != -1) {
-                for (int i = 0; i < valueManager.myself.name.length(); i++) {
-                    if (valueManager.myself.name.charAt(i) == ' ') {
-                        valueManager.myself.name = valueManager.myself.name.substring(0, i + 1) + valueManager.myself.name.substring(i + 1, i + 2).toUpperCase() + valueManager.myself.name.substring(i + 2);
+            vm.myself.name = myObjX.substring(nameFirstLetter);
+            vm.myself.name = vm.myself.name.replaceAll("\\.+$", "");
+            vm.myself.name = vm.myself.name.replaceAll("\\?+$", "");
+            vm.myself.name = vm.myself.name.trim();
+            vm.myself.name = vm.myself.name.substring(0, 1).toUpperCase() + vm.myself.name.substring(1);
+            if (vm.myself.name.indexOf(' ') != -1) {
+                for (int i = 0; i < vm.myself.name.length(); i++) {
+                    if (vm.myself.name.charAt(i) == ' ') {
+                        vm.myself.name = vm.myself.name.substring(0, i + 1) + vm.myself.name.substring(i + 1, i + 2).toUpperCase() + vm.myself.name.substring(i + 2);
                     }
                 }
             }
-            secondText.setText("Nice to meet you, " + valueManager.myself.name + ".");
+            secondText.setText("Nice to meet you, " + vm.myself.name + ".");
             linearLayout.addView(secondText);
         } else if (myObjX.matches("change artificial intelligence") || myObjX.matches("change ai") || myObjX.matches("change game artificial intelligence") || myObjX.matches("change game ai") || (myObjX.contains("i ") && myObjX.contains("don't") && (myObjX.contains("talk") || myObjX.contains("speak") || myObjX.contains("play")))) {
             changeAiConversationStatus = 1;
@@ -196,29 +196,29 @@ public class CommonAnswers extends AppCompatActivity {
             secondText.setText("Done.");
             linearLayout.addView(secondText);
             int myNewColor = 0;
-            switch (valueManager.appColor) {
+            switch (vm.appColor) {
                 case 1:
-                    valueManager.appColor = 2;
+                    vm.appColor = 2;
                     myNewColor = getResources().getColor(R.color.colorGreen);
                     break;
                 case 2:
-                    valueManager.appColor = 3;
+                    vm.appColor = 3;
                     myNewColor = getResources().getColor(R.color.colorPink);
                     break;
                 case 3:
-                    valueManager.appColor = 1;
+                    vm.appColor = 1;
                     myNewColor = getResources().getColor(R.color.colorAccent);
                     break;
             }
-            SharedPreferences.Editor editor = valueManager.sharedPrefs.edit();
-            editor.putInt("appColor", valueManager.appColor);
+            SharedPreferences.Editor editor = vm.sharedPrefs.edit();
+            editor.putInt("appColor", vm.appColor);
             editor.commit();
             mechanicsManager.changeAppColor(linearLayout, myNewColor, activity);
         } else if (myObjX.contains("artificial intelligence")) {
             secondText.setText("AI is a complicated matter and is a topic I won't discuss here.\nFor your information, I cannot think by myself. I can only process your sentences after you type them, but I'm not able to throw an idea without that input.\n\nHope that you get that.");
             linearLayout.addView(secondText);
         } else if (myObjX.contains("draw") || myObjX.contains("paint")) {
-            if (!(valueManager.myself.inventory.contains("pencil"))) {
+            if (!(vm.myself.inventory.contains("pencil"))) {
                 secondText.setText("There is no pencil in your inventory.");
             } else {
                 secondText.setText("Feeling artistic? Well, you can draw in other games.");
@@ -330,19 +330,19 @@ public class CommonAnswers extends AppCompatActivity {
             linearLayout.addView(secondText);
         } else if (myObjX.matches("die")) {
             myLocation.setText("Dead");
-            secondText.setText("You died. Smart move." + valueManager.dieOptions);
+            secondText.setText("You died. Smart move." + vm.dieOptions);
             linearLayout.addView(secondText);
-            valueManager.currentObjective = 0;
+            vm.currentObjective = 0;
         } else if (myObjX.contains("die")) {
             secondText.setText("If you wanna die, just say UNIVERSE PLEASE KILL ME.");
             linearLayout.addView(secondText);
         } else if (myObjX.contains("universe please kill me")) {
             myLocation.setText("Dead");
             secondText.setText("As you pronounce your last words, you get a glimpse of a blinding light with a little flicker in its core. After a few seconds feeling a tingle in the back of your chest, you just disappear.\n\nThirty meters from there, a woman saw the scene and she swore to see for a second a shadow of you just walking out of the spot. She told this to a friend, Kida Thatch, who took this as a reason to continue her studies in alternate realities.\n\n" +
-                    "Few years later, it turned out that there is a reality where you died and there's also a reality where you walked away. The energy that killed you showed Kida's friend a reflect of this parallel reality.\n\nNow everyone can visit their friends and families from other realities. There is no frontiers between countries and realities. People love eachother. World Peace is ensured for centuries to come. Meanwhile, in one of these realities you can find a tombstone at Ludlow Cemetery with the words: In loving memory of " + valueManager.myself.name + " " + valueManager.myself.surname + " 'UNIVERSE PLEASE KILL ME'."
-                    + valueManager.dieOptions);
+                    "Few years later, it turned out that there is a reality where you died and there's also a reality where you walked away. The energy that killed you showed Kida's friend a reflect of this parallel reality.\n\nNow everyone can visit their friends and families from other realities. There is no frontiers between countries and realities. People love eachother. World Peace is ensured for centuries to come. Meanwhile, in one of these realities you can find a tombstone at Ludlow Cemetery with the words: In loving memory of " + vm.myself.name + " " + vm.myself.surname + " 'UNIVERSE PLEASE KILL ME'."
+                    + vm.dieOptions);
             linearLayout.addView(secondText);
-            valueManager.currentObjective = 0;
+            vm.currentObjective = 0;
         } else if (myObjX.contains("kill you") && !myObjX.contains("your")) {
             secondText.setText("I'm a video game. I cannot die... You better take care of your words.");
             linearLayout.addView(secondText);

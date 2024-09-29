@@ -21,14 +21,12 @@ public class ValueManager extends AppCompatActivity {
     public MyBasement myBasement = new MyBasement();
     public Ludlow ludlow = new Ludlow();
     public boolean isMatchSaved = sharedPrefs.getBoolean("isMatchSaved", false);
-    public int appColor = sharedPrefs.getInt("appColor", 1); //1 grey, 2 green, 3 pink
+    public int appColor = sharedPrefs.getInt("appColor", 1); // 1 grey, 2 green, 3 pink
     public String dieOptions = "\n\nType RESTART, RESTORE, COMMANDS or QUIT.";
     public int currentObjective; // WHICH OBJECTIVE I AM DOING. ZERO IS GAME OVER
     public int score;
 
     ArrayList<String> myInventoryPast = new ArrayList<String>();
-    ArrayList<String> dropStreet = new ArrayList<String>();
-    ArrayList<String> dropLibraryDoor = new ArrayList<String>();
     ArrayList<String> dropLibraryL = new ArrayList<String>();
     ArrayList<String> dropRoomD = new ArrayList<String>();
     ArrayList<String> dropHouseDesert11 = new ArrayList<String>();
@@ -47,12 +45,6 @@ public class ValueManager extends AppCompatActivity {
     boolean callbacksRemoved;
     int prevStringLength = 2;
     boolean capsLocked = false;
-
-    int speakcountobj7 = 0;
-    int houseobj7 = 0;
-    int streetobj7 = 0;
-    int libraryobj7 = 0;
-    int firsttimestreets = 1;
 
     int inreading = 0;
     int inconversationsully = 0;
@@ -92,8 +84,6 @@ public class ValueManager extends AppCompatActivity {
         score = 0;
 
         myInventoryPast.clear();
-        dropStreet.clear();
-        dropLibraryDoor.clear();
         dropLibraryL.clear();
         dropRoomD.clear();
         dropHouseDesert11.clear();
@@ -103,12 +93,6 @@ public class ValueManager extends AppCompatActivity {
         dropHouseDesert22.clear();
         dropHouseDesert23.clear();
         dropHouseDesert32.clear();
-
-        speakcountobj7 = 0;
-        houseobj7 = 0;
-        streetobj7 = 0;
-        libraryobj7 = 0;
-        firsttimestreets = 1;
 
         knowsarmoredpeople = 0; //pregunta y le habla de gente con armadura
         abigailchatphase = 1; // DIALOGO DINAMICO ABIGAIL
@@ -151,10 +135,6 @@ public class ValueManager extends AppCompatActivity {
 
         Set<String> myInventoryPastSet = new HashSet<>(myInventoryPast);
         editor.putStringSet("myInventoryPastSet", myInventoryPastSet);
-        Set<String> dropStreetSet = new HashSet<>(dropStreet);
-        editor.putStringSet("dropStreetSet", dropStreetSet);
-        Set<String> dropLibraryDoorSet = new HashSet<>(dropLibraryDoor);
-        editor.putStringSet("dropLibraryDoorSet", dropLibraryDoorSet);
         Set<String> dropLibraryLSet = new HashSet<>(dropLibraryL);
         editor.putStringSet("dropLibraryLSet", dropLibraryLSet);
         Set<String> dropRoomDSet = new HashSet<>(dropRoomD);
@@ -173,12 +153,6 @@ public class ValueManager extends AppCompatActivity {
         editor.putStringSet("dropHouseDesert23Set", dropHouseDesert23Set);
         Set<String> dropHouseDesert32Set = new HashSet<>(dropHouseDesert32);
         editor.putStringSet("dropHouseDesert32Set", dropHouseDesert32Set);
-
-        editor.putInt("speakcountobj7", speakcountobj7);
-        editor.putInt("houseobj7", houseobj7);
-        editor.putInt("streetobj7", streetobj7);
-        editor.putInt("libraryobj7", libraryobj7);
-        editor.putInt("firsttimestreets", firsttimestreets);
 
         editor.putInt("knowsarmoredpeople", knowsarmoredpeople);
         editor.putInt("abigailchatphase", abigailchatphase);
@@ -223,10 +197,6 @@ public class ValueManager extends AppCompatActivity {
 
         Set<String> myInventoryPastSet = sharedPrefs.getStringSet("myInventoryPastSet", emptyset);
         myInventoryPast = new ArrayList<>(myInventoryPastSet);
-        Set<String> dropStreetSet = sharedPrefs.getStringSet("dropStreetSet", emptyset);
-        dropStreet = new ArrayList<>(dropStreetSet);
-        Set<String> dropLibraryDoorSet = sharedPrefs.getStringSet("dropLibraryDoorSet", emptyset);
-        dropLibraryDoor = new ArrayList<>(dropLibraryDoorSet);
         Set<String> dropLibraryLSet = sharedPrefs.getStringSet("dropLibraryLSet", emptyset);
         dropLibraryL = new ArrayList<>(dropLibraryLSet);
         Set<String> dropRoomDSet = sharedPrefs.getStringSet("dropRoomDSet", emptyset);
@@ -245,12 +215,6 @@ public class ValueManager extends AppCompatActivity {
         dropHouseDesert23 = new ArrayList<>(dropHouseDesert23Set);
         Set<String> dropHouseDesert32Set = sharedPrefs.getStringSet("dropHouseDesert32Set", emptyset);
         dropHouseDesert32 = new ArrayList<>(dropHouseDesert32Set);
-
-        speakcountobj7 = sharedPrefs.getInt("speakcountobj7", 0);
-        houseobj7 = sharedPrefs.getInt("houseobj7", 0);
-        streetobj7 = sharedPrefs.getInt("streetobj7", 0);
-        libraryobj7 = sharedPrefs.getInt("libraryobj7", 0);
-        firsttimestreets = sharedPrefs.getInt("firsttimestreets", 1);
 
         knowsarmoredpeople = sharedPrefs.getInt("knowsarmoredpeople", 0);
         abigailchatphase = sharedPrefs.getInt("abigailchatphase", 1);
