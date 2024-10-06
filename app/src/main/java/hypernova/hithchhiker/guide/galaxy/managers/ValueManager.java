@@ -9,17 +9,31 @@ import java.util.HashSet;
 import java.util.Set;
 
 import hypernova.hithchhiker.guide.galaxy.R;
+import hypernova.hithchhiker.guide.galaxy.characters.Abigail;
 import hypernova.hithchhiker.guide.galaxy.characters.Fred;
+import hypernova.hithchhiker.guide.galaxy.characters.Henry;
+import hypernova.hithchhiker.guide.galaxy.characters.Icarus;
+import hypernova.hithchhiker.guide.galaxy.characters.Kenny;
 import hypernova.hithchhiker.guide.galaxy.characters.Myself;
+import hypernova.hithchhiker.guide.galaxy.characters.Shannon;
+import hypernova.hithchhiker.guide.galaxy.characters.Sully;
 import hypernova.hithchhiker.guide.galaxy.places.Ludlow;
+import hypernova.hithchhiker.guide.galaxy.places.LudlowLibrary;
 import hypernova.hithchhiker.guide.galaxy.places.MyBasement;
 
 public class ValueManager extends AppCompatActivity {
     public SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
     public Myself myself = new Myself();
     public Fred fred = new Fred();
+    public Abigail abigail = new Abigail();
+    public Icarus icarus = new Icarus();
+    public Shannon shannon = new Shannon();
+    public Sully sully = new Sully();
+    public Henry henry = new Henry();
+    public Kenny kenny = new Kenny();
     public MyBasement myBasement = new MyBasement();
     public Ludlow ludlow = new Ludlow();
+    public LudlowLibrary lwLibrary = new LudlowLibrary();
     public boolean isMatchSaved = sharedPrefs.getBoolean("isMatchSaved", false);
     public int appColor = sharedPrefs.getInt("appColor", 1); // 1 grey, 2 green, 3 pink
     public String dieOptions = "\n\nType RESTART, RESTORE, COMMANDS or QUIT.";
@@ -46,22 +60,13 @@ public class ValueManager extends AppCompatActivity {
     int prevStringLength = 2;
     boolean capsLocked = false;
 
-    int inreading = 0;
-    int inconversationsully = 0;
-    int knowsarmoredpeople = 0; //pregunta y le habla de gente con armadura
-    int inconversationabigail = 0;
     int abigailchatphase = 1; // DIALOGO DINAMICO ABIGAIL
-    int inconversationkenny = 0;
-    int inconversationhenry = 0;
-    int inconversationicarus = 0;
     int icaruschatphase = 1; // DIALOGO DINAMICO ICARUS
-    int inconversationshannon = 0;
     int brokenwindow8 = 0;
     int peopleleave8 = 0;
     int haskidicarus = 0; // VACILAR ICARUS
     int score8 = 0;
     int scorepeopleleave8 = 0;
-    int hasreadborrowedbooks = 0;
 
     int stoppeton = 0;
     int firsttimebacklibrary = 1;
@@ -79,6 +84,7 @@ public class ValueManager extends AppCompatActivity {
         fred.initiateVariables();
         myBasement.initiateVariables();
         ludlow.initiateVariables();
+        lwLibrary.initiateVariables();
 
         currentObjective = 1;
         score = 0;
@@ -94,7 +100,6 @@ public class ValueManager extends AppCompatActivity {
         dropHouseDesert23.clear();
         dropHouseDesert32.clear();
 
-        knowsarmoredpeople = 0; //pregunta y le habla de gente con armadura
         abigailchatphase = 1; // DIALOGO DINAMICO ABIGAIL
         icaruschatphase = 1; // DIALOGO DINAMICO ICARUS
         brokenwindow8 = 0;
@@ -102,7 +107,6 @@ public class ValueManager extends AppCompatActivity {
         haskidicarus = 0; // VACILAR ICARUS
         score8 = 0;
         scorepeopleleave8 = 0;
-        hasreadborrowedbooks = 0;
 
         stoppeton = 0;
         firsttimebacklibrary = 1;
@@ -122,6 +126,7 @@ public class ValueManager extends AppCompatActivity {
         fred.save();
         myBasement.save();
         ludlow.save();
+        lwLibrary.save();
 
         isMatchSaved = true;
         editor.putBoolean("isMatchSaved", true);
@@ -154,7 +159,6 @@ public class ValueManager extends AppCompatActivity {
         Set<String> dropHouseDesert32Set = new HashSet<>(dropHouseDesert32);
         editor.putStringSet("dropHouseDesert32Set", dropHouseDesert32Set);
 
-        editor.putInt("knowsarmoredpeople", knowsarmoredpeople);
         editor.putInt("abigailchatphase", abigailchatphase);
         editor.putInt("icaruschatphase", icaruschatphase);
         editor.putInt("brokenwindow8", brokenwindow8);
@@ -162,7 +166,6 @@ public class ValueManager extends AppCompatActivity {
         editor.putInt("haskidicarus", haskidicarus);
         editor.putInt("score8", score8);
         editor.putInt("scorepeopleleave8", scorepeopleleave8);
-        editor.putInt("hasreadborrowedbooks", hasreadborrowedbooks);
 
         editor.putInt("stoppeton", stoppeton);
         editor.putInt("firsttimebacklibrary", firsttimebacklibrary);
@@ -184,6 +187,7 @@ public class ValueManager extends AppCompatActivity {
         fred.restore();
         myBasement.restore();
         ludlow.restore();
+        lwLibrary.restore();
 
         currentObjective = sharedPrefs.getInt("currentObjective", 1);
 
@@ -216,7 +220,6 @@ public class ValueManager extends AppCompatActivity {
         Set<String> dropHouseDesert32Set = sharedPrefs.getStringSet("dropHouseDesert32Set", emptyset);
         dropHouseDesert32 = new ArrayList<>(dropHouseDesert32Set);
 
-        knowsarmoredpeople = sharedPrefs.getInt("knowsarmoredpeople", 0);
         abigailchatphase = sharedPrefs.getInt("abigailchatphase", 1);
         icaruschatphase = sharedPrefs.getInt("icaruschatphase", 1);
         brokenwindow8 = sharedPrefs.getInt("brokenwindow8", 0);
@@ -224,7 +227,6 @@ public class ValueManager extends AppCompatActivity {
         haskidicarus = sharedPrefs.getInt("haskidicarus", 0);
         score8 = sharedPrefs.getInt("score8", 0);
         scorepeopleleave8 = sharedPrefs.getInt("scorepeopleleave8", 0);
-        hasreadborrowedbooks = sharedPrefs.getInt("hasreadborrowedbooks", 0);
 
         stoppeton = sharedPrefs.getInt("stoppeton", 0);
         firsttimebacklibrary = sharedPrefs.getInt("firsttimebacklibrary", 1);
