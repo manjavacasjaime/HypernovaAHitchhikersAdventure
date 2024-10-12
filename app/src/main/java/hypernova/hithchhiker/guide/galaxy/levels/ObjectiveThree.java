@@ -26,20 +26,20 @@ public class ObjectiveThree extends AppCompatActivity {
         TextView secondText = new TextView(activity.getBaseContext());
         secondText.setTypeface(typeface);
 
-        if (vm.fred.conversationStatus == 31) {  // CONVERSATION FRED
+        if (vm.fred.conversationStatus == 1) {  // CONVERSATION FRED
             switch (myObjThree) {
                 case "1":
-                    vm.fred.conversationStatus = 32;
+                    vm.fred.conversationStatus = 2;
                     secondText.setText("I'm F.R.E.D.\nFormed Rico Emotionally Disturbed, but you always call me Fred.\n\n\nDialogue Fred.\n\n1. 'Well. What do you want, Fred?'\n2. 'What is a Rico?'");
                     linearLayout.addView(secondText);
                     break;
                 case "2":
-                    vm.fred.conversationStatus = 32;
+                    vm.fred.conversationStatus = 2;
                     secondText.setText("You bet I know, " + vm.myself.name + ".\nHey it's me, F.R.E.D.\nFormed Rico Emotionally Disturbed, but you always call me Fred.\n\n\nDialogue Fred.\n\n1. 'Well. What do you want, Fred?'\n2. 'What is a Rico?'");
                     linearLayout.addView(secondText);
                     break;
                 case "3":
-                    vm.fred.conversationStatus = 32;
+                    vm.fred.conversationStatus = 2;
                     secondText.setText("Of course you know me. I'm F.R.E.D.\nFormed Rico Emotionally Disturbed, but you always call me Fred.\n\n\nDialogue Fred.\n\n1. 'Well. What do you want, Fred?'\n2. 'What is a Rico?'");
                     linearLayout.addView(secondText);
                     break;
@@ -49,15 +49,15 @@ public class ObjectiveThree extends AppCompatActivity {
                     linearLayout.addView(secondText);
                     break;
             }
-        } else if (vm.fred.conversationStatus == 32) {
+        } else if (vm.fred.conversationStatus == 2) {
             switch (myObjThree) {
                 case "1":
-                    vm.fred.conversationStatus = 33;
+                    vm.fred.conversationStatus = 3;
                     secondText.setText("I'll get to that in a minute. First of all, the weekly report:\nNow, 89% of the Bubbles have electricity. The 300 years universal peace anniversary is closer. And our brothers from B905 have made it into the Space Federation.\n\n\nDialogue Fred.\n\n1. 'Pleased to hear that.'\n2. 'I hate these B905 guys.'\n3. 'Anything else?'");
                     linearLayout.addView(secondText);
                     break;
                 case "2":
-                    vm.fred.conversationStatus = 33;
+                    vm.fred.conversationStatus = 3;
                     secondText.setText("Don't make me talk about those bastards.\nAnyways, let's take a look at the weekly report:\nNow, 89% of the Bubbles have electricity. The 300 years universal peace anniversary is closer. And our brothers from B905 have made it into the Space Federation.\n\n\nDialogue Fred.\n\n1. 'Pleased to hear that.'\n2. 'I hate these B905 guys.'\n3. 'Anything else?'");
                     linearLayout.addView(secondText);
                     break;
@@ -67,20 +67,20 @@ public class ObjectiveThree extends AppCompatActivity {
                     linearLayout.addView(secondText);
                     break;
             }
-        } else if (vm.fred.conversationStatus == 33) {
+        } else if (vm.fred.conversationStatus == 3) {
             switch (myObjThree) {
                 case "1":
-                    vm.fred.conversationStatus = 34;
+                    vm.fred.conversationStatus = 4;
                     secondText.setText("You always so nice.\n\nOne more thing.\nI've been doing some research about the Space Travel Ban.\nI've checked every route made by the Space Federation and the routes allowed according to the law.\nThe numbers don't fit... There might be one Traveller alive.\n\n\nDialogue Fred.\n\n1. 'No way. The Travellers are dead.'\n2. 'The Space Federation will take care of him.'");
                     linearLayout.addView(secondText);
                     break;
                 case "2":
-                    vm.fred.conversationStatus = 34;
+                    vm.fred.conversationStatus = 4;
                     secondText.setText("Although they kill their parents when they're twelve, we don't have to treat them differently.\n\nOne more thing.\nI've been doing some research about the Space Travel Ban.\nI've checked every route made by the Space Federation and the routes allowed according to the law.\nThe numbers don't fit... There might be one Traveller alive.\n\n\nDialogue Fred.\n\n1. 'No way. The Travellers are dead.'\n2. 'The Space Federation will take care of him.'");
                     linearLayout.addView(secondText);
                     break;
                 case "3":
-                    vm.fred.conversationStatus = 34;
+                    vm.fred.conversationStatus = 4;
                     secondText.setText("Yes.\nI've been doing some research about the Space Travel Ban.\nI've checked every route made by the Space Federation and the routes allowed according to the law.\nThe numbers don't fit... There might be one Traveller alive.\n\n\nDialogue Fred.\n\n1. 'No way. The Travellers are dead.'\n2. 'The Space Federation will take care of him.'");
                     linearLayout.addView(secondText);
                     break;
@@ -90,15 +90,15 @@ public class ObjectiveThree extends AppCompatActivity {
                     linearLayout.addView(secondText);
                     break;
             }
-        } else if (vm.fred.conversationStatus == 34) {
+        } else if (vm.fred.conversationStatus == 4) {
             switch (myObjThree) {
                 case "1":
-                    vm.fred.conversationStatus = 35;
+                    vm.fred.conversationStatus = 5;
                     secondText.setText("I've said there MIGHT be one alive. Maybe. Just maybe...\nNow there's hope to get out of B903.\n\n\nDialogue Fred.\n\n1. 'I'm happy in the Bubble.'\n2. 'Assuming this Traveller exists, what now?'");
                     linearLayout.addView(secondText);
                     break;
                 case "2":
-                    vm.fred.conversationStatus = 35;
+                    vm.fred.conversationStatus = 5;
                     secondText.setText("Fred doesn't want that. Nobody in the universe would want that...\nNow there's hope to get out of B903.\n\n\nDialogue Fred.\n\n1. 'I'm happy in the Bubble.'\n2. 'Assuming this Traveller exists, what now?'");
                     linearLayout.addView(secondText);
                     break;
@@ -108,7 +108,7 @@ public class ObjectiveThree extends AppCompatActivity {
                     linearLayout.addView(secondText);
                     break;
             }
-        } else if (vm.fred.conversationStatus == 35) {
+        } else if (vm.fred.conversationStatus == 5) {
             switch (myObjThree) {
                 case "1":
                     vm.fred.conversationStatus = 0;
@@ -193,7 +193,7 @@ public class ObjectiveThree extends AppCompatActivity {
             } else if (myObjThree.contains("door")) {
                 vm.ludlow.isHouseDoorOpen = true;
                 vm.fred.isPresent = true;
-                vm.fred.conversationStatus = 31;
+                vm.fred.conversationStatus = 1;
                 myLocation.setText("Hall, open door");
                 secondText.setText("'10 o'clock at your door. 10 o'clock at your door. Is it that difficult?'\n\n\nDialogue Fred.\n\n1. 'Who are you?'\n2. 'You know who are you talking with!?'\n3. 'I'm " + vm.myself.name + ". Do I know you?'");
                 linearLayout.addView(secondText);

@@ -285,8 +285,8 @@ public class MainActivity extends AppCompatActivity {
                                       obj();
                                   }
                                   break;
-                              case 8:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && checkObj8Answer(myobjxlow).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                              case 5:
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.objectiveFive.checkObjAnswer(myobjxlow, MainActivity.this).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
@@ -524,7 +524,7 @@ public class MainActivity extends AppCompatActivity {
                     obj();
                     break;
             }
-        } else if ((valueManager.score - score9 >= 3) && (((String) myLocation.getText()).matches("Library, room D")) && pastabigail==12) {
+        } else if ((valueManager.score - scoreWhenEnteringRoomD >= 3) && (((String) myLocation.getText()).matches("Library, room D")) && pastabigail==12) {
             pastabigail=0;
             valueManager.score++;
             myMoves.setText("Moves: " + valueManager.score);
@@ -1040,7 +1040,7 @@ public class MainActivity extends AppCompatActivity {
                 linearLayout.addView(secondText);
                 obj();
             }
-        } else if (myobj9.matches("help") && valueManager.score - score9 >= 6) { // HELP VERB 9
+        } else if (myobj9.matches("help") && valueManager.score - scoreWhenEnteringRoomD >= 6) { // HELP VERB 9
             valueManager.score++;
             myMoves.setText("Moves: " + valueManager.score);
             secondText.setText("The name you are looking for is written in one of the notes which are at the hall.");

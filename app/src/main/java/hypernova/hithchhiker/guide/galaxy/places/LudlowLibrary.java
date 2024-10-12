@@ -5,6 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import hypernova.hithchhiker.guide.galaxy.characters.Henry;
 import hypernova.hithchhiker.guide.galaxy.characters.Kenny;
 import hypernova.hithchhiker.guide.galaxy.characters.Shannon;
@@ -12,27 +16,62 @@ import hypernova.hithchhiker.guide.galaxy.characters.Sully;
 
 public class LudlowLibrary extends AppCompatActivity {
     SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
+    public int scoreWhenEnteringLibrary;
+    public int scoreWhenEnteringRoomD;
+    public int scoreWhenPeopleLeave;
     public boolean isReadingPinboard = false;
     public boolean hasReadBorrowedBooks;
     public boolean hasKnownArmoredPeople;
+    public boolean hasPeopleLeft;
+    public boolean hasBrokenWindow;
+    public ArrayList<String> objectsDroppedHall = new ArrayList<>();
+    public ArrayList<String> objectsDroppedRoomD = new ArrayList<>();
 
     public void initiateVariables() {
+        scoreWhenEnteringLibrary = 0;
+        scoreWhenEnteringRoomD = 0;
+        scoreWhenPeopleLeave = 0;
         hasReadBorrowedBooks = false;
         hasKnownArmoredPeople = false;
+        hasPeopleLeft = false;
+        hasBrokenWindow = false;
+        objectsDroppedHall.clear();
+        objectsDroppedRoomD.clear();
     }
 
     public void save() {
         SharedPreferences.Editor editor = sharedPrefs.edit();
 
+        editor.putInt("ludlowLibrary.scoreWhenEnteringLibrary", scoreWhenEnteringLibrary);
+        editor.putInt("ludlowLibrary.scoreWhenEnteringRoomD", scoreWhenEnteringRoomD);
+        editor.putInt("ludlowLibrary.scoreWhenPeopleLeave", scoreWhenPeopleLeave);
         editor.putBoolean("ludlowLibrary.hasReadBorrowedBooks", hasReadBorrowedBooks);
         editor.putBoolean("ludlowLibrary.hasKnownArmoredPeople", hasKnownArmoredPeople);
+        editor.putBoolean("ludlowLibrary.hasPeopleLeft", hasPeopleLeft);
+        editor.putBoolean("ludlowLibrary.hasBrokenWindow", hasBrokenWindow);
+
+        Set<String> objectsDroppedHallSet = new HashSet<>(objectsDroppedHall);
+        editor.putStringSet("ludlowLibrary.objectsDroppedHallSet", objectsDroppedHallSet);
+        Set<String> objectsDroppedRoomDSet = new HashSet<>(objectsDroppedRoomD);
+        editor.putStringSet("ludlowLibrary.objectsDroppedRoomDSet", objectsDroppedRoomDSet);
 
         editor.commit();
     }
 
     public void restore() {
+        Set<String> emptyset = new HashSet<>();
+        scoreWhenEnteringLibrary = sharedPrefs.getInt("ludlowLibrary.scoreWhenEnteringLibrary", 0);
+        scoreWhenEnteringRoomD = sharedPrefs.getInt("ludlowLibrary.scoreWhenEnteringRoomD", 0);
+        scoreWhenPeopleLeave = sharedPrefs.getInt("ludlowLibrary.scoreWhenPeopleLeave", 0);
         hasReadBorrowedBooks = sharedPrefs.getBoolean("ludlowLibrary.hasReadBorrowedBooks", false);
         hasKnownArmoredPeople = sharedPrefs.getBoolean("ludlowLibrary.hasKnownArmoredPeople", false);
+        hasPeopleLeft = sharedPrefs.getBoolean("ludlowLibrary.hasPeopleLeft", false);
+        hasBrokenWindow = sharedPrefs.getBoolean("ludlowLibrary.hasBrokenWindow", false);
+
+        Set<String> objectsDroppedHallSet = sharedPrefs.getStringSet("ludlowLibrary.objectsDroppedHallSet", emptyset);
+        objectsDroppedHall = new ArrayList<>(objectsDroppedHallSet);
+        Set<String> objectsDroppedRoomDSet = sharedPrefs.getStringSet("ludlowLibrary.objectsDroppedRoomDSet", emptyset);
+        objectsDroppedRoomD = new ArrayList<>(objectsDroppedRoomDSet);
     }
 
     public void displayPinboardNotes(String note, LinearLayout linearLayout, TextView secondText) {

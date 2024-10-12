@@ -41,8 +41,6 @@ public class ValueManager extends AppCompatActivity {
     public int score;
 
     ArrayList<String> myInventoryPast = new ArrayList<String>();
-    ArrayList<String> dropLibraryL = new ArrayList<String>();
-    ArrayList<String> dropRoomD = new ArrayList<String>();
     ArrayList<String> dropHouseDesert11 = new ArrayList<String>();
     ArrayList<String> dropHouseDesert12 = new ArrayList<String>();
     ArrayList<String> dropHouseDesert13 = new ArrayList<String>();
@@ -60,19 +58,10 @@ public class ValueManager extends AppCompatActivity {
     int prevStringLength = 2;
     boolean capsLocked = false;
 
-    int abigailchatphase = 1; // DIALOGO DINAMICO ABIGAIL
-    int icaruschatphase = 1; // DIALOGO DINAMICO ICARUS
-    int brokenwindow8 = 0;
-    int peopleleave8 = 0;
-    int haskidicarus = 0; // VACILAR ICARUS
-    int score8 = 0;
-    int scorepeopleleave8 = 0;
-
     int stoppeton = 0;
     int firsttimebacklibrary = 1;
     int pastabigail = 12; // decision tú pasado a abigail: 1 persona distante, 2 persona afable
     int correctdoor9 = 0;
-    int score9 = 0;
 
     int closeddoor = 0; // esta es una variable que se irá reciclando para todas las puertas a partir de obj10
     int housedesert = 12;
@@ -90,8 +79,6 @@ public class ValueManager extends AppCompatActivity {
         score = 0;
 
         myInventoryPast.clear();
-        dropLibraryL.clear();
-        dropRoomD.clear();
         dropHouseDesert11.clear();
         dropHouseDesert12.clear();
         dropHouseDesert13.clear();
@@ -100,19 +87,10 @@ public class ValueManager extends AppCompatActivity {
         dropHouseDesert23.clear();
         dropHouseDesert32.clear();
 
-        abigailchatphase = 1; // DIALOGO DINAMICO ABIGAIL
-        icaruschatphase = 1; // DIALOGO DINAMICO ICARUS
-        brokenwindow8 = 0;
-        peopleleave8 = 0;
-        haskidicarus = 0; // VACILAR ICARUS
-        score8 = 0;
-        scorepeopleleave8 = 0;
-
         stoppeton = 0;
         firsttimebacklibrary = 1;
         pastabigail = 12; // decision tú pasado a abigail: 1 persona distante, 2 persona afable
         correctdoor9 = 0;
-        score9 = 0;
 
         closeddoor = 0; // esta es una variable que se irá reciclando para todas las puertas a partir de obj10
         housedesert = 12;
@@ -140,10 +118,6 @@ public class ValueManager extends AppCompatActivity {
 
         Set<String> myInventoryPastSet = new HashSet<>(myInventoryPast);
         editor.putStringSet("myInventoryPastSet", myInventoryPastSet);
-        Set<String> dropLibraryLSet = new HashSet<>(dropLibraryL);
-        editor.putStringSet("dropLibraryLSet", dropLibraryLSet);
-        Set<String> dropRoomDSet = new HashSet<>(dropRoomD);
-        editor.putStringSet("dropRoomDSet", dropRoomDSet);
         Set<String> dropHouseDesert11Set = new HashSet<>(dropHouseDesert11);
         editor.putStringSet("dropHouseDesert11Set", dropHouseDesert11Set);
         Set<String> dropHouseDesert12Set = new HashSet<>(dropHouseDesert12);
@@ -159,19 +133,10 @@ public class ValueManager extends AppCompatActivity {
         Set<String> dropHouseDesert32Set = new HashSet<>(dropHouseDesert32);
         editor.putStringSet("dropHouseDesert32Set", dropHouseDesert32Set);
 
-        editor.putInt("abigailchatphase", abigailchatphase);
-        editor.putInt("icaruschatphase", icaruschatphase);
-        editor.putInt("brokenwindow8", brokenwindow8);
-        editor.putInt("peopleleave8", peopleleave8);
-        editor.putInt("haskidicarus", haskidicarus);
-        editor.putInt("score8", score8);
-        editor.putInt("scorepeopleleave8", scorepeopleleave8);
-
         editor.putInt("stoppeton", stoppeton);
         editor.putInt("firsttimebacklibrary", firsttimebacklibrary);
         editor.putInt("pastabigail", pastabigail);
         editor.putInt("correctdoor9", correctdoor9);
-        editor.putInt("score9", score9);
 
         editor.putInt("closeddoor", closeddoor);
         editor.putInt("housedesert", housedesert);
@@ -201,10 +166,6 @@ public class ValueManager extends AppCompatActivity {
 
         Set<String> myInventoryPastSet = sharedPrefs.getStringSet("myInventoryPastSet", emptyset);
         myInventoryPast = new ArrayList<>(myInventoryPastSet);
-        Set<String> dropLibraryLSet = sharedPrefs.getStringSet("dropLibraryLSet", emptyset);
-        dropLibraryL = new ArrayList<>(dropLibraryLSet);
-        Set<String> dropRoomDSet = sharedPrefs.getStringSet("dropRoomDSet", emptyset);
-        dropRoomD = new ArrayList<>(dropRoomDSet);
         Set<String> dropHouseDesert11Set = sharedPrefs.getStringSet("dropHouseDesert11Set", emptyset);
         dropHouseDesert11 = new ArrayList<>(dropHouseDesert11Set);
         Set<String> dropHouseDesert12Set = sharedPrefs.getStringSet("dropHouseDesert12Set", emptyset);
@@ -220,19 +181,10 @@ public class ValueManager extends AppCompatActivity {
         Set<String> dropHouseDesert32Set = sharedPrefs.getStringSet("dropHouseDesert32Set", emptyset);
         dropHouseDesert32 = new ArrayList<>(dropHouseDesert32Set);
 
-        abigailchatphase = sharedPrefs.getInt("abigailchatphase", 1);
-        icaruschatphase = sharedPrefs.getInt("icaruschatphase", 1);
-        brokenwindow8 = sharedPrefs.getInt("brokenwindow8", 0);
-        peopleleave8 = sharedPrefs.getInt("peopleleave8", 0);
-        haskidicarus = sharedPrefs.getInt("haskidicarus", 0);
-        score8 = sharedPrefs.getInt("score8", 0);
-        scorepeopleleave8 = sharedPrefs.getInt("scorepeopleleave8", 0);
-
         stoppeton = sharedPrefs.getInt("stoppeton", 0);
         firsttimebacklibrary = sharedPrefs.getInt("firsttimebacklibrary", 1);
         pastabigail = sharedPrefs.getInt("pastabigail", 12);
         correctdoor9 = sharedPrefs.getInt("correctdoor9", 0);
-        score9 = sharedPrefs.getInt("score9", 0);
 
         closeddoor = sharedPrefs.getInt("closeddoor", 0);
         housedesert = sharedPrefs.getInt("housedesert", 12);

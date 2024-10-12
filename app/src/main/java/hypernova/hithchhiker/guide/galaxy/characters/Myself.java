@@ -15,12 +15,17 @@ public class Myself extends AppCompatActivity {
     public boolean isNeckChipInstalled; // This device will be used to check which rooms is the character allowed to access
     public ArrayList<String> inventory = new ArrayList<>();
 
+    // Important choices
+    public boolean hasKidIcarus; // Whether or not you have kidded Icarus
+
     public void initiateVariables() {
         name = "Alex";
         surname = "Peabody";
         isStanding = false;
         isNeckChipInstalled = false;
         inventory.clear();
+
+        hasKidIcarus = false;
     }
 
     public void save() {
@@ -34,6 +39,8 @@ public class Myself extends AppCompatActivity {
         Set<String> inventorySet = new HashSet<>(inventory);
         editor.putStringSet("myself.inventorySet", inventorySet);
 
+        editor.putBoolean("myself.hasKidIcarus", hasKidIcarus);
+
         editor.commit();
     }
 
@@ -46,5 +53,7 @@ public class Myself extends AppCompatActivity {
 
         Set<String> inventorySet = sharedPrefs.getStringSet("myself.inventorySet", emptySet);
         inventory = new ArrayList<>(inventorySet);
+
+        hasKidIcarus = sharedPrefs.getBoolean("myself.hasKidIcarus", false);
     }
 }

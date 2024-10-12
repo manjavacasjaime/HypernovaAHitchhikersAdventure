@@ -1,5 +1,6 @@
 package hypernova.hithchhiker.guide.galaxy.managers;
 
+import hypernova.hithchhiker.guide.galaxy.levels.ObjectiveFive;
 import hypernova.hithchhiker.guide.galaxy.levels.ObjectiveFour;
 import hypernova.hithchhiker.guide.galaxy.levels.ObjectiveOne;
 import hypernova.hithchhiker.guide.galaxy.levels.ObjectiveThree;
@@ -16,6 +17,7 @@ public class LevelManager {
     public ObjectiveTwo objectiveTwo;
     public ObjectiveThree objectiveThree;
     public ObjectiveFour objectiveFour;
+    public ObjectiveFive objectiveFive;
 
     public LevelManager(ValueManager valManager) {
         commonAnswers = new CommonAnswers(valManager);
@@ -25,5 +27,6 @@ public class LevelManager {
         objectiveTwo = new ObjectiveTwo(valManager);
         objectiveThree = new ObjectiveThree(valManager);
         objectiveFour = new ObjectiveFour(valManager);
+        objectiveFive = new ObjectiveFive(valManager);
     }
 }

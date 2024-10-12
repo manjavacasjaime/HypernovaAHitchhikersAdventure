@@ -273,6 +273,7 @@ public class ObjectiveFour extends AppCompatActivity {
                         intro = intro + "You both enter the library.\n\n'I need to talk with someone here. I'll be back in a minute. Find the book, " + vm.myself.name + ".'\nFred enters the office door of the library and closes it behind him. Look around.\n\nNote: Whenever you want to speak with someone say SPEAK (and the name of the person).";
                         secondText.setText(intro);
                         linearLayout.addView(secondText);
+                        vm.lwLibrary.scoreWhenEnteringLibrary = vm.score;
                         vm.currentObjective = 5;
                     }
                 }
@@ -320,6 +321,7 @@ public class ObjectiveFour extends AppCompatActivity {
                         intro = intro + "You both enter the library.\n\n'I need to talk with someone here. I'll be back in a minute. Find the book, " + vm.myself.name + ".'\nFred enters the office door of the library and closes it behind him. Look around.\n\nNote: Whenever you want to speak with someone say SPEAK (and the name of the person).";
                         secondText.setText(intro);
                         linearLayout.addView(secondText);
+                        vm.lwLibrary.scoreWhenEnteringLibrary = vm.score;
                         vm.currentObjective = 5;
                     }
                 } else {
@@ -697,10 +699,8 @@ public class ObjectiveFour extends AppCompatActivity {
                     for (int i = 0; i < n; i++) {
                         intro = intro + "\nThere's the " + vm.ludlow.objectsDroppedHouse.get(i) + " here.";
                     }
-                    secondText.setText(intro);
-                } else {
-                    secondText.setText(intro);
                 }
+                secondText.setText(intro);
                 linearLayout.addView(secondText);
             } else if (vm.ludlow.currentLocation.equals("street")) {
                 String intro = "Street\nYou can see that Ludlow Library is West and your house is South.";
@@ -712,10 +712,8 @@ public class ObjectiveFour extends AppCompatActivity {
                     for (int i = 0; i < n; i++) {
                         intro = intro + "\nThere's the " + vm.ludlow.objectsDroppedStreet.get(i) + " here.";
                     }
-                    secondText.setText(intro);
-                } else {
-                    secondText.setText(intro);
                 }
+                secondText.setText(intro);
                 linearLayout.addView(secondText);
             } else {
                 String intro = "You find yourself in front of the library door.\nFred is here.";
@@ -724,10 +722,8 @@ public class ObjectiveFour extends AppCompatActivity {
                     for (int i = 0; i < n; i++) {
                         intro = intro + "\nThere's the " + vm.ludlow.objectsDroppedLibrary.get(i) + " here.";
                     }
-                    secondText.setText(intro);
-                } else {
-                    secondText.setText(intro);
                 }
+                secondText.setText(intro);
                 linearLayout.addView(secondText);
             }
         } else if (myObjFour.matches("i") || myObjFour.matches("inventory")) {
