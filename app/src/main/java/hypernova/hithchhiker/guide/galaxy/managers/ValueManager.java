@@ -58,11 +58,6 @@ public class ValueManager extends AppCompatActivity {
     int prevStringLength = 2;
     boolean capsLocked = false;
 
-    int stoppeton = 0;
-    int firsttimebacklibrary = 1;
-    int pastabigail = 12; // decision tú pasado a abigail: 1 persona distante, 2 persona afable
-    int correctdoor9 = 0;
-
     int closeddoor = 0; // esta es una variable que se irá reciclando para todas las puertas a partir de obj10
     int housedesert = 12;
     int havefoundeggin = 00;
@@ -86,11 +81,6 @@ public class ValueManager extends AppCompatActivity {
         dropHouseDesert22.clear();
         dropHouseDesert23.clear();
         dropHouseDesert32.clear();
-
-        stoppeton = 0;
-        firsttimebacklibrary = 1;
-        pastabigail = 12; // decision tú pasado a abigail: 1 persona distante, 2 persona afable
-        correctdoor9 = 0;
 
         closeddoor = 0; // esta es una variable que se irá reciclando para todas las puertas a partir de obj10
         housedesert = 12;
@@ -132,11 +122,6 @@ public class ValueManager extends AppCompatActivity {
         editor.putStringSet("dropHouseDesert23Set", dropHouseDesert23Set);
         Set<String> dropHouseDesert32Set = new HashSet<>(dropHouseDesert32);
         editor.putStringSet("dropHouseDesert32Set", dropHouseDesert32Set);
-
-        editor.putInt("stoppeton", stoppeton);
-        editor.putInt("firsttimebacklibrary", firsttimebacklibrary);
-        editor.putInt("pastabigail", pastabigail);
-        editor.putInt("correctdoor9", correctdoor9);
 
         editor.putInt("closeddoor", closeddoor);
         editor.putInt("housedesert", housedesert);
@@ -180,11 +165,6 @@ public class ValueManager extends AppCompatActivity {
         dropHouseDesert23 = new ArrayList<>(dropHouseDesert23Set);
         Set<String> dropHouseDesert32Set = sharedPrefs.getStringSet("dropHouseDesert32Set", emptyset);
         dropHouseDesert32 = new ArrayList<>(dropHouseDesert32Set);
-
-        stoppeton = sharedPrefs.getInt("stoppeton", 0);
-        firsttimebacklibrary = sharedPrefs.getInt("firsttimebacklibrary", 1);
-        pastabigail = sharedPrefs.getInt("pastabigail", 12);
-        correctdoor9 = sharedPrefs.getInt("correctdoor9", 0);
 
         closeddoor = sharedPrefs.getInt("closeddoor", 0);
         housedesert = sharedPrefs.getInt("housedesert", 12);

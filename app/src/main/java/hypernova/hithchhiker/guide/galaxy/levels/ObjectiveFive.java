@@ -155,11 +155,11 @@ public class ObjectiveFive extends AppCompatActivity {
                         break;
                     case "3":
                         vm.abigail.conversationStatus = 0;
-                        abigailChatPhase = 1;
                         secondText.setText("'Sounds like a deal to me.\nHowever, after we open that door, I'll go and do my thing and you'll go and do yours. Because I know that you're looking for the Traveller too, obviously. But I don't know why you are looking for him...'\n\nDialogue Abigail finished.\n\nSuddenly, Fred joins Abigail and you.\nYou tell Fred everything you've talked with Abigail and he's pleased to know that you've found something interesting.\n\nAbigail indicates you and Fred to follow her. The three of you go NORTH ending in a private room which Abigail seems to know.");
                         linearLayout.addView(secondText);
                         myLocation.setText("Library, room D");
                         vm.lwLibrary.scoreWhenEnteringRoomD = vm.score;
+                        vm.lwLibrary.currentLocation = "room D";
                         vm.currentObjective = 6;
                         break;
                     case "4":

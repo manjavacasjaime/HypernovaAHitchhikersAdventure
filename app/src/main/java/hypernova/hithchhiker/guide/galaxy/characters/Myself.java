@@ -17,6 +17,7 @@ public class Myself extends AppCompatActivity {
 
     // Important choices
     public boolean hasKidIcarus; // Whether or not you have kidded Icarus
+    public int kindOfPerson; // -1 not yet chosen, 0 choosing, 1 distant, 2 affable. Commented to Abigail
 
     public void initiateVariables() {
         name = "Alex";
@@ -26,6 +27,7 @@ public class Myself extends AppCompatActivity {
         inventory.clear();
 
         hasKidIcarus = false;
+        kindOfPerson = -1;
     }
 
     public void save() {
@@ -40,6 +42,7 @@ public class Myself extends AppCompatActivity {
         editor.putStringSet("myself.inventorySet", inventorySet);
 
         editor.putBoolean("myself.hasKidIcarus", hasKidIcarus);
+        editor.putInt("myself.kindOfPerson", kindOfPerson);
 
         editor.commit();
     }
@@ -55,5 +58,6 @@ public class Myself extends AppCompatActivity {
         inventory = new ArrayList<>(inventorySet);
 
         hasKidIcarus = sharedPrefs.getBoolean("myself.hasKidIcarus", false);
+        kindOfPerson = sharedPrefs.getInt("myself.kindOfPerson", -1);
     }
 }

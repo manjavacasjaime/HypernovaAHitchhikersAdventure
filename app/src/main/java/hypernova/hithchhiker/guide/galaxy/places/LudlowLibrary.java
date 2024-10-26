@@ -24,6 +24,8 @@ public class LudlowLibrary extends AppCompatActivity {
     public boolean hasKnownArmoredPeople;
     public boolean hasPeopleLeft;
     public boolean hasBrokenWindow;
+    public boolean hasChosenCorrectDoor;
+    public String currentLocation; // hall, room D
     public ArrayList<String> objectsDroppedHall = new ArrayList<>();
     public ArrayList<String> objectsDroppedRoomD = new ArrayList<>();
 
@@ -35,6 +37,8 @@ public class LudlowLibrary extends AppCompatActivity {
         hasKnownArmoredPeople = false;
         hasPeopleLeft = false;
         hasBrokenWindow = false;
+        hasChosenCorrectDoor = false;
+        currentLocation = "hall";
         objectsDroppedHall.clear();
         objectsDroppedRoomD.clear();
     }
@@ -49,6 +53,8 @@ public class LudlowLibrary extends AppCompatActivity {
         editor.putBoolean("ludlowLibrary.hasKnownArmoredPeople", hasKnownArmoredPeople);
         editor.putBoolean("ludlowLibrary.hasPeopleLeft", hasPeopleLeft);
         editor.putBoolean("ludlowLibrary.hasBrokenWindow", hasBrokenWindow);
+        editor.putBoolean("ludlowLibrary.hasChosenCorrectDoor", hasChosenCorrectDoor);
+        editor.putString("ludlowLibrary.currentLocation", currentLocation);
 
         Set<String> objectsDroppedHallSet = new HashSet<>(objectsDroppedHall);
         editor.putStringSet("ludlowLibrary.objectsDroppedHallSet", objectsDroppedHallSet);
@@ -67,6 +73,8 @@ public class LudlowLibrary extends AppCompatActivity {
         hasKnownArmoredPeople = sharedPrefs.getBoolean("ludlowLibrary.hasKnownArmoredPeople", false);
         hasPeopleLeft = sharedPrefs.getBoolean("ludlowLibrary.hasPeopleLeft", false);
         hasBrokenWindow = sharedPrefs.getBoolean("ludlowLibrary.hasBrokenWindow", false);
+        hasChosenCorrectDoor = sharedPrefs.getBoolean("ludlowLibrary.hasChosenCorrectDoor", false);
+        currentLocation = sharedPrefs.getString("ludlowLibrary.currentLocation", "hall");
 
         Set<String> objectsDroppedHallSet = sharedPrefs.getStringSet("ludlowLibrary.objectsDroppedHallSet", emptyset);
         objectsDroppedHall = new ArrayList<>(objectsDroppedHallSet);
