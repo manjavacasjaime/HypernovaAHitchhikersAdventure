@@ -1807,7 +1807,7 @@ public class MainActivity extends AppCompatActivity {
                 linearLayout.addView(secondText);
                 obj10();
             } else {
-                secondText.setText("This thing cannot be hitted or it is not in the place.");
+                secondText.setText("This thing cannot be hit or it is not in the place.");
                 linearLayout.addView(secondText);
                 obj10();
             }

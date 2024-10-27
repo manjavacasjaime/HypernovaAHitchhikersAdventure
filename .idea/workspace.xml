@@ -80,14 +80,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4a34fca-42c8-4dfc-bcb4-eabf8bcc6c4a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveSix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/characters/Myself.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/characters/Myself.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/characters/Fred.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/characters/Fred.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveFive.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveFive.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/managers/LevelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/managers/LevelManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/managers/ValueManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/managers/ValueManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/places/LudlowLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/places/LudlowLibrary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveFour.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveFour.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveSix.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveSix.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

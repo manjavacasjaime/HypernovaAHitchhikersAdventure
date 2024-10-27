@@ -669,7 +669,7 @@ public class ObjectiveFour extends AppCompatActivity {
                 }
                 linearLayout.addView(secondText);
             } else {
-                secondText.setText("This thing cannot be hitted or it is not in the place.");
+                secondText.setText("This thing cannot be hit or it is not in the place.");
                 linearLayout.addView(secondText);
             }
         } else if (myObjFour.contains("window")) {  // WINDOW ACTIONS, added just in case

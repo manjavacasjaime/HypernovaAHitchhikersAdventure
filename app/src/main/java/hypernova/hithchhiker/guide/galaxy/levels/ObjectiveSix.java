@@ -140,7 +140,7 @@ public class ObjectiveSix extends AppCompatActivity {
         } else if (myObjSix.matches("south") || myObjSix.matches("s") || myObjSix.matches("go south") || myObjSix.matches("go s") || myObjSix.matches("go backwards") || myObjSix.matches("exit") || myObjSix.matches("leave") || ((myObjSix.contains("go") || myObjSix.contains("get")) && myObjSix.contains("out")) || (myObjSix.contains("exit") && myObjSix.contains("room"))) {
             vm.score++;
             myMoves.setText("Moves: " + vm.score);
-            if (vm.lwLibrary.currentLocation.equals("room D")) {
+            if (vm.lwLibrary.currentLocation.equals("hall")) {
                 secondText.setText("You are not leaving without Fred, are you?");
             } else {
                 vm.lwLibrary.currentLocation = "hall";
@@ -180,240 +180,201 @@ public class ObjectiveSix extends AppCompatActivity {
                 }
             }
         } else if (myObjSix.contains("stop")) {  // STOP VERB
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             if (myObjSix.contains("voices")) {
                 secondText.setText("You are not hearing voices... Not yet.");
                 linearLayout.addView(secondText);
-                obj();
             } else if (myObjSix.contains("time")) {
-                if (stoppeton==0) {
-                    stoppeton=1;
+                if (stoppetonConversationStatus == 0) {
+                    stoppetonConversationStatus = 1;
                     secondText.setText("Oh my God. OH MY GOD! You have had powers after all this time.\nScrew the Travellers. Who needs to travel in space if you can travel in time. Now you have become... STOPPETON, THE TIME 'PAUSER'. Now choose:\n\n1. Live your life with this powers like a God.\n2. Ignore your unique skill and continue your journey.");
                 } else {
                     secondText.setText("That's useless.");
                 }
                 linearLayout.addView(secondText);
-                obj();
             } else {
                 secondText.setText("There's nothing you can stop here.");
                 linearLayout.addView(secondText);
-                obj();
             }
-        } else if (myObjSix.matches("close")) {  // CLOSE VERB 9
+        } else if (myObjSix.matches("close")) {  // CLOSE VERB
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("close")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             if (myObjSix.contains("door")) {
-                if (correctdoor9==1 && (((String) myLocation.getText()).matches("Library, room D"))) {
+                if (vm.lwLibrary.hasChosenCorrectDoor && vm.lwLibrary.currentLocation.equals("room D")) {
                     secondText.setText("I don't think you are that strong.");
                 } else {
                     secondText.setText("The door is already closed.");
                 }
                 linearLayout.addView(secondText);
-                obj();
             } else if (myObjSix.contains("eye")) {
                 secondText.setText("This is not really useful right now.");
                 linearLayout.addView(secondText);
-                obj();
             } else {
                 secondText.setText("This thing cannot be closed or it is not in the place.");
                 linearLayout.addView(secondText);
-                obj();
             }
-        } else if (myObjSix.matches("open")) {  // OPEN VERB 9
+        } else if (myObjSix.matches("open")) {  // OPEN VERB
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("open")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             if (myObjSix.contains("door")) {
-                if (((String) myLocation.getText()).matches("Ludlow Library")) {
+                if (vm.lwLibrary.currentLocation.equals("hall")) {
                     secondText.setText("Locked.");
                 } else {
-                    if (correctdoor9==1) {
+                    if (vm.lwLibrary.hasChosenCorrectDoor) {
                         secondText.setText("You already opened it.");
                     } else {
                         secondText.setText("The door will open after you PUT the fuse IN one of the three containers placed under each painting.\nYou'll have to guess who is 'the unfortunate one'. But remember. The mistake is punished with death, so be sure about your decision.");
                     }
                 }
                 linearLayout.addView(secondText);
-                obj();
             } else if ((myObjSix.contains("entry") || myObjSix.contains("library") || myObjSix.contains("entrance")) && myObjSix.contains("door")) {
-                if (((String) myLocation.getText()).matches("Ludlow Library")) {
+                if (vm.lwLibrary.currentLocation.equals("hall")) {
                     secondText.setText("You are not leaving without Fred, are you?");
                 } else {
                     secondText.setText("That's in the other room.");
                 }
                 linearLayout.addView(secondText);
-                obj();
             } else if (myObjSix.contains("eye")) {
                 secondText.setText("Your eyes are wide open.");
                 linearLayout.addView(secondText);
-                obj();
             } else if (myObjSix.contains("window")) {
-                if (((String) myLocation.getText()).matches("Ludlow Library")) {
-                    if (brokenwindow8 == 0) {
+                if (vm.lwLibrary.currentLocation.equals("hall")) {
+                    if (!vm.lwLibrary.hasBrokenWindow) {
                         secondText.setText("The wind feels fresh on your skin.");
                         linearLayout.addView(secondText);
-                        obj();
                     } else {
                         secondText.setText("You actually broke it, so...");
                         linearLayout.addView(secondText);
-                        obj();
                     }
                 } else {
                     secondText.setText("You can't see any window here!");
                     linearLayout.addView(secondText);
-                    obj();
                 }
             } else if (myObjSix.contains("book")) {
                 secondText.setText("You will have to take a book first.");
                 linearLayout.addView(secondText);
-                obj();
             } else {
                 secondText.setText("This thing cannot be opened or it is not in the place.");
                 linearLayout.addView(secondText);
-                obj();
             }
-        } else if (myObjSix.matches("turn off") || myObjSix.matches("turn it off") || myObjSix.matches("shut down") || myObjSix.matches("shut it down")) {  // TURN OFF VERB 9
+        // TURN OFF VERB
+        } else if (myObjSix.matches("turn off") || myObjSix.matches("turn it off") || myObjSix.matches("shut down") || myObjSix.matches("shut it down")) {
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
-            obj();
         } else if ((myObjSix.contains("turn") && myObjSix.contains("off")) || (myObjSix.contains("shut") && myObjSix.contains("down"))) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             if (myObjSix.contains("alarm")) {
                 secondText.setText("No alarm is sounding.");
                 linearLayout.addView(secondText);
-                obj();
             } else if (myObjSix.contains("music")) {
                 secondText.setText("No music is being played.");
                 linearLayout.addView(secondText);
-                obj();
             } else if (myObjSix.contains("fuse")) {
-                if (myInventory.contains("fuse") || (((String) myLocation.getText()).matches("Library, room D"))) {
+                if (vm.myself.inventory.contains("fuse") || vm.lwLibrary.currentLocation.equals("room D")) {
                     secondText.setText("I'm not sure you have the electrical knowledge to do that.");
                 } else {
                     secondText.setText("You are not holding the fuse or it is not here.");
                 }
                 linearLayout.addView(secondText);
-                obj();
             } else {
                 secondText.setText("This thing cannot be turned off or it is not in the place.");
                 linearLayout.addView(secondText);
-                obj();
             }
-        } else if (myObjSix.contains("turn on") || myObjSix.contains("turn it on")) {  // TURN ON VERB 9
+        // TURN ON VERB
+        } else if (myObjSix.contains("turn on") || myObjSix.contains("turn it on")) {
             secondText.setText("There's nothing you can turn on here.");
             linearLayout.addView(secondText);
-            obj();
-        } else if (myObjSix.contains("stand") || myObjSix.contains("get up")) { // STAND VERB 9
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+        } else if (myObjSix.contains("stand") || myObjSix.contains("get up")) {  // STAND VERB
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             secondText.setText("You are already standing.");
             linearLayout.addView(secondText);
-            obj();
-        } else if (myObjSix.contains("sit down") || myObjSix.matches("sit") || myObjSix.contains("lie")) { // LIE VERB 9
+        // LIE VERB
+        } else if (myObjSix.contains("sit down") || myObjSix.matches("sit") || myObjSix.contains("lie")) {
             secondText.setText("Abigail and Fred are waiting you to open the metal door.");
             linearLayout.addView(secondText);
-            obj();
-        } else if (myObjSix.matches("examine")) { // EXAMINE VERB 9
+        } else if (myObjSix.matches("examine")) {  // EXAMINE VERB
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("examine")) {
-            if (((String) myLocation.getText()).matches("Ludlow Library")) {
+            if (vm.lwLibrary.currentLocation.equals("hall")) {
                 if (myObjSix.contains("window")) {
                     secondText.setText("Library views are no different from your house ones. As always, you see the same desert with the same pieces of metal scattered on the ground.\nAt least you can spot a part of the houses that were buried during last week's sand storm.");
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("book") || myObjSix.contains("shelve")) {
-                    secondText.setText("Go and SPEAK with the librarian to ask for a book.\nRemember: say SPEAK and the name of the person you wanna speak with.");
+                    secondText.setText("Sully is the one who manages the borrowed books and now he is gone...");
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("sully") || myObjSix.contains("librarian")) {
                     secondText.setText("He is not here.");
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("cabin")) {
                     secondText.setText("This thing is bulletproof. You couldn't get in there even if you want to.");
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("door")) {
                     secondText.setText("It is just a door.");
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("pinboard") || myObjSix.contains("note")) {
-                    inreading=1;
+                    vm.lwLibrary.isReadingPinboard = true;
                     secondText.setText("Reading pinboard.\n\n1. Buzz Ruzzinsky's live in concert.\n2. Borrowed books.\n3. Ludlow Post 11 21 1959.\n4. The Message 06 04 1672.\n5. exit.");
                     linearLayout.addView(secondText);
-                    obj();
                 } else {
                     secondText.setText("This thing cannot be examined or it is not in the place.");
                     linearLayout.addView(secondText);
-                    obj();
                 }
             } else {
                 if (myObjSix.contains("painting")) {
                     secondText.setText("Mmh... The three of them are portraits that look pretty alike.\nUnder each one of them there is a container with a number (1, 2, 3).");
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("instructions")) {
                     secondText.setText("Canterman Electronics.\nThe mechanics of this door are really simple. The door is connected with three containers (container 1, container 2 and container 3).\nYou have to PUT a fuse IN the right container in order to open the door.\nBeware of doing that with the wrong container.\n\nNote: Use PUT and IN to place an object in a container (e.g. 'put the fuse in 1' places the fuse in the container of the first painting).");
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("fuse")) {
-                    if (myInventory.contains("fuse")) {
+                    if (vm.myself.inventory.contains("fuse")) {
                         secondText.setText("It works.");
                     } else {
                         secondText.setText("It works. You can easily take it.");
                     }
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("door")) {
                     secondText.setText("The door looks sealed. The text 'the unfortunate one' seems to be written with fury.");
                     linearLayout.addView(secondText);
-                    obj();
                 } else {
                     secondText.setText("This thing cannot be examined or it is not in the place.");
                     linearLayout.addView(secondText);
-                    obj();
                 }
             }
         }
-        // TAKE GET VERB 9
+        // TAKE GET VERB
         else if (myObjSix.matches("take") || myObjSix.matches("get") || myObjSix.matches("pick") || myObjSix.matches("grab")) {
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("take") || myObjSix.contains("get") || myObjSix.contains("pick") || myObjSix.contains("grab")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
-            if (((String) myLocation.getText()).matches("Ludlow Library")) {
-                if ((myObjSix.contains("glass") || myObjSix.contains("crystal")) && brokenwindow8 == 1) {
-                    String brokenglass = "broken glass";
-                    if (myInventory.contains("broken glass")) {
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
+            if (vm.lwLibrary.currentLocation.equals("hall")) {
+                if ((myObjSix.contains("glass") || myObjSix.contains("crystal")) && vm.lwLibrary.hasBrokenWindow) {
+                    if (vm.myself.inventory.contains("broken glass")) {
                         secondText.setText("You already took it.");
                     } else {
-                        myInventory.add(brokenglass);
+                        vm.myself.inventory.add("broken glass");
                         secondText.setText("Taken.");
                     }
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("book") || myObjSix.contains("shelve")) {
                     secondText.setText("Sully is the one who manages the borrowed books and now he is gone...");
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("note")) {
                     secondText.setText("Notes cannot be taken, but you can read them.");
                     linearLayout.addView(secondText);
-                    obj();
-                } else if (!dropLibraryL.isEmpty()) {
+                } else if (!vm.lwLibrary.objectsDroppedHall.isEmpty()) {
                     int n;
                     if (myObjSix.contains("take") || myObjSix.contains("pick") || myObjSix.contains("grab")) {
                         n = 4;
@@ -427,48 +388,42 @@ public class ObjectiveSix extends AppCompatActivity {
                     s = s.replace(" a ", "");
                     s = s.replace(" an ", "");
                     s = s.trim();
-                    if (dropLibraryL.contains(s)) {
-                        dropLibraryL.remove(s);
-                        myInventory.add(s);
+                    if (vm.lwLibrary.objectsDroppedHall.contains(s)) {
+                        vm.lwLibrary.objectsDroppedHall.remove(s);
+                        vm.myself.inventory.add(s);
                         secondText.setText("Taken.");
                         linearLayout.addView(secondText);
-                        obj();
                     } else {
                         secondText.setText("You can't see any " + s + " here!");
                         linearLayout.addView(secondText);
-                        obj();
                     }
                 } else {
                     secondText.setText("This thing cannot be taken or it is not in the place.");
                     linearLayout.addView(secondText);
-                    obj();
                 }
             } else {
                 if (myObjSix.contains("fuse")) {
-                    if (dropLibraryL.contains("fuse")) {
+                    if (vm.lwLibrary.objectsDroppedHall.contains("fuse")) {
                         secondText.setText("You can't see any fuse here!");
                     } else {
-                        if (myInventory.contains("fuse")) {
+                        if (vm.myself.inventory.contains("fuse")) {
                             secondText.setText("You already took it.");
                         } else {
-                            if (dropRoomD.contains("fuse")) {
-                                dropRoomD.remove("fuse");
+                            if (vm.lwLibrary.objectsDroppedRoomD.contains("fuse")) {
+                                vm.lwLibrary.objectsDroppedRoomD.remove("fuse");
                             }
-                            myInventory.add("fuse");
+                            vm.myself.inventory.add("fuse");
                             secondText.setText("Taken.");
                         }
                     }
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("painting")) {
                     secondText.setText("Looks like the paintings are attached to the wall.");
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("instructions")) {
                     secondText.setText("Instructions cannot be taken, but you can read them.");
                     linearLayout.addView(secondText);
-                    obj();
-                } else if (!dropRoomD.isEmpty()) {
+                } else if (!vm.lwLibrary.objectsDroppedRoomD.isEmpty()) {
                     int n;
                     if (myObjSix.contains("take") || myObjSix.contains("pick") || myObjSix.contains("grab")) {
                         n = 4;
@@ -482,423 +437,355 @@ public class ObjectiveSix extends AppCompatActivity {
                     s = s.replace(" a ", "");
                     s = s.replace(" an ", "");
                     s = s.trim();
-                    if (dropRoomD.contains(s)) {
-                        dropRoomD.remove(s);
-                        myInventory.add(s);
+                    if (vm.lwLibrary.objectsDroppedRoomD.contains(s)) {
+                        vm.lwLibrary.objectsDroppedRoomD.remove(s);
+                        vm.myself.inventory.add(s);
                         secondText.setText("Taken.");
                         linearLayout.addView(secondText);
-                        obj();
                     } else {
                         secondText.setText("You can't see any " + s + " here!");
                         linearLayout.addView(secondText);
-                        obj();
                     }
                 } else {
                     secondText.setText("This thing cannot be taken or it is not in the place.");
                     linearLayout.addView(secondText);
-                    obj();
                 }
             }
-        } else if (myObjSix.matches("drop") || myObjSix.contains("get rid of")) { // DROP VERB 9
+        // DROP VERB
+        } else if (myObjSix.matches("drop") || myObjSix.contains("get rid of")) {
             secondText.setText("Just say: Drop (and the object you want to drop).");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("drop")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             int n = 4;
             String s = myObjSix.substring(n);
             s = s.replace(" the ","");
             s = s.replace(" a ","");
             s = s.replace(" an ","");
             s = s.trim();
-            if (myInventory.contains(s)) {
-                myInventory.remove(s);
-                if (((String) myLocation.getText()).matches("Ludlow Library")) {
-                    dropLibraryL.add(s);
+            if (vm.myself.inventory.contains(s)) {
+                vm.myself.inventory.remove(s);
+                if (vm.lwLibrary.currentLocation.equals("hall")) {
+                    vm.lwLibrary.objectsDroppedHall.add(s);
                 } else {
-                    dropRoomD.add(s);
+                    vm.lwLibrary.objectsDroppedRoomD.add(s);
                 }
                 secondText.setText("Dropped.");
                 linearLayout.addView(secondText);
-                obj();
             } else {
                 secondText.setText("You're not holding the " + s + ".");
                 linearLayout.addView(secondText);
-                obj();
             }
-        } else if (myObjSix.matches("put") || myObjSix.matches("place")) { // PUT VERB 9
+        // PUT VERB
+        } else if (myObjSix.matches("put") || myObjSix.matches("place")) {
             secondText.setText("This verb needs to be used with an object and a container.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("put") || myObjSix.contains("place")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             if (myObjSix.contains("fuse") && (myObjSix.contains("1") || myObjSix.contains("one") || myObjSix.contains("wallace") || myObjSix.contains("storm"))) {
-                if (((String) myLocation.getText()).matches("Library, room D")) {
-                    if (!myInventory.contains("fuse")) {
+                if (vm.lwLibrary.currentLocation.equals("room D")) {
+                    if (!vm.myself.inventory.contains("fuse")) {
                         secondText.setText("The fuse is not in your inventory.");
                         linearLayout.addView(secondText);
-                        obj();
                     } else {
                         myLocation.setText("Dead");
-                        String dieOptions = "\n\nType RESTART, RESTORE, COMMANDS or QUIT.";
-                        myInventory.remove("fuse");
-                        dropRoomD.add("fuse");
+                        vm.myself.inventory.remove("fuse");
+                        vm.lwLibrary.objectsDroppedRoomD.add("fuse");
                         secondText.setText("You placed the fuse in the container 1. You think Wallace Storm is 'the unfortunate one'.\n\nIt seems that the painting had a hole in his mouth where a shotgun appears and blows your head off.\n\nAs a result of the vulnerabilities that the living being's head has, there are Bubbles in the universe where your body can be modified to work without a head.\nUnfortunately, B903 is not one of those.\nYou died."
-                                + dieOptions);
+                                + vm.dieOptions);
                         linearLayout.addView(secondText);
-                        obj=0;
-                        obj();
+                        vm.currentObjective = 0;
                     }
                 } else {
                     secondText.setText("You are not in the room where this container is.");
                     linearLayout.addView(secondText);
-                    obj();
                 }
             } else if (myObjSix.contains("fuse") && (myObjSix.contains("2") || myObjSix.contains("two") || myObjSix.contains("catherine") || myObjSix.contains("barker"))) {
-                if (((String) myLocation.getText()).matches("Library, room D")) {
-                    if (!myInventory.contains("fuse")) {
+                if (vm.lwLibrary.currentLocation.equals("room D")) {
+                    if (!vm.myself.inventory.contains("fuse")) {
                         secondText.setText("The fuse is not in your inventory.");
                         linearLayout.addView(secondText);
-                        obj();
                     } else {
                         myLocation.setText("Dead");
-                        String dieOptions = "\n\nType RESTART, RESTORE, COMMANDS or QUIT.";
-                        myInventory.remove("fuse");
-                        dropRoomD.add("fuse");
+                        vm.myself.inventory.remove("fuse");
+                        vm.lwLibrary.objectsDroppedRoomD.add("fuse");
                         secondText.setText("You placed the fuse in the container 2. You think Catherine Barker is 'the unfortunate one'.\n\nIt seems that the painting had a hole in her mouth where a shotgun appears and blows your head off.\n\nAs a result of the vulnerabilities that the living being's head has, there are Bubbles in the universe where your body can be modified to work without a head.\nUnfortunately, B903 is not one of those.\nYou died."
-                                + dieOptions);
+                                + vm.dieOptions);
                         linearLayout.addView(secondText);
-                        obj=0;
-                        obj();
+                        vm.currentObjective = 0;
                     }
                 } else {
                     secondText.setText("You are not in the room where this container is.");
                     linearLayout.addView(secondText);
-                    obj();
                 }
             } else if (myObjSix.contains("fuse") && (myObjSix.contains("3") || myObjSix.contains("three") || myObjSix.contains("joseph") || myObjSix.contains("lovehart"))) {
-                if (((String) myLocation.getText()).matches("Library, room D")) {
-                    if (!myInventory.contains("fuse")) {
+                if (vm.lwLibrary.currentLocation.equals("room D")) {
+                    if (!vm.myself.inventory.contains("fuse")) {
                         secondText.setText("The fuse is not in your inventory.");
                         linearLayout.addView(secondText);
-                        obj();
                     } else {
-                        correctdoor9 = 1;
-                        myInventory.remove("fuse");
-                        dropRoomD.add("fuse");
+                        vm.lwLibrary.hasChosenCorrectDoor = true;
+                        vm.myself.inventory.remove("fuse");
+                        vm.lwLibrary.objectsDroppedRoomD.add("fuse");
                         secondText.setText("You placed the fuse in the container 3. You think Joseph Lovehart is 'the unfortunate one'.\n\nAfter a few seconds, the sealed door opens. Heading NORTH you can go to the next room.");
                         linearLayout.addView(secondText);
-                        obj();
                     }
                 } else {
                     secondText.setText("You are not in the room where this container is.");
                     linearLayout.addView(secondText);
-                    obj();
                 }
             } else {
                 secondText.setText("The name of the object is wrong, the number/name of the container is wrong or this object cannot be used this way.");
                 linearLayout.addView(secondText);
-                obj();
             }
-        } else if (myObjSix.matches("help") && valueManager.score - scoreWhenEnteringRoomD >= 6) { // HELP VERB 9
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+        // HELP VERB
+        } else if (myObjSix.matches("help") && vm.score - vm.lwLibrary.scoreWhenEnteringRoomD >= 6) {
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             secondText.setText("The name you are looking for is written in one of the notes which are at the hall.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.matches("help")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             secondText.setText("Try to do things by yourself first.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("help")) {
             secondText.setText("Just say HELP.");
             linearLayout.addView(secondText);
-            obj();
         }
-        // FOLLOW VERB 9
+        // FOLLOW VERB
         else if (myObjSix.matches("follow") || myObjSix.matches("chase") || myObjSix.matches("find") || myObjSix.matches("search")) {
             secondText.setText("This verb needs to be used with a name.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("follow") || myObjSix.contains("chase") || myObjSix.contains("find") || myObjSix.contains("search")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             if (myObjSix.contains("abigail") || myObjSix.contains("fred")) {
-                if (((String) myLocation.getText()).matches("Ludlow Library")) {
+                if (vm.lwLibrary.currentLocation.equals("hall")) {
+                    vm.lwLibrary.currentLocation = "room D";
                     myLocation.setText("Library, room D");
                     secondText.setText("Now you are in room D.");
                 } else {
                     secondText.setText("You already are with them.");
                 }
                 linearLayout.addView(secondText);
-                obj();
             } else if (myObjSix.contains("sully") || myObjSix.contains("librarian")) {
-                if (((String) myLocation.getText()).matches("Ludlow Library")) {
+                if (vm.lwLibrary.currentLocation.equals("hall")) {
                     secondText.setText("You don't know where he went... This is really weird.");
                 } else {
                     secondText.setText("Sully was in the other room.");
                 }
                 linearLayout.addView(secondText);
-                obj();
             } else {
                 secondText.setText("This person's name is incorrect or he/she cannot be followed.");
                 linearLayout.addView(secondText);
-                obj();
             }
-        } else if (myObjSix.contains("drink")) { // DRINK VERB 9
+        } else if (myObjSix.contains("drink")) {  // DRINK VERB
             secondText.setText("There is nothing you can drink here.");
             linearLayout.addView(secondText);
-            obj();
-        } else if (myObjSix.contains("write")) {  // WRITE VERB 9
+        } else if (myObjSix.contains("write")) {  // WRITE VERB
             secondText.setText("You cannot write new notes.");
             linearLayout.addView(secondText);
-            obj();
-        } else if (myObjSix.matches("read")) {  // READ VERB 9
+        } else if (myObjSix.matches("read")) {  // READ VERB
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("read")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             if (myObjSix.contains("note") || myObjSix.contains("pinboard")) {
-                if (((String) myLocation.getText()).matches("Ludlow Library")) {
-                    inreading=1;
+                if (vm.lwLibrary.currentLocation.equals("hall")) {
+                    vm.lwLibrary.isReadingPinboard = true;
                     secondText.setText("Reading pinboard.\n\n1. Buzz Ruzzinsky's live in concert.\n2. Borrowed books.\n3. Ludlow Post 11 21 1959.\n4. The Message 06 04 1672.\n5. exit.");
                 } else {
                     secondText.setText("You can't see any note here!");
                 }
                 linearLayout.addView(secondText);
-                obj();
             } else if (myObjSix.contains("book")) {
                 secondText.setText("You are not holding a book.");
                 linearLayout.addView(secondText);
-                obj();
             } else if (myObjSix.contains("instructions")) {
-                if (((String) myLocation.getText()).matches("Ludlow Library")) {
+                if (vm.lwLibrary.currentLocation.equals("hall")) {
                     secondText.setText("You can't see any instructions here!");
                 } else {
                     secondText.setText("Canterman Electronics.\nThe mechanics of this door are really simple. The door is connected with three containers (container 1, container 2 and container 3).\nYou have to PUT a fuse IN the right container in order to open the door.\nBeware of doing that with the wrong container.\n\nNote: Use PUT and IN to place an object in a container (e.g. 'put the fuse in 1' places the fuse in the container of the first painting).");
                 }
                 linearLayout.addView(secondText);
-                obj();
-            } else if (myObjSix.contains("door") && (((String) myLocation.getText()).matches("Library, room D"))) {
+            } else if (myObjSix.contains("door") && vm.lwLibrary.currentLocation.equals("room D")) {
                 secondText.setText("'the unfortunate one'.");
                 linearLayout.addView(secondText);
-                obj();
             } else {
                 secondText.setText("This thing cannot be read or it is not in the place.");
                 linearLayout.addView(secondText);
-                obj();
             }
-        } else if (myObjSix.matches("break") || myObjSix.matches("hit") || myObjSix.matches("attack") || myObjSix.matches("punch") || myObjSix.matches("fight") || myObjSix.matches("kick")) {  // BREAK VERB 9
+        // BREAK VERB
+        } else if (myObjSix.matches("break") || myObjSix.matches("hit") || myObjSix.matches("attack") || myObjSix.matches("punch") || myObjSix.matches("fight") || myObjSix.matches("kick")) {
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("break") || myObjSix.contains("hit") || myObjSix.contains("attack") || myObjSix.contains("punch") || myObjSix.contains("fight") || myObjSix.contains("kick")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
-            if (((String) myLocation.getText()).matches("Ludlow Library")) {
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
+            if (vm.lwLibrary.currentLocation.equals("hall")) {
                 if (myObjSix.contains("people") || myObjSix.contains("person") || myObjSix.contains("sully") || myObjSix.contains("librarian")) {
                     secondText.setText("There's no one here you can attack.");
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("window")) {
-                    if (brokenwindow8 == 0) {
-                        brokenwindow8 = 1;
+                    if (!vm.lwLibrary.hasBrokenWindow) {
+                        vm.lwLibrary.hasBrokenWindow = true;
                         secondText.setText("And now the window is broken. It's a mess.");
                         linearLayout.addView(secondText);
-                        obj();
                     } else {
                         secondText.setText("The window is already broken.");
                         linearLayout.addView(secondText);
-                        obj();
                     }
                 } else if (myObjSix.contains("cabin") || myObjSix.contains("shelve") || myObjSix.contains("door")) {
                     secondText.setText("You are all alone and hitting stuff. You should be proud.");
                     linearLayout.addView(secondText);
-                    obj();
                 } else {
-                    secondText.setText("This thing cannot be hitted or it is not in the place.");
+                    secondText.setText("This thing cannot be hit or it is not in the place.");
                     linearLayout.addView(secondText);
-                    obj();
                 }
             } else {
                 if (myObjSix.contains("abigail")) {
                     secondText.setText("She stops your hand.\n'Easy boy! Don't make me cut your hand off.'");
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("fred") || myObjSix.contains("friend")) {
                     secondText.setText("After you slap Fred, Abigail looks at you with a smile.");
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("painting")) {
                     secondText.setText("Abigail: 'Hey Hey Hey!'\n'This paintings have been here for decades and one of them must be this 'unfortunate one'. Figure that out instead of acting like an ape.'");
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("fuse")) {
                     secondText.setText("It sparks you.");
                     linearLayout.addView(secondText);
-                    obj();
                 } else if (myObjSix.contains("door")) {
-                    secondText.setText("The sound of metal being hitted is really cool, but useless.");
+                    secondText.setText("The sound of metal being hit is really cool, but useless.");
                     linearLayout.addView(secondText);
-                    obj();
                 } else {
-                    secondText.setText("This thing cannot be hitted or it is not in the place.");
+                    secondText.setText("This thing cannot be hit or it is not in the place.");
                     linearLayout.addView(secondText);
-                    obj();
                 }
             }
-        } else if ((myObjSix.contains("fix") || myObjSix.contains("repair")) && myObjSix.contains("window")) { // WINDOW ACTIONS 9
-            if (((String) myLocation.getText()).matches("Ludlow Library")) {
+        // WINDOW ACTIONS
+        } else if ((myObjSix.contains("fix") || myObjSix.contains("repair")) && myObjSix.contains("window")) {
+            if (vm.lwLibrary.currentLocation.equals("hall")) {
                 secondText.setText("Not your business.");
             } else {
                 secondText.setText("There is no window in this room.");
             }
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("jump") && myObjSix.contains("window")) {
-            if (((String) myLocation.getText()).matches("Ludlow Library")) {
+            if (vm.lwLibrary.currentLocation.equals("hall")) {
                 secondText.setText("You are not a savage.");
             } else {
                 secondText.setText("There is no window in this room.");
             }
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("window")) {
-            if (((String) myLocation.getText()).matches("Ludlow Library")) {
-                valueManager.score++;
-                myMoves.setText("Moves: " + valueManager.score);
+            if (vm.lwLibrary.currentLocation.equals("hall")) {
+                vm.score++;
+                myMoves.setText("Moves: " + vm.score);
                 secondText.setText("Library views are no different from your house ones. As always, you see the same desert with the same pieces of metal scattered on the ground.\nAt least you can spot a part of the houses that were buried during last week's sand storm.");
             } else {
                 secondText.setText("There is no window in this room.");
             }
             linearLayout.addView(secondText);
-            obj();
         } else if ((myObjSix.contains("look") && myObjSix.contains("around")) || myObjSix.matches("l") || myObjSix.matches("look")) {
-            if (((String) myLocation.getText()).matches("Ludlow Library")) {
+            if (vm.lwLibrary.currentLocation.equals("hall")) {
                 String intro = "Library\n";
-                if (brokenwindow8 == 1) {
+                if (vm.lwLibrary.hasBrokenWindow) {
                     intro = intro + "There are some book shelves and a large broken window.\nSully's cabin is empty.";
                 } else {
                     intro = intro + "There are some book shelves and a large window.\nSully's cabin is empty.";
                 }
                 intro = intro + " There is the closed office door and a pinboard with a few notes here.\nHeading NORTH is the room D.";
-                if (!dropLibraryL.isEmpty()) {
-                    int n = dropLibraryL.size();
+                if (!vm.lwLibrary.objectsDroppedHall.isEmpty()) {
+                    int n = vm.lwLibrary.objectsDroppedHall.size();
                     for (int i = 0; i < n; i++) {
-                        intro = intro + "\nThere's the " + dropLibraryL.get(i) + " here.";
+                        intro = intro + "\nThere's the " + vm.lwLibrary.objectsDroppedHall.get(i) + " here.";
                     }
-                    secondText.setText(intro);
-                    linearLayout.addView(secondText);
-                    obj();
-                } else {
-                    secondText.setText(intro);
-                    linearLayout.addView(secondText);
-                    obj();
                 }
+                secondText.setText(intro);
+                linearLayout.addView(secondText);
             } else {
                 String intro = "Room D\nIt is a small place with three paintings: 1 Wallace Storm, 2 Catherine Barker and 3 Joseph Lovehart.\nHere is a metal door where it is written 'the unfortunate one' on it.\n";
-                if (myInventory.contains("fuse") || dropLibraryL.contains("fuse") || dropRoomD.contains("fuse")) {
+                if (vm.myself.inventory.contains("fuse") || vm.lwLibrary.objectsDroppedHall.contains("fuse")
+                        || vm.lwLibrary.objectsDroppedRoomD.contains("fuse")) {
                     intro = intro + "There are some instructions next to the door.\n";
                 } else {
                     intro = intro + "There is a fuse with some instructions next to the door.\n";
                 }
-                intro = intro + "Heading SOUTH is the library's hall.\nAbigail and Fred are here.";
-                if (!dropRoomD.isEmpty()) {
-                    int n = dropRoomD.size();
+                intro = intro + "Heading SOUTH is the Library's hall.\nAbigail and Fred are here.";
+                if (!vm.lwLibrary.objectsDroppedRoomD.isEmpty()) {
+                    int n = vm.lwLibrary.objectsDroppedRoomD.size();
                     for (int i = 0; i < n; i++) {
-                        intro = intro + "\nThere's the " + dropRoomD.get(i) + " here.";
+                        intro = intro + "\nThere's the " + vm.lwLibrary.objectsDroppedRoomD.get(i) + " here.";
                     }
-                    secondText.setText(intro);
-                    linearLayout.addView(secondText);
-                    obj();
-                } else {
-                    secondText.setText(intro);
-                    linearLayout.addView(secondText);
-                    obj();
                 }
+                secondText.setText(intro);
+                linearLayout.addView(secondText);
             }
         } else if (myObjSix.matches("i") || myObjSix.matches("inventory")) {
             String inventory = "You have:";
-            if (!myInventory.isEmpty()) {
-                int n = myInventory.size();
+            if (!vm.myself.inventory.isEmpty()) {
+                int n = vm.myself.inventory.size();
                 for (int i=0; i<n; i++) {
-                    inventory = inventory + "\n    " + myInventory.get(i) + ".";
+                    inventory = inventory + "\n    " + vm.myself.inventory.get(i) + ".";
                 }
-                secondText.setText(inventory);
-                linearLayout.addView(secondText);
-                obj();
             } else {
                 inventory = "You have nothing.";
-                secondText.setText(inventory);
-                linearLayout.addView(secondText);
-                obj();
             }
+            secondText.setText(inventory);
+            linearLayout.addView(secondText);
         } else if (myObjSix.contains("inventory")) {
             secondText.setText("Just write the letter I or say INVENTORY.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("repeat")) {
             secondText.setText("There is nothing you can repeat.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.matches("sleep")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             secondText.setText("It will be inappropriate because Abigail and Fred are waiting you to open the metal door.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("check") && myObjSix.contains("out")) {
             secondText.setText("Try to LOOK AROUND or EXAMINE an object.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("check") || myObjSix.contains("review")) {
             secondText.setText("Say EXAMINE and the object you want to check.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("enter")) {
             secondText.setText("Try to open the doors of the places you want to get in.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("jump") || myObjSix.contains("climb") || myObjSix.contains("turn") || myObjSix.contains("shut") || myObjSix.contains("look") || myObjSix.contains("see") || myObjSix.contains("watch") || myObjSix.contains("play") || myObjSix.contains("run") || myObjSix.contains("walk") || myObjSix.contains("eat") || myObjSix.contains("move") || myObjSix.contains("give") || myObjSix.contains("offer")) {
-            valueManager.score++;
-            myMoves.setText("Moves: " + valueManager.score);
+            vm.score++;
+            myMoves.setText("Moves: " + vm.score);
             secondText.setText("Look around you.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("smell")) {
-            if (((String) myLocation.getText()).matches("Ludlow Library")) {
+            if (vm.lwLibrary.currentLocation.equals("hall")) {
                 secondText.setText("It smells just like a library.");
             } else {
                 secondText.setText("It smells just like the room has been neglected for years.");
             }
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("listen")) {
-            if (((String) myLocation.getText()).matches("Ludlow Library")) {
+            if (vm.lwLibrary.currentLocation.equals("hall")) {
                 secondText.setText("It feels like the silence is killing you.");
             } else {
                 secondText.setText("You can tell that there is no one at the other side of the metal door.");
             }
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("wait")) {
             secondText.setText("Time passes...");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.contains("what") && myObjSix.contains("time") && myObjSix.contains("is") || myObjSix.matches("time") || myObjSix.matches("the time")) {
             secondText.setText("It is daylight.");
             linearLayout.addView(secondText);
-            obj();
         } else if (myObjSix.matches("diagnostic") || myObjSix.matches("diagnose")) {
             secondText.setText("This is not available at the moment.");
             linearLayout.addView(secondText);
-            obj();
         }
 
         return (String) secondText.getText();

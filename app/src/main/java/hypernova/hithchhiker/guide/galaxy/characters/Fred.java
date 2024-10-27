@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 
 public class Fred extends AppCompatActivity {
     SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
-    // 0 no conversation, XY being X the objective and Y the conversation stage
     public int conversationStatus = 0;
     public boolean isDead;
     public boolean isPresent;
