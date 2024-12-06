@@ -20,6 +20,7 @@ import hypernova.hithchhiker.guide.galaxy.characters.Sully;
 import hypernova.hithchhiker.guide.galaxy.places.Ludlow;
 import hypernova.hithchhiker.guide.galaxy.places.LudlowLibrary;
 import hypernova.hithchhiker.guide.galaxy.places.MyBasement;
+import hypernova.hithchhiker.guide.galaxy.places.Nowhere;
 
 public class ValueManager extends AppCompatActivity {
     public SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
@@ -34,6 +35,7 @@ public class ValueManager extends AppCompatActivity {
     public MyBasement myBasement = new MyBasement();
     public Ludlow ludlow = new Ludlow();
     public LudlowLibrary lwLibrary = new LudlowLibrary();
+    public Nowhere nowhere = new Nowhere();
     public boolean isMatchSaved = sharedPrefs.getBoolean("isMatchSaved", false);
     public int appColor = sharedPrefs.getInt("appColor", 1); // 1 grey, 2 green, 3 pink
     public String dieOptions = "\n\nType RESTART, RESTORE, COMMANDS or QUIT.";
@@ -69,6 +71,7 @@ public class ValueManager extends AppCompatActivity {
         myBasement.initiateVariables();
         ludlow.initiateVariables();
         lwLibrary.initiateVariables();
+        nowhere.initiateVariables();
 
         currentObjective = 1;
         score = 0;
@@ -95,6 +98,7 @@ public class ValueManager extends AppCompatActivity {
         myBasement.save();
         ludlow.save();
         lwLibrary.save();
+        nowhere.save();
 
         isMatchSaved = true;
         editor.putBoolean("isMatchSaved", true);
@@ -138,6 +142,7 @@ public class ValueManager extends AppCompatActivity {
         myBasement.restore();
         ludlow.restore();
         lwLibrary.restore();
+        nowhere.restore();
 
         currentObjective = sharedPrefs.getInt("currentObjective", 1);
 
