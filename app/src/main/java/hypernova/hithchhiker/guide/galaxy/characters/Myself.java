@@ -14,6 +14,7 @@ public class Myself extends AppCompatActivity {
     public boolean isStanding;
     public boolean isNeckChipInstalled; // This device will be used to check which rooms is the character allowed to access
     public ArrayList<String> inventory = new ArrayList<>();
+    public ArrayList<String> inventoryPast = new ArrayList<>();
 
     // Important choices
     public boolean hasKidIcarus; // Whether or not you have kidded Icarus
@@ -25,6 +26,7 @@ public class Myself extends AppCompatActivity {
         isStanding = false;
         isNeckChipInstalled = false;
         inventory.clear();
+        inventoryPast.clear();
 
         hasKidIcarus = false;
         kindOfPerson = -1;
@@ -40,6 +42,8 @@ public class Myself extends AppCompatActivity {
 
         Set<String> inventorySet = new HashSet<>(inventory);
         editor.putStringSet("myself.inventorySet", inventorySet);
+        Set<String> inventoryPastSet = new HashSet<>(inventoryPast);
+        editor.putStringSet("myself.inventoryPastSet", inventoryPastSet);
 
         editor.putBoolean("myself.hasKidIcarus", hasKidIcarus);
         editor.putInt("myself.kindOfPerson", kindOfPerson);
@@ -56,6 +60,8 @@ public class Myself extends AppCompatActivity {
 
         Set<String> inventorySet = sharedPrefs.getStringSet("myself.inventorySet", emptySet);
         inventory = new ArrayList<>(inventorySet);
+        Set<String> inventoryPastSet = sharedPrefs.getStringSet("myself.inventoryPastSet", emptySet);
+        inventoryPast = new ArrayList<>(inventoryPastSet);
 
         hasKidIcarus = sharedPrefs.getBoolean("myself.hasKidIcarus", false);
         kindOfPerson = sharedPrefs.getInt("myself.kindOfPerson", -1);

@@ -30,7 +30,6 @@ public class ObjectiveSeven extends AppCompatActivity {
         if (myObjSeven.matches("up") || myObjSeven.matches("u") || myObjSeven.matches("go up") || myObjSeven.matches("upstairs") || myObjSeven.matches("go upstairs") || myObjSeven.matches("go u") || myObjSeven.matches("down") || myObjSeven.matches("d") || myObjSeven.matches("go down") || myObjSeven.matches("downstairs") || myObjSeven.matches("go downstairs") || myObjSeven.matches("go d")) {
             secondText.setText("You can't go that way.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.matches("north") || myObjSeven.matches("n") || myObjSeven.matches("go north") || myObjSeven.matches("go n") || myObjSeven.matches("go straight on")) {
             String s = "";
             switch (housedesert) {

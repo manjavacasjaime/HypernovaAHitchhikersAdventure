@@ -42,15 +42,6 @@ public class ValueManager extends AppCompatActivity {
     public int currentObjective; // WHICH OBJECTIVE I AM DOING. ZERO IS GAME OVER
     public int score;
 
-    ArrayList<String> myInventoryPast = new ArrayList<String>();
-    ArrayList<String> dropHouseDesert11 = new ArrayList<String>();
-    ArrayList<String> dropHouseDesert12 = new ArrayList<String>();
-    ArrayList<String> dropHouseDesert13 = new ArrayList<String>();
-    ArrayList<String> dropHouseDesert21 = new ArrayList<String>();
-    ArrayList<String> dropHouseDesert22 = new ArrayList<String>();
-    ArrayList<String> dropHouseDesert23 = new ArrayList<String>();
-    ArrayList<String> dropHouseDesert32 = new ArrayList<String>();
-
     int blinkcolor = 0; //0 black, 1 grey
     int pos = -1;
     int edittouched = 0;
@@ -61,7 +52,6 @@ public class ValueManager extends AppCompatActivity {
     boolean capsLocked = false;
 
     int closeddoor = 0; // esta es una variable que se irá reciclando para todas las puertas a partir de obj10
-    int housedesert = 12;
     int havefoundeggin = 00;
     int brokenegg = 0;
 
@@ -76,17 +66,7 @@ public class ValueManager extends AppCompatActivity {
         currentObjective = 1;
         score = 0;
 
-        myInventoryPast.clear();
-        dropHouseDesert11.clear();
-        dropHouseDesert12.clear();
-        dropHouseDesert13.clear();
-        dropHouseDesert21.clear();
-        dropHouseDesert22.clear();
-        dropHouseDesert23.clear();
-        dropHouseDesert32.clear();
-
         closeddoor = 0; // esta es una variable que se irá reciclando para todas las puertas a partir de obj10
-        housedesert = 12;
         havefoundeggin = 00;
         brokenegg = 0;
     }
@@ -110,25 +90,7 @@ public class ValueManager extends AppCompatActivity {
         String locSaved = myLocation.getText().toString();
         editor.putString("locSaved", locSaved);
 
-        Set<String> myInventoryPastSet = new HashSet<>(myInventoryPast);
-        editor.putStringSet("myInventoryPastSet", myInventoryPastSet);
-        Set<String> dropHouseDesert11Set = new HashSet<>(dropHouseDesert11);
-        editor.putStringSet("dropHouseDesert11Set", dropHouseDesert11Set);
-        Set<String> dropHouseDesert12Set = new HashSet<>(dropHouseDesert12);
-        editor.putStringSet("dropHouseDesert12Set", dropHouseDesert12Set);
-        Set<String> dropHouseDesert13Set = new HashSet<>(dropHouseDesert13);
-        editor.putStringSet("dropHouseDesert13Set", dropHouseDesert13Set);
-        Set<String> dropHouseDesert21Set = new HashSet<>(dropHouseDesert21);
-        editor.putStringSet("dropHouseDesert21Set", dropHouseDesert21Set);
-        Set<String> dropHouseDesert22Set = new HashSet<>(dropHouseDesert22);
-        editor.putStringSet("dropHouseDesert22Set", dropHouseDesert22Set);
-        Set<String> dropHouseDesert23Set = new HashSet<>(dropHouseDesert23);
-        editor.putStringSet("dropHouseDesert23Set", dropHouseDesert23Set);
-        Set<String> dropHouseDesert32Set = new HashSet<>(dropHouseDesert32);
-        editor.putStringSet("dropHouseDesert32Set", dropHouseDesert32Set);
-
         editor.putInt("closeddoor", closeddoor);
-        editor.putInt("housedesert", housedesert);
         editor.putInt("havefoundeggin", havefoundeggin);
         editor.putInt("brokenegg", brokenegg);
 
@@ -154,25 +116,7 @@ public class ValueManager extends AppCompatActivity {
         TextView myLocation = (TextView) findViewById(R.id.location);
         myLocation.setText(locSaved);
 
-        Set<String> myInventoryPastSet = sharedPrefs.getStringSet("myInventoryPastSet", emptyset);
-        myInventoryPast = new ArrayList<>(myInventoryPastSet);
-        Set<String> dropHouseDesert11Set = sharedPrefs.getStringSet("dropHouseDesert11Set", emptyset);
-        dropHouseDesert11 = new ArrayList<>(dropHouseDesert11Set);
-        Set<String> dropHouseDesert12Set = sharedPrefs.getStringSet("dropHouseDesert12Set", emptyset);
-        dropHouseDesert12 = new ArrayList<>(dropHouseDesert12Set);
-        Set<String> dropHouseDesert13Set = sharedPrefs.getStringSet("dropHouseDesert13Set", emptyset);
-        dropHouseDesert13 = new ArrayList<>(dropHouseDesert13Set);
-        Set<String> dropHouseDesert21Set = sharedPrefs.getStringSet("dropHouseDesert21Set", emptyset);
-        dropHouseDesert21 = new ArrayList<>(dropHouseDesert21Set);
-        Set<String> dropHouseDesert22Set = sharedPrefs.getStringSet("dropHouseDesert22Set", emptyset);
-        dropHouseDesert22 = new ArrayList<>(dropHouseDesert22Set);
-        Set<String> dropHouseDesert23Set = sharedPrefs.getStringSet("dropHouseDesert23Set", emptyset);
-        dropHouseDesert23 = new ArrayList<>(dropHouseDesert23Set);
-        Set<String> dropHouseDesert32Set = sharedPrefs.getStringSet("dropHouseDesert32Set", emptyset);
-        dropHouseDesert32 = new ArrayList<>(dropHouseDesert32Set);
-
         closeddoor = sharedPrefs.getInt("closeddoor", 0);
-        housedesert = sharedPrefs.getInt("housedesert", 12);
         havefoundeggin = sharedPrefs.getInt("havefoundeggin", 00);
         brokenegg = sharedPrefs.getInt("brokenegg", 0);
     }
