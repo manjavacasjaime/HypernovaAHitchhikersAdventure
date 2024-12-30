@@ -204,8 +204,9 @@ public class ObjectiveThree extends AppCompatActivity {
                 secondText.setText("This thing cannot be opened or it is not in the place.");
                 linearLayout.addView(secondText);
             }
+        }
         // TURN OFF VERB
-        } else if ((myObjThree.contains("turn") && myObjThree.contains("off")) || (myObjThree.contains("shut") && myObjThree.contains("down"))) {
+        else if ((myObjThree.contains("turn") && myObjThree.contains("off")) || (myObjThree.contains("shut") && myObjThree.contains("down"))) {
             secondText.setText("There is nothing you can turn off here.\nSomeone is still knocking on your house door.");
             linearLayout.addView(secondText);
         } else if (myObjThree.contains("turn on") || myObjThree.contains("turn it on")) {  // TURN ON VERB

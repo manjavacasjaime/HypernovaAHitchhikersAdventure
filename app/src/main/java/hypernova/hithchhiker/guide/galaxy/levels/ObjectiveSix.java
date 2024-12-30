@@ -156,8 +156,9 @@ public class ObjectiveSix extends AppCompatActivity {
         } else if (myObjSix.contains("go")) {
             secondText.setText("This verb needs to be used with a direction.");
             linearLayout.addView(secondText);
+        }
         // SPEAK VERB
-        } else if (myObjSix.matches("speak") || myObjSix.matches("talk") || myObjSix.matches("ask")) {
+        else if (myObjSix.matches("speak") || myObjSix.matches("talk") || myObjSix.matches("ask")) {
             secondText.setText("This verb needs to be used with a name.");
             linearLayout.addView(secondText);
         } else if (myObjSix.contains("speak") || myObjSix.contains("talk") || myObjSix.contains("ask")) {
@@ -264,8 +265,9 @@ public class ObjectiveSix extends AppCompatActivity {
                 secondText.setText("This thing cannot be opened or it is not in the place.");
                 linearLayout.addView(secondText);
             }
+        }
         // TURN OFF VERB
-        } else if (myObjSix.matches("turn off") || myObjSix.matches("turn it off") || myObjSix.matches("shut down") || myObjSix.matches("shut it down")) {
+        else if (myObjSix.matches("turn off") || myObjSix.matches("turn it off") || myObjSix.matches("shut down") || myObjSix.matches("shut it down")) {
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
         } else if ((myObjSix.contains("turn") && myObjSix.contains("off")) || (myObjSix.contains("shut") && myObjSix.contains("down"))) {
@@ -288,8 +290,9 @@ public class ObjectiveSix extends AppCompatActivity {
                 secondText.setText("This thing cannot be turned off or it is not in the place.");
                 linearLayout.addView(secondText);
             }
+        }
         // TURN ON VERB
-        } else if (myObjSix.contains("turn on") || myObjSix.contains("turn it on")) {
+        else if (myObjSix.contains("turn on") || myObjSix.contains("turn it on")) {
             secondText.setText("There's nothing you can turn on here.");
             linearLayout.addView(secondText);
         } else if (myObjSix.contains("stand") || myObjSix.contains("get up")) {  // STAND VERB
@@ -297,8 +300,9 @@ public class ObjectiveSix extends AppCompatActivity {
             myMoves.setText("Moves: " + vm.score);
             secondText.setText("You are already standing.");
             linearLayout.addView(secondText);
+        }
         // LIE VERB
-        } else if (myObjSix.contains("sit down") || myObjSix.matches("sit") || myObjSix.contains("lie")) {
+        else if (myObjSix.contains("sit down") || myObjSix.matches("sit") || myObjSix.contains("lie")) {
             secondText.setText("Abigail and Fred are waiting you to open the metal door.");
             linearLayout.addView(secondText);
         } else if (myObjSix.matches("examine")) {  // EXAMINE VERB
@@ -451,8 +455,9 @@ public class ObjectiveSix extends AppCompatActivity {
                     linearLayout.addView(secondText);
                 }
             }
+        }
         // DROP VERB
-        } else if (myObjSix.matches("drop") || myObjSix.contains("get rid of")) {
+        else if (myObjSix.matches("drop") || myObjSix.contains("get rid of")) {
             secondText.setText("Just say: Drop (and the object you want to drop).");
             linearLayout.addView(secondText);
         } else if (myObjSix.contains("drop")) {
@@ -477,8 +482,9 @@ public class ObjectiveSix extends AppCompatActivity {
                 secondText.setText("You're not holding the " + s + ".");
                 linearLayout.addView(secondText);
             }
+        }
         // PUT VERB
-        } else if (myObjSix.matches("put") || myObjSix.matches("place")) {
+        else if (myObjSix.matches("put") || myObjSix.matches("place")) {
             secondText.setText("This verb needs to be used with an object and a container.");
             linearLayout.addView(secondText);
         } else if (myObjSix.contains("put") || myObjSix.contains("place")) {
@@ -540,8 +546,9 @@ public class ObjectiveSix extends AppCompatActivity {
                 secondText.setText("The name of the object is wrong, the number/name of the container is wrong or this object cannot be used this way.");
                 linearLayout.addView(secondText);
             }
+        }
         // HELP VERB
-        } else if (myObjSix.matches("help") && vm.score - vm.lwLibrary.scoreWhenEnteringRoomD >= 6) {
+        else if (myObjSix.matches("help") && vm.score - vm.lwLibrary.scoreWhenEnteringRoomD >= 6) {
             vm.score++;
             myMoves.setText("Moves: " + vm.score);
             secondText.setText("The name you are looking for is written in one of the notes which are at the hall.");
@@ -619,8 +626,9 @@ public class ObjectiveSix extends AppCompatActivity {
                 secondText.setText("This thing cannot be read or it is not in the place.");
                 linearLayout.addView(secondText);
             }
+        }
         // BREAK VERB
-        } else if (myObjSix.matches("break") || myObjSix.matches("hit") || myObjSix.matches("attack") || myObjSix.matches("punch") || myObjSix.matches("fight") || myObjSix.matches("kick")) {
+        else if (myObjSix.matches("break") || myObjSix.matches("hit") || myObjSix.matches("attack") || myObjSix.matches("punch") || myObjSix.matches("fight") || myObjSix.matches("kick")) {
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
         } else if (myObjSix.contains("break") || myObjSix.contains("hit") || myObjSix.contains("attack") || myObjSix.contains("punch") || myObjSix.contains("fight") || myObjSix.contains("kick")) {
@@ -667,8 +675,9 @@ public class ObjectiveSix extends AppCompatActivity {
                     linearLayout.addView(secondText);
                 }
             }
+        }
         // WINDOW ACTIONS
-        } else if ((myObjSix.contains("fix") || myObjSix.contains("repair")) && myObjSix.contains("window")) {
+        else if ((myObjSix.contains("fix") || myObjSix.contains("repair")) && myObjSix.contains("window")) {
             if (vm.lwLibrary.currentLocation.equals("hall")) {
                 secondText.setText("Not your business.");
             } else {

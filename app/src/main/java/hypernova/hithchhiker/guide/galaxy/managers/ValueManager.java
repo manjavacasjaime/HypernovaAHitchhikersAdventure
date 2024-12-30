@@ -4,10 +4,6 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
 import hypernova.hithchhiker.guide.galaxy.R;
 import hypernova.hithchhiker.guide.galaxy.characters.Abigail;
 import hypernova.hithchhiker.guide.galaxy.characters.Fred;
@@ -51,10 +47,6 @@ public class ValueManager extends AppCompatActivity {
     int prevStringLength = 2;
     boolean capsLocked = false;
 
-    int closeddoor = 0; // esta es una variable que se irá reciclando para todas las puertas a partir de obj10
-    int havefoundeggin = 00;
-    int brokenegg = 0;
-
     public void initiateVariables() {
         myself.initiateVariables();
         fred.initiateVariables();
@@ -65,10 +57,6 @@ public class ValueManager extends AppCompatActivity {
 
         currentObjective = 1;
         score = 0;
-
-        closeddoor = 0; // esta es una variable que se irá reciclando para todas las puertas a partir de obj10
-        havefoundeggin = 00;
-        brokenegg = 0;
     }
 
     public void save() {
@@ -83,22 +71,16 @@ public class ValueManager extends AppCompatActivity {
         isMatchSaved = true;
         editor.putBoolean("isMatchSaved", true);
         editor.putInt("currentObjective", currentObjective);
-
         editor.putInt("score", score);
 
         TextView myLocation = (TextView) findViewById(R.id.location);
         String locSaved = myLocation.getText().toString();
         editor.putString("locSaved", locSaved);
 
-        editor.putInt("closeddoor", closeddoor);
-        editor.putInt("havefoundeggin", havefoundeggin);
-        editor.putInt("brokenegg", brokenegg);
-
         editor.commit();
     }
 
     public void restore() {
-        Set<String> emptyset = new HashSet<>();
         myself.restore();
         fred.restore();
         myBasement.restore();
@@ -107,7 +89,6 @@ public class ValueManager extends AppCompatActivity {
         nowhere.restore();
 
         currentObjective = sharedPrefs.getInt("currentObjective", 1);
-
         score = sharedPrefs.getInt("score", 0);
         TextView myMoves = (TextView) findViewById(R.id.moves);
         myMoves.setText("Moves: " + score);
@@ -115,9 +96,5 @@ public class ValueManager extends AppCompatActivity {
         String locSaved = sharedPrefs.getString("locSaved", "Just playing");
         TextView myLocation = (TextView) findViewById(R.id.location);
         myLocation.setText(locSaved);
-
-        closeddoor = sharedPrefs.getInt("closeddoor", 0);
-        havefoundeggin = sharedPrefs.getInt("havefoundeggin", 00);
-        brokenegg = sharedPrefs.getInt("brokenegg", 0);
     }
 }

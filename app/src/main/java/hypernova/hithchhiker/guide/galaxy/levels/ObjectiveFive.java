@@ -197,8 +197,9 @@ public class ObjectiveFive extends AppCompatActivity {
         } else if (myObjFive.contains("go")) {
             secondText.setText("This verb needs to be used with a direction.");
             linearLayout.addView(secondText);
+        }
         // SPEAK VERB
-        } else if (myObjFive.matches("speak") || myObjFive.matches("talk") || myObjFive.matches("ask")) {
+        else if (myObjFive.matches("speak") || myObjFive.matches("talk") || myObjFive.matches("ask")) {
             secondText.setText("This verb needs to be used with a name.");
             linearLayout.addView(secondText);
         } else if (myObjFive.contains("speak") || myObjFive.contains("talk") || myObjFive.contains("ask")) {
@@ -315,8 +316,9 @@ public class ObjectiveFive extends AppCompatActivity {
                 secondText.setText("This thing cannot be opened or it is not in the place.");
                 linearLayout.addView(secondText);
             }
+        }
         // TURN OFF VERB
-        } else if (myObjFive.matches("turn off") || myObjFive.matches("turn it off") || myObjFive.matches("shut down") || myObjFive.matches("shut it down")) {
+        else if (myObjFive.matches("turn off") || myObjFive.matches("turn it off") || myObjFive.matches("shut down") || myObjFive.matches("shut it down")) {
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
         } else if ((myObjFive.contains("turn") && myObjFive.contains("off")) || (myObjFive.contains("shut") && myObjFive.contains("down"))) {
@@ -340,8 +342,9 @@ public class ObjectiveFive extends AppCompatActivity {
             myMoves.setText("Moves: " + vm.score);
             secondText.setText("You are already standing.");
             linearLayout.addView(secondText);
+        }
         // LIE VERB
-        } else if (myObjFive.contains("sit down") || myObjFive.matches("sit") || myObjFive.contains("lie")) {
+        else if (myObjFive.contains("sit down") || myObjFive.matches("sit") || myObjFive.contains("lie")) {
             secondText.setText("There's no chairs left.");
             linearLayout.addView(secondText);
         } else if (myObjFive.matches("examine")) {  // EXAMINE VERB
@@ -452,8 +455,9 @@ public class ObjectiveFive extends AppCompatActivity {
                 secondText.setText("You're not holding the " + s + ".");
                 linearLayout.addView(secondText);
             }
+        }
         // HELP VERB
-        } else if (myObjFive.matches("help") && vm.score - vm.lwLibrary.scoreWhenEnteringLibrary >= 6) {
+        else if (myObjFive.matches("help") && vm.score - vm.lwLibrary.scoreWhenEnteringLibrary >= 6) {
             vm.score++;
             myMoves.setText("Moves: " + vm.score);
             secondText.setText("Find that hitchhiker's book.");
@@ -509,8 +513,9 @@ public class ObjectiveFive extends AppCompatActivity {
                 secondText.setText("This thing cannot be read or it is not in the place.");
                 linearLayout.addView(secondText);
             }
+        }
         // BREAK VERB
-        } else if (myObjFive.matches("break") || myObjFive.matches("hit") || myObjFive.matches("attack") || myObjFive.matches("punch") || myObjFive.matches("fight") || myObjFive.matches("kick")) {
+        else if (myObjFive.matches("break") || myObjFive.matches("hit") || myObjFive.matches("attack") || myObjFive.matches("punch") || myObjFive.matches("fight") || myObjFive.matches("kick")) {
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
         } else if (myObjFive.contains("break") || myObjFive.contains("hit") || myObjFive.contains("attack") || myObjFive.contains("punch") || myObjFive.contains("fight") || myObjFive.contains("kick")) {
@@ -555,8 +560,9 @@ public class ObjectiveFive extends AppCompatActivity {
                 secondText.setText("This thing cannot be hit or it is not in the place.");
                 linearLayout.addView(secondText);
             }
+        }
         // WINDOW ACTIONS
-        } else if ((myObjFive.contains("fix") || myObjFive.contains("repair")) && myObjFive.contains("window")) {
+        else if ((myObjFive.contains("fix") || myObjFive.contains("repair")) && myObjFive.contains("window")) {
             secondText.setText("Not your business.");
             linearLayout.addView(secondText);
         } else if (myObjFive.contains("jump") && myObjFive.contains("window")) {

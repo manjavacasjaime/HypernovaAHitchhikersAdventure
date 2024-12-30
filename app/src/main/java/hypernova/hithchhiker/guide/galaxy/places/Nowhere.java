@@ -9,6 +9,8 @@ import java.util.Set;
 
 public class Nowhere extends AppCompatActivity {
     SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
+    public boolean isHouseDoorOpen;
+    public boolean isEggBroken;
     public int currentLocation; // 11, 12, 13, 21, 22, 23
     public ArrayList<String> objectsDropped11 = new ArrayList<>();
     public ArrayList<String> objectsDropped12 = new ArrayList<>();
@@ -18,6 +20,8 @@ public class Nowhere extends AppCompatActivity {
     public ArrayList<String> objectsDropped23 = new ArrayList<>();
 
     public void initiateVariables() {
+        isHouseDoorOpen = true;
+        isEggBroken = false;
         currentLocation = 12;
         objectsDropped11.clear();
         objectsDropped12.clear();
@@ -30,6 +34,8 @@ public class Nowhere extends AppCompatActivity {
     public void save() {
         SharedPreferences.Editor editor = sharedPrefs.edit();
 
+        editor.putBoolean("nowhere.isHouseDoorOpen", isHouseDoorOpen);
+        editor.putBoolean("nowhere.isEggBroken", isEggBroken);
         editor.putInt("nowhere.currentLocation", currentLocation);
 
         Set<String> objectsDropped11Set = new HashSet<>(objectsDropped11);
@@ -50,6 +56,8 @@ public class Nowhere extends AppCompatActivity {
 
     public void restore() {
         Set<String> emptyset = new HashSet<>();
+        isHouseDoorOpen = sharedPrefs.getBoolean("nowhere.isHouseDoorOpen", true);
+        isEggBroken = sharedPrefs.getBoolean("nowhere.isEggBroken", false);
         currentLocation = sharedPrefs.getInt("nowhere.currentLocation", 12);
 
         Set<String> objectsDropped11Set = sharedPrefs.getStringSet("nowhere.objectsDropped11Set", emptyset);

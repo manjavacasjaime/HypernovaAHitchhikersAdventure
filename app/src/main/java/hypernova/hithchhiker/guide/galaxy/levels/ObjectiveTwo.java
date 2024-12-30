@@ -137,8 +137,9 @@ public class ObjectiveTwo extends AppCompatActivity {
                 secondText.setText("This thing cannot be opened or it is not in the place.");
                 linearLayout.addView(secondText);
             }
+        }
         // TURN OFF VERB
-        } else if (myObjTwo.matches("turn off") || myObjTwo.matches("turn it off") || myObjTwo.matches("shut down") || myObjTwo.matches("shut it down")) {
+        else if (myObjTwo.matches("turn off") || myObjTwo.matches("turn it off") || myObjTwo.matches("shut down") || myObjTwo.matches("shut it down")) {
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
         } else if ((myObjTwo.contains("turn") && myObjTwo.contains("off")) || (myObjTwo.contains("shut") && myObjTwo.contains("down"))) {
