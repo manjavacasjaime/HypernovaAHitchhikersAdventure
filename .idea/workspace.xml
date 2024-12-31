@@ -81,13 +81,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a4a34fca-42c8-4dfc-bcb4-eabf8bcc6c4a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveFive.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveFive.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveSeven.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveSeven.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveSix.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveSix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveThree.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveThree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/levels/ObjectiveTwo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/managers/ValueManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/managers/ValueManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/places/Nowhere.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/hypernova/hithchhiker/guide/galaxy/places/Nowhere.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,19 +175,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "E:/AndroidProjects/HypernovaAHitchhikersAdventure",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
       <recent name="hypernova.hithchhiker.guide.galaxy" />
