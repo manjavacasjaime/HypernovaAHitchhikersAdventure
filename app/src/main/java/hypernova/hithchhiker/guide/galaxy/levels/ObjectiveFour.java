@@ -770,7 +770,7 @@ public class ObjectiveFour extends AppCompatActivity {
         } else if (myObjFour.matches("diagnostic") || myObjFour.matches("diagnose")) {
             secondText.setText("This is not available at the moment.");
             linearLayout.addView(secondText);
-        } else if (myObjFour.contains("jump") || myObjFour.contains("climb") || myObjFour.contains("turn") || myObjFour.contains("shut") || myObjFour.contains("look") || myObjFour.contains("see") || myObjFour.contains("watch") || myObjFour.contains("play") || myObjFour.contains("run") || myObjFour.contains("walk") || myObjFour.contains("eat") || myObjFour.contains("move") || myObjFour.contains("give") || myObjFour.contains("offer") || myObjFour.contains("read") || myObjFour.contains("write") || myObjFour.contains("fix")|| myObjFour.contains("repair")) {
+        } else if (myObjFour.contains("jump") || myObjFour.contains("climb") || myObjFour.contains("turn") || myObjFour.contains("shut") || myObjFour.contains("look") || myObjFour.contains("see") || myObjFour.contains("watch") || myObjFour.contains("play") || myObjFour.contains("run") || myObjFour.contains("walk") || myObjFour.contains("eat") || myObjFour.contains("move") || myObjFour.contains("give") || myObjFour.contains("offer") || myObjFour.contains("read") || myObjFour.contains("write") || myObjFour.contains("fix") || myObjFour.contains("repair")) {
             vm.score++;
             myMoves.setText("Moves: " + vm.score);
             secondText.setText("Look around you.");
