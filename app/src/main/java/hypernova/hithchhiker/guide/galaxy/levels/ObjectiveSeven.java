@@ -656,7 +656,7 @@ public class ObjectiveSeven extends AppCompatActivity {
             } else if (myObjSeven.contains("black") && (myObjSeven.contains("stone") || myObjSeven.contains("rock"))) {
                 secondText.setText("The black stones are cold.");
             } else if ((myObjSeven.contains("stone") || myObjSeven.contains("rock"))) {
-                if (vm.nowhere.currentLocation == 21 && !(vm.myself.inventoryPast.contains("egg") ||
+                if (vm.nowhere.currentLocation == 21 && !(vm.myself.inventoryPast.contains("egg") || vm.nowhere.isEggBroken ||
                     vm.nowhere.objectsDropped11.contains("egg") || vm.nowhere.objectsDropped12.contains("egg") ||
                     vm.nowhere.objectsDropped13.contains("egg") || vm.nowhere.objectsDropped21.contains("egg") ||
                     vm.nowhere.objectsDropped22.contains("egg") || vm.nowhere.objectsDropped23.contains("egg"))) {
@@ -685,7 +685,7 @@ public class ObjectiveSeven extends AppCompatActivity {
             vm.score++;
             myMoves.setText("Moves: " + vm.score);
             if (myObjSeven.contains("stone") || myObjSeven.contains("rock")) {
-                if (vm.nowhere.currentLocation == 21 && !(vm.myself.inventoryPast.contains("egg") ||
+                if (vm.nowhere.currentLocation == 21 && !(vm.myself.inventoryPast.contains("egg") || vm.nowhere.isEggBroken ||
                     vm.nowhere.objectsDropped11.contains("egg") || vm.nowhere.objectsDropped12.contains("egg") ||
                     vm.nowhere.objectsDropped13.contains("egg") || vm.nowhere.objectsDropped21.contains("egg") ||
                     vm.nowhere.objectsDropped22.contains("egg") || vm.nowhere.objectsDropped23.contains("egg"))) {
@@ -783,7 +783,6 @@ public class ObjectiveSeven extends AppCompatActivity {
         else if (myObjSeven.matches("drop") || myObjSeven.contains("get rid of")) {
             secondText.setText("Just say: Drop (and the object you want to drop).");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.contains("drop")) {
             vm.score++;
             myMoves.setText("Moves: " + vm.score);
@@ -793,171 +792,146 @@ public class ObjectiveSeven extends AppCompatActivity {
             s = s.replace(" a ","");
             s = s.replace(" an ","");
             s = s.trim();
-            if (myInventoryPast.contains(s)) {
-                myInventoryPast.remove(s);
-                switch (housedesert) {
+            if (vm.myself.inventoryPast.contains(s)) {
+                vm.myself.inventoryPast.remove(s);
+                switch (vm.nowhere.currentLocation) {
                     case 11:
-                        dropHouseDesert11.add(s);
+                        vm.nowhere.objectsDropped11.add(s);
                         break;
                     case 12:
-                        dropHouseDesert12.add(s);
+                        vm.nowhere.objectsDropped12.add(s);
                         break;
                     case 13:
-                        dropHouseDesert13.add(s);
+                        vm.nowhere.objectsDropped13.add(s);
                         break;
                     case 21:
-                        dropHouseDesert21.add(s);
+                        vm.nowhere.objectsDropped21.add(s);
                         break;
                     case 22:
-                        dropHouseDesert22.add(s);
+                        vm.nowhere.objectsDropped22.add(s);
                         break;
                     case 23:
-                        dropHouseDesert23.add(s);
-                        break;
-                    case 32:
-                        dropHouseDesert32.add(s);
+                        vm.nowhere.objectsDropped23.add(s);
                         break;
                 }
                 secondText.setText("Dropped.");
-                linearLayout.addView(secondText);
-                obj10();
             } else {
                 secondText.setText("You're not holding the " + s + ".");
-                linearLayout.addView(secondText);
-                obj10();
             }
+            linearLayout.addView(secondText);
         } else if (myObjSeven.contains("put") || myObjSeven.contains("place")) {  // PUT VERB
             secondText.setText("There is no container here where you can put an object in.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.matches("help")) {  // HELP VERB
             vm.score++;
             myMoves.setText("Moves: " + vm.score);
             secondText.setText("You don't need help.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.contains("help")) {
             secondText.setText("Just say HELP.");
             linearLayout.addView(secondText);
-            obj10();
         }
         // FOLLOW VERB
         else if (myObjSeven.contains("follow") || myObjSeven.contains("chase") || myObjSeven.contains("find") || myObjSeven.contains("search")) {
             secondText.setText("There is no one here you can follow.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.contains("drink")) {  // DRINK VERB
             secondText.setText("You wish you had water.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.matches("eat")) {  // EAT VERB
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.contains("eat")) {
             vm.score++;
             myMoves.setText("Moves: " + vm.score);
-            if (myObjSeven.contains("egg") && (myInventoryPast.contains("egg") || (housedesert==11 && dropHouseDesert11.contains("egg")) || (housedesert==12 && dropHouseDesert12.contains("egg")) || (housedesert==13 && dropHouseDesert13.contains("egg")) || (housedesert==21 && dropHouseDesert21.contains("egg")) || (housedesert==22 && dropHouseDesert22.contains("egg")) || (housedesert==23 && dropHouseDesert23.contains("egg")) || (housedesert==32 && dropHouseDesert32.contains("egg")))) {
-                brokenegg=1;
-                if (myInventoryPast.contains("egg")) {myInventoryPast.remove("egg");}
-                else if (dropHouseDesert11.contains("egg")) {dropHouseDesert11.remove("egg");}
-                else if (dropHouseDesert12.contains("egg")) {dropHouseDesert12.remove("egg");}
-                else if (dropHouseDesert13.contains("egg")) {dropHouseDesert13.remove("egg");}
-                else if (dropHouseDesert21.contains("egg")) {dropHouseDesert21.remove("egg");}
-                else if (dropHouseDesert22.contains("egg")) {dropHouseDesert22.remove("egg");}
-                else if (dropHouseDesert23.contains("egg")) {dropHouseDesert23.remove("egg");}
-                else if (dropHouseDesert32.contains("egg")) {dropHouseDesert32.remove("egg");}
-                secondText.setText("When it crashes on the ground... nothing happens.\nIf there was hope to see another species in B903, now there's none.");
-                linearLayout.addView(secondText);
-                obj10();
+            if (myObjSeven.contains("egg") && (vm.myself.inventoryPast.contains("egg") ||
+                (vm.nowhere.currentLocation == 11 && vm.nowhere.objectsDropped11.contains("egg")) ||
+                (vm.nowhere.currentLocation == 12 && vm.nowhere.objectsDropped12.contains("egg")) ||
+                (vm.nowhere.currentLocation == 13 && vm.nowhere.objectsDropped13.contains("egg")) ||
+                (vm.nowhere.currentLocation == 21 && vm.nowhere.objectsDropped21.contains("egg")) ||
+                (vm.nowhere.currentLocation == 22 && vm.nowhere.objectsDropped22.contains("egg")) ||
+                (vm.nowhere.currentLocation == 23 && vm.nowhere.objectsDropped23.contains("egg")))) {
+                vm.nowhere.isEggBroken = true;
+                if (vm.myself.inventoryPast.contains("egg")) {vm.myself.inventoryPast.remove("egg");}
+                else if (vm.nowhere.objectsDropped11.contains("egg")) {vm.nowhere.objectsDropped11.remove("egg");}
+                else if (vm.nowhere.objectsDropped12.contains("egg")) {vm.nowhere.objectsDropped12.remove("egg");}
+                else if (vm.nowhere.objectsDropped13.contains("egg")) {vm.nowhere.objectsDropped13.remove("egg");}
+                else if (vm.nowhere.objectsDropped21.contains("egg")) {vm.nowhere.objectsDropped21.remove("egg");}
+                else if (vm.nowhere.objectsDropped22.contains("egg")) {vm.nowhere.objectsDropped22.remove("egg");}
+                else vm.nowhere.objectsDropped23.remove("egg");
+                secondText.setText("Before you eat the egg, it slips through your fingers and breaks on the ground.\nIf there was hope to see another species in B903, now there's none.");
             } else if (myObjSeven.contains("arm") || myObjSeven.contains("hand")) {
                 secondText.setText("What would you do with just one hand?");
-                linearLayout.addView(secondText);
-                obj10();
             } else if (myObjSeven.contains("house")) {
                 secondText.setText("Stop. What if there's someone inside?");
-                linearLayout.addView(secondText);
-                obj10();
             } else {
                 secondText.setText("This thing cannot be eaten or it is not in the place.");
-                linearLayout.addView(secondText);
-                obj10();
             }
+            linearLayout.addView(secondText);
         } else if (myObjSeven.contains("write")) {  // WRITE VERB
             secondText.setText("You cannot write new notes.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.contains("read")) {  // READ VERB
             secondText.setText("You can't see any note here!");
             linearLayout.addView(secondText);
-            obj10();
         }
         // BREAK VERB
         else if (myObjSeven.matches("break") || myObjSeven.matches("hit") || myObjSeven.matches("attack") || myObjSeven.matches("punch") || myObjSeven.matches("fight") || myObjSeven.matches("kick")) {
             secondText.setText("This verb needs to be used with a noun.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.contains("break") || myObjSeven.contains("hit") || myObjSeven.contains("attack") || myObjSeven.contains("punch") || myObjSeven.contains("fight") || myObjSeven.contains("kick")) {
             vm.score++;
             myMoves.setText("Moves: " + vm.score);
             if (myObjSeven.contains("house")) {
-                if (housedesert==12) {
+                if (vm.nowhere.currentLocation == 12) {
                     secondText.setText("As you punch the house, you hear the wood cracking a little.");
                 } else {
                     secondText.setText("You are kind of far from the house.");
                 }
-                linearLayout.addView(secondText);
-                obj10();
             } else if (myObjSeven.contains("door")) {
-                if (housedesert==12) {
+                if (vm.nowhere.currentLocation == 12) {
                     secondText.setText("You see the dust of the door falling off as you hit the door.");
                 } else {
                     secondText.setText("You are kind of far from the house.");
                 }
-                linearLayout.addView(secondText);
-                obj10();
             } else if (myObjSeven.contains("curtain")) {
-                if (housedesert==12) {
+                if (vm.nowhere.currentLocation == 12) {
                     secondText.setText("The cloth is so fine that it breaks apart when you touch it.");
                 } else {
                     secondText.setText("You are kind of far from the house.");
                 }
-                linearLayout.addView(secondText);
-                obj10();
             } else if (myObjSeven.contains("window")) {
-                if (housedesert==12) {
+                if (vm.nowhere.currentLocation == 12) {
                     secondText.setText("The windows are already half-broken.");
                 } else {
                     secondText.setText("You are kind of far from the house.");
                 }
-                linearLayout.addView(secondText);
-                obj10();
             } else if (myObjSeven.contains("stone")) {
                 secondText.setText("It is just a stone. Why would you hit a stone?");
-                linearLayout.addView(secondText);
-                obj10();
-            } else if (myObjSeven.contains("egg") && (myInventoryPast.contains("egg") || (housedesert==11 && dropHouseDesert11.contains("egg")) || (housedesert==12 && dropHouseDesert12.contains("egg")) || (housedesert==13 && dropHouseDesert13.contains("egg")) || (housedesert==21 && dropHouseDesert21.contains("egg")) || (housedesert==22 && dropHouseDesert22.contains("egg")) || (housedesert==23 && dropHouseDesert23.contains("egg")) || (housedesert==32 && dropHouseDesert32.contains("egg")))) {
-                brokenegg=1;
-                if (myInventoryPast.contains("egg")) {myInventoryPast.remove("egg");}
-                else if (dropHouseDesert11.contains("egg")) {dropHouseDesert11.remove("egg");}
-                else if (dropHouseDesert12.contains("egg")) {dropHouseDesert12.remove("egg");}
-                else if (dropHouseDesert13.contains("egg")) {dropHouseDesert13.remove("egg");}
-                else if (dropHouseDesert21.contains("egg")) {dropHouseDesert21.remove("egg");}
-                else if (dropHouseDesert22.contains("egg")) {dropHouseDesert22.remove("egg");}
-                else if (dropHouseDesert23.contains("egg")) {dropHouseDesert23.remove("egg");}
-                else if (dropHouseDesert32.contains("egg")) {dropHouseDesert32.remove("egg");}
+            } else if (myObjSeven.contains("egg") && (vm.myself.inventoryPast.contains("egg") ||
+                (vm.nowhere.currentLocation == 11 && vm.nowhere.objectsDropped11.contains("egg")) ||
+                (vm.nowhere.currentLocation == 12 && vm.nowhere.objectsDropped12.contains("egg")) ||
+                (vm.nowhere.currentLocation == 13 && vm.nowhere.objectsDropped13.contains("egg")) ||
+                (vm.nowhere.currentLocation == 21 && vm.nowhere.objectsDropped21.contains("egg")) ||
+                (vm.nowhere.currentLocation == 22 && vm.nowhere.objectsDropped22.contains("egg")) ||
+                (vm.nowhere.currentLocation == 23 && vm.nowhere.objectsDropped23.contains("egg")))) {
+                vm.nowhere.isEggBroken = true;
+                if (vm.myself.inventoryPast.contains("egg")) {vm.myself.inventoryPast.remove("egg");}
+                else if (vm.nowhere.objectsDropped11.contains("egg")) {vm.nowhere.objectsDropped11.remove("egg");}
+                else if (vm.nowhere.objectsDropped12.contains("egg")) {vm.nowhere.objectsDropped12.remove("egg");}
+                else if (vm.nowhere.objectsDropped13.contains("egg")) {vm.nowhere.objectsDropped13.remove("egg");}
+                else if (vm.nowhere.objectsDropped21.contains("egg")) {vm.nowhere.objectsDropped21.remove("egg");}
+                else if (vm.nowhere.objectsDropped22.contains("egg")) {vm.nowhere.objectsDropped22.remove("egg");}
+                else vm.nowhere.objectsDropped23.remove("egg");
                 secondText.setText("When it crashes on the ground... nothing happens.\nIf there was hope to see another species in B903, now there's none.");
-                linearLayout.addView(secondText);
-                obj10();
             } else {
                 secondText.setText("This thing cannot be hit or it is not in the place.");
-                linearLayout.addView(secondText);
-                obj10();
             }
+            linearLayout.addView(secondText);
         }
         // CURTAIN ACTIONS
         else if ((((myObjSeven.contains("draw") || myObjSeven.contains("pull")) && (myObjSeven.contains("back") || myObjSeven.contains("aside"))) || myObjSeven.contains("move")) && myObjSeven.contains("curtain")) {
-            if (housedesert==12) {
+            if (vm.nowhere.currentLocation == 12) {
                 vm.score++;
                 myMoves.setText("Moves: " + vm.score);
                 secondText.setText("You can hardly see anything. It is really dark inside.");
@@ -965,121 +939,85 @@ public class ObjectiveSeven extends AppCompatActivity {
                 secondText.setText("You have wandered off the house. You better get closer to do that.");
             }
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.contains("curtain")) {
-            if (housedesert==12) {
+            if (vm.nowhere.currentLocation == 12) {
                 secondText.setText("They are just some dark curtains.");
             } else {
                 secondText.setText("You are kind of far from the house.");
             }
             linearLayout.addView(secondText);
-            obj10();
         } else if ((myObjSeven.contains("look") && myObjSeven.contains("around")) || myObjSeven.matches("l") || myObjSeven.matches("look")) {
             String s = "";
-            switch (housedesert) {
+            switch (vm.nowhere.currentLocation) {
                 case 11:
                     s = "Nowhere\nHeading northeast you still see the house.";
-                    if (!(dropHouseDesert11.isEmpty())) {
-                        int n = dropHouseDesert11.size();
+                    if (!vm.nowhere.objectsDropped11.isEmpty()) {
+                        int n = vm.nowhere.objectsDropped11.size();
                         for (int i = 0; i < n; i++) {
-                            s = s + "\nThere's the " + dropHouseDesert11.get(i) + " here.";
+                            s = s + "\nThere's the " + vm.nowhere.objectsDropped11.get(i) + " here.";
                         }
-                        secondText.setText(s);
-                    } else {
-                        secondText.setText(s);
                     }
                     break;
                 case 12:
-                    if (closeddoor==0) {
-                        s = "In the middle of nowhere\nThe ground is covered with black stones. The sky is still orange.\nHeading NORTH you see a house with the door open.";
+                    s = "In the middle of nowhere\nThe ground is covered with black stones. The sky is still orange.";
+                    if (vm.nowhere.isHouseDoorOpen) {
+                        s = s + "\nHeading NORTH you see a house with the door open.";
                     } else {
-                        s = "In the middle of nowhere\nThe ground is covered with black stones. The sky is still orange.\nHeading NORTH you see a house with the door closed.";
+                        s = s + "\nHeading NORTH you see a house with the door closed.";
                     }
-                    if (!(dropHouseDesert12.isEmpty())) {
-                        int n = dropHouseDesert12.size();
+                    if (!vm.nowhere.objectsDropped12.isEmpty()) {
+                        int n = vm.nowhere.objectsDropped12.size();
                         for (int i = 0; i < n; i++) {
-                            s = s + "\nThere's the " + dropHouseDesert12.get(i) + " here.";
+                            s = s + "\nThere's the " + vm.nowhere.objectsDropped12.get(i) + " here.";
                         }
-                        secondText.setText(s);
-                    } else {
-                        secondText.setText(s);
                     }
                     break;
                 case 13:
                     s = "Nowhere\nHeading northwest you still see the house.";
-                    if (!(dropHouseDesert13.isEmpty())) {
-                        int n = dropHouseDesert13.size();
+                    if (!vm.nowhere.objectsDropped13.isEmpty()) {
+                        int n = vm.nowhere.objectsDropped13.size();
                         for (int i = 0; i < n; i++) {
-                            s = s + "\nThere's the " + dropHouseDesert13.get(i) + " here.";
+                            s = s + "\nThere's the " + vm.nowhere.objectsDropped13.get(i) + " here.";
                         }
-                        secondText.setText(s);
-                    } else {
-                        secondText.setText(s);
                     }
                     break;
                 case 21:
-                    if (havefoundeggin==21 && !(myInventoryPast.contains("egg") || dropHouseDesert11.contains("egg") || dropHouseDesert12.contains("egg") || dropHouseDesert13.contains("egg") || dropHouseDesert21.contains("egg") || dropHouseDesert22.contains("egg") || dropHouseDesert23.contains("egg") || dropHouseDesert32.contains("egg") || brokenegg==1)) {
-                        s = "Nowhere\nThe house is northeast.\nHere you see a white stone that calls your attention.";
-                    } else {
+                    if (vm.myself.inventoryPast.contains("egg") || vm.nowhere.objectsDropped11.contains("egg") ||
+                        vm.nowhere.objectsDropped12.contains("egg") || vm.nowhere.objectsDropped13.contains("egg") ||
+                        vm.nowhere.objectsDropped21.contains("egg") || vm.nowhere.objectsDropped22.contains("egg") ||
+                        vm.nowhere.objectsDropped23.contains("egg") || vm.nowhere.isEggBroken) {
                         s = "Nowhere\nThe house is northeast.";
-                    }
-                    if (!(dropHouseDesert21.isEmpty())) {
-                        int n = dropHouseDesert21.size();
-                        for (int i = 0; i < n; i++) {
-                            s = s + "\nThere's the " + dropHouseDesert21.get(i) + " here.";
-                        }
-                        secondText.setText(s);
                     } else {
-                        secondText.setText(s);
+                        s = "Nowhere\nThe house is northeast.\nHere you see a white stone that calls your attention.";
+                    }
+                    if (!vm.nowhere.objectsDropped21.isEmpty()) {
+                        int n = vm.nowhere.objectsDropped21.size();
+                        for (int i = 0; i < n; i++) {
+                            s = s + "\nThere's the " + vm.nowhere.objectsDropped21.get(i) + " here.";
+                        }
                     }
                     break;
                 case 22:
                     s = "Nowhere\nHeading north you still see the house.";
-                    if (!(dropHouseDesert22.isEmpty())) {
-                        int n = dropHouseDesert22.size();
+                    if (!vm.nowhere.objectsDropped22.isEmpty()) {
+                        int n = vm.nowhere.objectsDropped22.size();
                         for (int i = 0; i < n; i++) {
-                            s = s + "\nThere's the " + dropHouseDesert22.get(i) + " here.";
+                            s = s + "\nThere's the " + vm.nowhere.objectsDropped22.get(i) + " here.";
                         }
-                        secondText.setText(s);
-                    } else {
-                        secondText.setText(s);
                     }
                     break;
                 case 23:
-                    if (havefoundeggin==23 && !(myInventoryPast.contains("egg") || dropHouseDesert11.contains("egg") || dropHouseDesert12.contains("egg") || dropHouseDesert13.contains("egg") || dropHouseDesert21.contains("egg") || dropHouseDesert22.contains("egg") || dropHouseDesert23.contains("egg") || dropHouseDesert32.contains("egg") || brokenegg==1)) {
-                        s = "Nowhere\nThe house is northwest.\nHere you see a white stone that calls your attention.";
-                    } else {
-                        s = "Nowhere\nThe house is northwest.";
-                    }
-                    if (!(dropHouseDesert23.isEmpty())) {
-                        int n = dropHouseDesert23.size();
+                    s = "Nowhere\nThe house is northwest.";
+                    if (!vm.nowhere.objectsDropped23.isEmpty()) {
+                        int n = vm.nowhere.objectsDropped23.size();
                         for (int i = 0; i < n; i++) {
-                            s = s + "\nThere's the " + dropHouseDesert23.get(i) + " here.";
+                            s = s + "\nThere's the " + vm.nowhere.objectsDropped23.get(i) + " here.";
                         }
-                        secondText.setText(s);
-                    } else {
-                        secondText.setText(s);
-                    }
-                    break;
-                case 32:
-                    if (havefoundeggin==32 && !(myInventoryPast.contains("egg") || dropHouseDesert11.contains("egg") || dropHouseDesert12.contains("egg") || dropHouseDesert13.contains("egg") || dropHouseDesert21.contains("egg") || dropHouseDesert22.contains("egg") || dropHouseDesert23.contains("egg") || dropHouseDesert32.contains("egg") || brokenegg==1)) {
-                        s = "Nowhere\nThe house is north.\nHere you see a white stone that calls your attention.";
-                    } else {
-                        s = "Nowhere\nThe house is north.";
-                    }
-                    if (!(dropHouseDesert32.isEmpty())) {
-                        int n = dropHouseDesert32.size();
-                        for (int i = 0; i < n; i++) {
-                            s = s + "\nThere's the " + dropHouseDesert32.get(i) + " here.";
-                        }
-                        secondText.setText(s);
-                    } else {
-                        secondText.setText(s);
                     }
                     break;
             }
+            secondText.setText(s);
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.matches("i") || myObjSeven.matches("inventory")) {
             String inventory = "You have:";
             if (!(myInventoryPast.isEmpty())) {
