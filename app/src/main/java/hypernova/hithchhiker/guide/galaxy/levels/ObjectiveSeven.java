@@ -1020,68 +1020,53 @@ public class ObjectiveSeven extends AppCompatActivity {
             linearLayout.addView(secondText);
         } else if (myObjSeven.matches("i") || myObjSeven.matches("inventory")) {
             String inventory = "You have:";
-            if (!(myInventoryPast.isEmpty())) {
-                int n = myInventoryPast.size();
+            if (!vm.myself.inventoryPast.isEmpty()) {
+                int n = vm.myself.inventoryPast.size();
                 for (int i=0; i<n; i++) {
-                    inventory = inventory + "\n    " + myInventoryPast.get(i) + ".";
+                    inventory = inventory + "\n    " + vm.myself.inventoryPast.get(i) + ".";
                 }
-                secondText.setText(inventory);
-                linearLayout.addView(secondText);
-                obj10();
             } else {
                 inventory = "You have nothing.";
-                secondText.setText(inventory);
-                linearLayout.addView(secondText);
-                obj10();
             }
+            secondText.setText(inventory);
+            linearLayout.addView(secondText);
         } else if (myObjSeven.contains("inventory")) {
             secondText.setText("Just write the letter I or say INVENTORY.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.contains("repeat")) {
             secondText.setText("There is nothing you can repeat.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.matches("sleep")) {
             vm.score++;
             myMoves.setText("Moves: " + vm.score);
             secondText.setText("After 20 minutes sleeping, you wake up and everything is still the same. Even the sky is still orange.\nYou just feel thirstier.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.contains("check") && myObjSeven.contains("out")) {
             secondText.setText("Try to LOOK AROUND or EXAMINE an object.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.contains("check") || myObjSeven.contains("review")) {
             secondText.setText("Say EXAMINE and the object you want to check.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.contains("jump") || myObjSeven.contains("climb") || myObjSeven.contains("turn") || myObjSeven.contains("shut") || myObjSeven.contains("look") || myObjSeven.contains("see") || myObjSeven.contains("watch") || myObjSeven.contains("play") || myObjSeven.contains("run") || myObjSeven.contains("walk") || myObjSeven.contains("move") || myObjSeven.contains("give") || myObjSeven.contains("offer")) {
             vm.score++;
             myMoves.setText("Moves: " + vm.score);
             secondText.setText("Look around you.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.contains("smell")) {
             secondText.setText("It does not smell as bad as the part of the planet where your house is.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.contains("listen")) {
             secondText.setText("You can barely hear someone crying inside the house.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.contains("wait")) {
             secondText.setText("Time passes...");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.contains("what") && myObjSeven.contains("time") && myObjSeven.contains("is") || myObjSeven.matches("time") || myObjSeven.matches("the time")) {
             secondText.setText("It is sunset.");
             linearLayout.addView(secondText);
-            obj10();
         } else if (myObjSeven.matches("diagnostic") || myObjSeven.matches("diagnose")) {
             secondText.setText("This is not available at the moment.");
             linearLayout.addView(secondText);
-            obj10();
         }
 
         return (String) secondText.getText();
