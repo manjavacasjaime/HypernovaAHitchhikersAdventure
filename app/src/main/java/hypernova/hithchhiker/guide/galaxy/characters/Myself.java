@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Myself extends AppCompatActivity {
-    SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
+    SharedPreferences sharedPrefs;
     public String name;
     public String surname;
     public boolean isStanding;
@@ -19,6 +19,10 @@ public class Myself extends AppCompatActivity {
     // Important choices
     public boolean hasKidIcarus; // Whether or not you have kidded Icarus
     public int kindOfPerson; // -1 not yet chosen, 0 choosing, 1 distant, 2 affable. Commented to Abigail
+
+    public Myself(SharedPreferences sharedPreferences) {
+        sharedPrefs = sharedPreferences;
+    }
 
     public void initiateVariables() {
         name = "Alex";

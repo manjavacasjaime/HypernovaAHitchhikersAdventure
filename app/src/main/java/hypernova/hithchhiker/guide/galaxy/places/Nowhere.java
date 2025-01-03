@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Nowhere extends AppCompatActivity {
-    SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
+    SharedPreferences sharedPrefs;
     public boolean isHouseDoorOpen;
     public boolean isEggBroken;
     public int currentLocation; // 11, 12, 13, 21, 22, 23
@@ -18,6 +18,10 @@ public class Nowhere extends AppCompatActivity {
     public ArrayList<String> objectsDropped21 = new ArrayList<>();
     public ArrayList<String> objectsDropped22 = new ArrayList<>();
     public ArrayList<String> objectsDropped23 = new ArrayList<>();
+
+    public Nowhere(SharedPreferences sharedPreferences) {
+        sharedPrefs = sharedPreferences;
+    }
 
     public void initiateVariables() {
         isHouseDoorOpen = true;

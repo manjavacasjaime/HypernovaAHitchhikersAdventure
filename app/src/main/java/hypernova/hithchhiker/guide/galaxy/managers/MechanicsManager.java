@@ -10,6 +10,11 @@ import android.widget.TextView;
 import hypernova.hithchhiker.guide.galaxy.R;
 
 public class MechanicsManager extends AppCompatActivity {
+    LinearLayout topBar;
+    public MechanicsManager(LinearLayout tb) {
+        topBar = tb;
+    }
+
     public void changeAppColor(LinearLayout linearLayout, int newColor, Activity activity) {
         switch (newColor) {
             case -5592406: // new color is grey
@@ -22,8 +27,6 @@ public class MechanicsManager extends AppCompatActivity {
                 activity.getTheme().applyStyle(R.style.AppThemePink, true);
                 break;
         }
-
-        LinearLayout topBar = (LinearLayout) findViewById(R.id.topBar); // changes top bar
 
         final int childCount = linearLayout.getChildCount(); // changes old text
         for (int i = 0; i < childCount; i++) {
@@ -38,7 +41,7 @@ public class MechanicsManager extends AppCompatActivity {
             }
         }
 
-        topBar.setBackgroundColor(newColor);
+        topBar.setBackgroundColor(newColor); // changes top bar
     }
 
     public void exitApp(Activity activity) {

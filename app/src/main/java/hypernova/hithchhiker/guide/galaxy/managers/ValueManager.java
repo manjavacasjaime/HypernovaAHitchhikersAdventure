@@ -19,24 +19,36 @@ import hypernova.hithchhiker.guide.galaxy.places.MyBasement;
 import hypernova.hithchhiker.guide.galaxy.places.Nowhere;
 
 public class ValueManager extends AppCompatActivity {
-    public SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
-    public Myself myself = new Myself();
-    public Fred fred = new Fred();
+    public SharedPreferences sharedPrefs;
+    public boolean isMatchSaved;
+    public int appColor; // 1 grey, 2 green, 3 pink
+    public Myself myself;
+    public Fred fred;
     public Abigail abigail = new Abigail();
     public Icarus icarus = new Icarus();
     public Shannon shannon = new Shannon();
     public Sully sully = new Sully();
     public Henry henry = new Henry();
     public Kenny kenny = new Kenny();
-    public MyBasement myBasement = new MyBasement();
-    public Ludlow ludlow = new Ludlow();
-    public LudlowLibrary lwLibrary = new LudlowLibrary();
-    public Nowhere nowhere = new Nowhere();
-    public boolean isMatchSaved = sharedPrefs.getBoolean("isMatchSaved", false);
-    public int appColor = sharedPrefs.getInt("appColor", 1); // 1 grey, 2 green, 3 pink
+    public MyBasement myBasement;
+    public Ludlow ludlow;
+    public LudlowLibrary lwLibrary;
+    public Nowhere nowhere;
     public String dieOptions = "\n\nType RESTART, RESTORE, COMMANDS or QUIT.";
     public int currentObjective; // WHICH OBJECTIVE I AM DOING. ZERO IS GAME OVER
     public int score;
+
+    public ValueManager(SharedPreferences sharedPreferences) {
+        sharedPrefs = sharedPreferences;
+        isMatchSaved = sharedPrefs.getBoolean("isMatchSaved", false);
+        appColor = sharedPrefs.getInt("appColor", 1);
+        myself = new Myself(sharedPreferences);
+        fred = new Fred(sharedPreferences);
+        myBasement = new MyBasement(sharedPreferences);
+        ludlow = new Ludlow(sharedPreferences);
+        lwLibrary = new LudlowLibrary(sharedPreferences);
+        nowhere = new Nowhere(sharedPreferences);
+    }
 
     public void initiateVariables() {
         myself.initiateVariables();

@@ -15,7 +15,7 @@ import hypernova.hithchhiker.guide.galaxy.characters.Shannon;
 import hypernova.hithchhiker.guide.galaxy.characters.Sully;
 
 public class LudlowLibrary extends AppCompatActivity {
-    SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
+    SharedPreferences sharedPrefs;
     public int scoreWhenEnteringLibrary;
     public int scoreWhenEnteringRoomD;
     public int scoreWhenPeopleLeave;
@@ -28,6 +28,10 @@ public class LudlowLibrary extends AppCompatActivity {
     public String currentLocation; // hall, room D
     public ArrayList<String> objectsDroppedHall = new ArrayList<>();
     public ArrayList<String> objectsDroppedRoomD = new ArrayList<>();
+
+    public LudlowLibrary(SharedPreferences sharedPreferences) {
+        sharedPrefs = sharedPreferences;
+    }
 
     public void initiateVariables() {
         scoreWhenEnteringLibrary = 0;

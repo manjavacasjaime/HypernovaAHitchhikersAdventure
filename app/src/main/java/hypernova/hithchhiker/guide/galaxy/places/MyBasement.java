@@ -8,10 +8,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MyBasement extends AppCompatActivity {
-    SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
+    SharedPreferences sharedPrefs;
     public int scoreWhenStopPlaying;
     public boolean isComputerOff;
     public ArrayList<String> objectsDropped = new ArrayList<>();
+
+    public MyBasement(SharedPreferences sharedPreferences) {
+        sharedPrefs = sharedPreferences;
+    }
 
     public void initiateVariables() {
         scoreWhenStopPlaying = 0;

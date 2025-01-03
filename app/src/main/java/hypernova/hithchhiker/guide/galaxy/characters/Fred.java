@@ -4,10 +4,14 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 
 public class Fred extends AppCompatActivity {
-    SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
+    SharedPreferences sharedPrefs;
     public int conversationStatus = 0;
     public boolean isDead;
     public boolean isPresent;
+
+    public Fred(SharedPreferences sharedPreferences) {
+        sharedPrefs = sharedPreferences;
+    }
 
     public void initiateVariables() {
         isDead = false;

@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Ludlow extends AppCompatActivity {
-    SharedPreferences sharedPrefs = getSharedPreferences("hypernova.save", MODE_PRIVATE);
+    SharedPreferences sharedPrefs;
     public int scoreWhenFredWaiting;
     public boolean isHouseDoorOpen;
     public boolean isHouseWaterDrunk;
@@ -16,6 +16,10 @@ public class Ludlow extends AppCompatActivity {
     public ArrayList<String> objectsDroppedHouse = new ArrayList<>();
     public ArrayList<String> objectsDroppedStreet = new ArrayList<>();
     public ArrayList<String> objectsDroppedLibrary = new ArrayList<>();
+
+    public Ludlow(SharedPreferences sharedPreferences) {
+        sharedPrefs = sharedPreferences;
+    }
 
     public void initiateVariables() {
         scoreWhenFredWaiting = 0;

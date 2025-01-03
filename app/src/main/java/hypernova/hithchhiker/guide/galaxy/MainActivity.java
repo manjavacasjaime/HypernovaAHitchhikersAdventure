@@ -1,5 +1,6 @@
 package hypernova.hithchhiker.guide.galaxy;
 
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.support.v4.content.res.ResourcesCompat;
@@ -26,10 +27,10 @@ import hypernova.hithchhiker.guide.galaxy.managers.ValueManager;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.gameearth);
-    final TextView myMoves = (TextView) findViewById(R.id.moves);
-    final TextView myLocation = (TextView) findViewById(R.id.location);
-    final Typeface typeface = ResourcesCompat.getFont(MainActivity.this, R.font.lucida_console);
+    LinearLayout linearLayout;
+    TextView myMoves;
+    TextView myLocation;
+    Typeface typeface;
     Handler handler;
     Runnable myRunnable;
     boolean isCallbacksRemoved;
@@ -40,14 +41,25 @@ public class MainActivity extends AppCompatActivity {
     int prevStringLength = 2;
     boolean isFirstClicked = false;
     boolean isCapsLocked = false;
-    ValueManager valueManager = new ValueManager();
-    MechanicsManager mechanicsManager = new MechanicsManager();
-    LevelManager levelManager = new LevelManager(valueManager);
+    ValueManager valueManager;
+    MechanicsManager mechanicsManager;
+    LevelManager levelManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        linearLayout = (LinearLayout) findViewById(R.id.gameearth);
+        myMoves = (TextView) findViewById(R.id.moves);
+        myLocation = (TextView) findViewById(R.id.location);
+        LinearLayout topBar = (LinearLayout) findViewById(R.id.topBar); // changes top bar
+        typeface = ResourcesCompat.getFont(MainActivity.this, R.font.lucida_console);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("hypernova.save", MODE_PRIVATE);
+        valueManager = new ValueManager(sharedPreferences);
+        mechanicsManager = new MechanicsManager(topBar);
+        levelManager = new LevelManager(valueManager);
 
         //splash();
         earth(); //this will be removed
