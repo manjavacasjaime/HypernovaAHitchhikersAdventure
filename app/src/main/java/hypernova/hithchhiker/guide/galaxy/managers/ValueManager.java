@@ -1,12 +1,10 @@
 package hypernova.hithchhiker.guide.galaxy.managers;
 
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import hypernova.hithchhiker.guide.galaxy.R;
 import hypernova.hithchhiker.guide.galaxy.characters.Abigail;
 import hypernova.hithchhiker.guide.galaxy.characters.Fred;
 import hypernova.hithchhiker.guide.galaxy.characters.Henry;
@@ -24,7 +22,6 @@ public class ValueManager extends AppCompatActivity {
     public LinearLayout linearLayout;
     public TextView myMoves;
     public TextView myLocation;
-    public Typeface typeface;
     public SharedPreferences sharedPrefs;
     public boolean isMatchSaved;
     public int appColor; // 1 grey, 2 green, 3 pink
@@ -45,12 +42,11 @@ public class ValueManager extends AppCompatActivity {
     public int score;
 
     public ValueManager(SharedPreferences sharedPreferences, LinearLayout ll, TextView moves,
-                        TextView location, Typeface tf) {
+                        TextView location) {
         sharedPrefs = sharedPreferences;
         linearLayout = ll;
         myMoves = moves;
         myLocation = location;
-        typeface = tf;
         isMatchSaved = sharedPrefs.getBoolean("isMatchSaved", false);
         appColor = sharedPrefs.getInt("appColor", 1);
         myself = new Myself(sharedPreferences);

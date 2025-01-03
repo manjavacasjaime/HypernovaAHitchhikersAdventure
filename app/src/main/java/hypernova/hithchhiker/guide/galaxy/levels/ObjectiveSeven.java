@@ -1,6 +1,5 @@
 package hypernova.hithchhiker.guide.galaxy.levels;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -13,10 +12,7 @@ public class ObjectiveSeven extends AppCompatActivity {
         vm = valManager;
     }
 
-    public String checkObjAnswer(String myObjSeven, Activity activity) {
-        TextView secondText = new TextView(activity.getBaseContext());
-        secondText.setTypeface(vm.typeface);
-
+    public String checkObjAnswer(String myObjSeven, TextView secondText) {
         // DIRECTIONS GO VERB
         if (myObjSeven.matches("up") || myObjSeven.matches("u") || myObjSeven.matches("go up") || myObjSeven.matches("upstairs") || myObjSeven.matches("go upstairs") || myObjSeven.matches("go u") || myObjSeven.matches("down") || myObjSeven.matches("d") || myObjSeven.matches("go down") || myObjSeven.matches("downstairs") || myObjSeven.matches("go downstairs") || myObjSeven.matches("go d")) {
             secondText.setText("You can't go that way.");

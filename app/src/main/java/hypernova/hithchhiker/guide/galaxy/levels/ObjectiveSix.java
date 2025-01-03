@@ -1,6 +1,5 @@
 package hypernova.hithchhiker.guide.galaxy.levels;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -15,10 +14,7 @@ public class ObjectiveSix extends AppCompatActivity {
         vm = valManager;
     }
 
-    public String checkObjAnswer(String myObjSix, Activity activity) {
-        TextView secondText = new TextView(activity.getBaseContext());
-        secondText.setTypeface(vm.typeface);
-
+    public String checkObjAnswer(String myObjSix, TextView secondText) {
         if (vm.lwLibrary.isReadingPinboard) {  // READING NOTES
             vm.lwLibrary.displayPinboardNotes(myObjSix, vm.linearLayout, secondText);
         } else if (stoppetonConversationStatus == 1) {  // STOP TIME DECISION

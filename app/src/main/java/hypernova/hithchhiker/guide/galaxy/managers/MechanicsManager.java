@@ -1,6 +1,7 @@
 package hypernova.hithchhiker.guide.galaxy.managers;
 
 import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -10,20 +11,29 @@ import android.widget.TextView;
 import hypernova.hithchhiker.guide.galaxy.R;
 
 public class MechanicsManager extends AppCompatActivity {
+    Activity activity;
+    LinearLayout linearLayout;
     LinearLayout topBar;
-    public MechanicsManager(LinearLayout tb) {
+
+    public MechanicsManager(Activity act, LinearLayout ll, LinearLayout tb) {
+        activity = act;
+        linearLayout = ll;
         topBar = tb;
     }
 
-    public void changeAppColor(LinearLayout linearLayout, int newColor, Activity activity) {
-        switch (newColor) {
-            case -5592406: // new color is grey
+    public void changeAppColor(int appColor) {
+        int newColor = 0;
+        switch (appColor) {
+            case 1: // new color is grey
+                newColor = ContextCompat.getColor(activity, R.color.colorAccent);
                 activity.getTheme().applyStyle(R.style.AppTheme, true);
                 break;
-            case -10044566: // new color is green
+            case 2: // new color is green
+                newColor = ContextCompat.getColor(activity, R.color.colorGreen);
                 activity.getTheme().applyStyle(R.style.AppThemeGreen, true);
                 break;
-            case -476208: // new color is pink
+            case 3: // new color is pink
+                newColor = ContextCompat.getColor(activity, R.color.colorPink);
                 activity.getTheme().applyStyle(R.style.AppThemePink, true);
                 break;
         }
@@ -44,7 +54,7 @@ public class MechanicsManager extends AppCompatActivity {
         topBar.setBackgroundColor(newColor); // changes top bar
     }
 
-    public void exitApp(Activity activity) {
+    public void exitApp() {
         activity.finish();
         System.exit(0);
     }

@@ -1,6 +1,5 @@
 package hypernova.hithchhiker.guide.galaxy.levels;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -15,10 +14,7 @@ public class ObjectiveFive extends AppCompatActivity {
         vm = valManager;
     }
 
-    public String checkObjAnswer(String myObjFive, Activity activity) {
-        TextView secondText = new TextView(activity.getBaseContext());
-        secondText.setTypeface(vm.typeface);
-
+    public String checkObjAnswer(String myObjFive, TextView secondText) {
         if (vm.lwLibrary.isReadingPinboard) {  // READING NOTES
             vm.lwLibrary.displayPinboardNotes(myObjFive, vm.linearLayout, secondText);
         } else if (vm.shannon.conversationStatus == 1) {  // CONVERSATIONS

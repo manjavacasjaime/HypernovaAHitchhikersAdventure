@@ -1,6 +1,5 @@
 package hypernova.hithchhiker.guide.galaxy.levels.common;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -14,10 +13,7 @@ public class ConsultGuide extends AppCompatActivity {
         vm = valManager;
     }
 
-    public String checkObjAnswer(String myObjX, Activity activity) {
-        TextView secondText = new TextView(activity.getBaseContext());
-        secondText.setTypeface(vm.typeface);
-
+    public String checkObjAnswer(String myObjX, TextView secondText) {
         if (myObjX.contains("consult") && myObjX.contains("guide")) {
             secondText.setText("You can't see any Guide here!");
             vm.linearLayout.addView(secondText);

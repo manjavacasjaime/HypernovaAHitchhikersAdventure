@@ -1,6 +1,5 @@
 package hypernova.hithchhiker.guide.galaxy.levels;
 
-import android.app.Activity;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -17,10 +16,7 @@ public class ObjectiveZero extends AppCompatActivity {
         vm = valManager;
     }
 
-    public String checkObjAnswer(String myObjZero, Activity activity, MechanicsManager mechanicsManager) {
-        TextView secondText = new TextView(activity.getBaseContext());
-        secondText.setTypeface(vm.typeface);
-
+    public String checkObjAnswer(String myObjZero, TextView secondText, MechanicsManager mechanicsManager) {
         if (myObjZero.matches("restart")) {
             vm.initiateVariables();
             vm.myMoves.setText("Moves: " + vm.score);
@@ -47,7 +43,7 @@ public class ObjectiveZero extends AppCompatActivity {
             myRunnable = new Runnable() {
                 @Override
                 public void run() {
-                    mechanicsManager.exitApp(activity);
+                    mechanicsManager.exitApp();
                 }
             };
             handler.postDelayed(myRunnable, 1500);

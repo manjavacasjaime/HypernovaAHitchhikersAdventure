@@ -1,7 +1,7 @@
 package hypernova.hithchhiker.guide.galaxy.levels.common;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -21,10 +21,7 @@ public class CommonAnswers extends AppCompatActivity {
         vm = valManager;
     }
 
-    public String checkObjAnswer(String myObjX, Activity activity, MechanicsManager mechanicsManager) {
-        TextView secondText = new TextView(activity.getBaseContext());
-        secondText.setTypeface(vm.typeface);
-
+    public String checkObjAnswer(String myObjX, TextView secondText, MechanicsManager mechanicsManager) {
         if (changeAiConversationStatus == 1) {
             switch (myObjX) {
                 case "1":
@@ -185,25 +182,21 @@ public class CommonAnswers extends AppCompatActivity {
         } else if ((myObjX.contains("change") || myObjX.contains("switch") || myObjX.contains("set") || myObjX.contains("edit")) && (myObjX.contains("color") || myObjX.contains("colour"))) {
             secondText.setText("Done.");
             vm.linearLayout.addView(secondText);
-            int myNewColor = 0;
             switch (vm.appColor) {
                 case 1:
                     vm.appColor = 2;
-                    myNewColor = getResources().getColor(R.color.colorGreen);
                     break;
                 case 2:
                     vm.appColor = 3;
-                    myNewColor = getResources().getColor(R.color.colorPink);
                     break;
                 case 3:
                     vm.appColor = 1;
-                    myNewColor = getResources().getColor(R.color.colorAccent);
                     break;
             }
             SharedPreferences.Editor editor = vm.sharedPrefs.edit();
             editor.putInt("appColor", vm.appColor);
             editor.commit();
-            mechanicsManager.changeAppColor(vm.linearLayout, myNewColor, activity);
+            mechanicsManager.changeAppColor(vm.appColor);
         } else if (myObjX.contains("artificial intelligence")) {
             secondText.setText("AI is a complicated matter and is a topic I won't discuss here.\nFor your information, I cannot think by myself. I can only process your sentences after you type them, but I'm not able to throw an idea without that input.\n\nHope that you get that.");
             vm.linearLayout.addView(secondText);

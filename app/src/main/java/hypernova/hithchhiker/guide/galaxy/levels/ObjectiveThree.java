@@ -1,6 +1,5 @@
 package hypernova.hithchhiker.guide.galaxy.levels;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -13,10 +12,7 @@ public class ObjectiveThree extends AppCompatActivity {
         vm = valManager;
     }
 
-    public String checkObjAnswer(String myObjThree, Activity activity) {
-        TextView secondText = new TextView(activity.getBaseContext());
-        secondText.setTypeface(vm.typeface);
-
+    public String checkObjAnswer(String myObjThree, TextView secondText) {
         if (vm.fred.conversationStatus == 1) {  // CONVERSATION FRED
             switch (myObjThree) {
                 case "1":

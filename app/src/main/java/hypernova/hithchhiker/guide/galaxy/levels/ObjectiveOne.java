@@ -1,6 +1,5 @@
 package hypernova.hithchhiker.guide.galaxy.levels;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -14,10 +13,7 @@ public class ObjectiveOne extends AppCompatActivity {
         vm = valManager;
     }
 
-    public String checkObjAnswer(String myObjOne, Activity activity) {
-        TextView secondText = new TextView(activity.getBaseContext());
-        secondText.setTypeface(vm.typeface);
-
+    public String checkObjAnswer(String myObjOne, TextView secondText) {
         if (myObjOne.matches("test606 obj7")) {
             vm.score = 12;
             vm.myMoves.setText("Moves: " + vm.score);

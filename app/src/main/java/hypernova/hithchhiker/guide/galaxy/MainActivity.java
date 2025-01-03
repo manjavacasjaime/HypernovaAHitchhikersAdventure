@@ -3,6 +3,7 @@ package hypernova.hithchhiker.guide.galaxy;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         typeface = ResourcesCompat.getFont(MainActivity.this, R.font.lucida_console);
 
         SharedPreferences sharedPreferences = getSharedPreferences("hypernova.save", MODE_PRIVATE);
-        valueManager = new ValueManager(sharedPreferences, linearLayout, myMoves, myLocation, typeface);
-        mechanicsManager = new MechanicsManager(topBar);
+        valueManager = new ValueManager(sharedPreferences, linearLayout, myMoves, myLocation);
+        mechanicsManager = new MechanicsManager(MainActivity.this, linearLayout, topBar);
         levelManager = new LevelManager(valueManager);
 
         //splash();
@@ -79,18 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void earth() {
         valueManager.initiateVariables();
-
-        switch (valueManager.appColor) {
-            case 1:
-                mechanicsManager.changeAppColor(linearLayout, getResources().getColor(R.color.colorAccent), this);
-                break;
-            case 2:
-                mechanicsManager.changeAppColor(linearLayout, getResources().getColor(R.color.colorGreen), this);
-                break;
-            case 3:
-                mechanicsManager.changeAppColor(linearLayout, getResources().getColor(R.color.colorPink), this);
-                break;
-        }
+        mechanicsManager.changeAppColor(valueManager.appColor);
 
         TextView firstText = new TextView(this);
         firstText.setTypeface(typeface);
@@ -129,18 +119,18 @@ public class MainActivity extends AppCompatActivity {
         final String text = "_";
         Spannable modifiedText = new SpannableString(text);
         if (isLowbarDisplayed) {
-            modifiedText.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimaryDark)), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            modifiedText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(MainActivity.this, R.color.colorPrimaryDark)), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             isLowbarDisplayed = false;
         } else {
             switch (valueManager.appColor) {
                 case 1:
-                    modifiedText.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    modifiedText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(MainActivity.this, R.color.colorAccent)), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     break;
                 case 2:
-                    modifiedText.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorGreen)), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    modifiedText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(MainActivity.this, R.color.colorGreen)), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     break;
                 case 3:
-                    modifiedText.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPink)), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    modifiedText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(MainActivity.this, R.color.colorPink)), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     break;
             }
         }
@@ -263,77 +253,77 @@ public class MainActivity extends AppCompatActivity {
 
                           switch (valueManager.currentObjective) {
                               case 0:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("")) {
                                       secondText.setText("Type RESTART, RESTORE, COMMANDS or QUIT.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 1:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
-                                      levelManager.objectiveOne.checkObjAnswer(myobjxlow, MainActivity.this).matches("") &&
-                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
-                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("") &&
+                                      levelManager.objectiveOne.checkObjAnswer(myobjxlow, secondText).matches("") &&
+                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("") &&
+                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, secondText).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 2:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
-                                      levelManager.objectiveTwo.checkObjAnswer(myobjxlow, MainActivity.this).matches("") &&
-                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
-                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("") &&
+                                      levelManager.objectiveTwo.checkObjAnswer(myobjxlow, secondText).matches("") &&
+                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("") &&
+                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, secondText).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 3:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
-                                      levelManager.objectiveThree.checkObjAnswer(myobjxlow, MainActivity.this).matches("") &&
-                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
-                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("") &&
+                                      levelManager.objectiveThree.checkObjAnswer(myobjxlow, secondText).matches("") &&
+                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("") &&
+                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, secondText).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 4:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
-                                      levelManager.objectiveFour.checkObjAnswer(myobjxlow, MainActivity.this).matches("") &&
-                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
-                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("") &&
+                                      levelManager.objectiveFour.checkObjAnswer(myobjxlow, secondText).matches("") &&
+                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("") &&
+                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, secondText).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 5:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
-                                      levelManager.objectiveFive.checkObjAnswer(myobjxlow, MainActivity.this).matches("") &&
-                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
-                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("") &&
+                                      levelManager.objectiveFive.checkObjAnswer(myobjxlow, secondText).matches("") &&
+                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("") &&
+                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, secondText).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 6:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
-                                      levelManager.objectiveSix.checkObjAnswer(myobjxlow, MainActivity.this).matches("") &&
-                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
-                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("") &&
+                                      levelManager.objectiveSix.checkObjAnswer(myobjxlow, secondText).matches("") &&
+                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("") &&
+                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, secondText).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 7:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
-                                      levelManager.objectiveSeven.checkObjAnswer(myobjxlow, MainActivity.this).matches("") &&
-                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
-                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("") &&
+                                      levelManager.objectiveSeven.checkObjAnswer(myobjxlow, secondText).matches("") &&
+                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("") &&
+                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, secondText).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();

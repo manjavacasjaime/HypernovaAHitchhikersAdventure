@@ -1,6 +1,5 @@
 package hypernova.hithchhiker.guide.galaxy.levels;
 
-import android.app.Activity;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
@@ -14,10 +13,7 @@ public class ObjectiveTwo extends AppCompatActivity {
         vm = valManager;
     }
 
-    public String checkObjAnswer(String myObjTwo, Activity activity) {
-        TextView secondText = new TextView(activity.getBaseContext());
-        secondText.setTypeface(vm.typeface);
-        
+    public String checkObjAnswer(String myObjTwo, TextView secondText) {
         if ((vm.score - vm.myBasement.scoreWhenStopPlaying >= 8) && !vm.myBasement.isComputerOff) {
             vm.myLocation.setText("Dead");
             secondText.setText("While you were trying to figure out how to get out of the basement, you started to feel sick as you have never been before. This is due to the electromagnetic waves that computers emit nowadays to avoid players being AFK. Not really a great system, but it works.\n\nTo sum up, you died. Remember to turn off your computer next time you are not playing."

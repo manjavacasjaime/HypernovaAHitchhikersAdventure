@@ -1,6 +1,5 @@
 package hypernova.hithchhiker.guide.galaxy.levels;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -17,10 +16,7 @@ public class ObjectiveFour extends AppCompatActivity {
         vm = valManager;
     }
 
-    public String checkObjAnswer(String myObjFour, Activity activity) {
-        TextView secondText = new TextView(activity.getBaseContext());
-        secondText.setTypeface(vm.typeface);
-
+    public String checkObjAnswer(String myObjFour, TextView secondText) {
         if (vm.fred.isPresent && vm.ludlow.currentLocation.equals("house") && (vm.score - vm.ludlow.scoreWhenFredWaiting >= 5)) {
             vm.fred.isPresent = false;
             if (!vm.ludlow.isHouseWaterDrunk && !vm.myself.inventory.contains("water") && !vm.ludlow.objectsDroppedHouse.contains("water")) {
