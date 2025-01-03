@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         typeface = ResourcesCompat.getFont(MainActivity.this, R.font.lucida_console);
 
         SharedPreferences sharedPreferences = getSharedPreferences("hypernova.save", MODE_PRIVATE);
-        valueManager = new ValueManager(sharedPreferences);
+        valueManager = new ValueManager(sharedPreferences, linearLayout, myMoves, myLocation, typeface);
         mechanicsManager = new MechanicsManager(topBar);
         levelManager = new LevelManager(valueManager);
 
@@ -270,49 +270,70 @@ public class MainActivity extends AppCompatActivity {
                                   }
                                   break;
                               case 1:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.objectiveOne.checkObjAnswer(myobjxlow, MainActivity.this).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
+                                      levelManager.objectiveOne.checkObjAnswer(myobjxlow, MainActivity.this).matches("") &&
+                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
+                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 2:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.objectiveTwo.checkObjAnswer(myobjxlow, MainActivity.this).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
+                                      levelManager.objectiveTwo.checkObjAnswer(myobjxlow, MainActivity.this).matches("") &&
+                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
+                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 3:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.objectiveThree.checkObjAnswer(myobjxlow, MainActivity.this).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
+                                      levelManager.objectiveThree.checkObjAnswer(myobjxlow, MainActivity.this).matches("") &&
+                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
+                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 4:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.objectiveFour.checkObjAnswer(myobjxlow, MainActivity.this).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
+                                      levelManager.objectiveFour.checkObjAnswer(myobjxlow, MainActivity.this).matches("") &&
+                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
+                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 5:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.objectiveFive.checkObjAnswer(myobjxlow, MainActivity.this).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
+                                      levelManager.objectiveFive.checkObjAnswer(myobjxlow, MainActivity.this).matches("") &&
+                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
+                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 6:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.objectiveSix.checkObjAnswer(myobjxlow, MainActivity.this).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
+                                      levelManager.objectiveSix.checkObjAnswer(myobjxlow, MainActivity.this).matches("") &&
+                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
+                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();
                                   }
                                   break;
                               case 7:
-                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.objectiveSeven.checkObjAnswer(myobjxlow, MainActivity.this).matches("") && levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") && levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
+                                  if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
+                                      levelManager.objectiveSeven.checkObjAnswer(myobjxlow, MainActivity.this).matches("") &&
+                                      levelManager.commonAnswers.checkObjAnswer(myobjxlow, MainActivity.this, mechanicsManager).matches("") &&
+                                      levelManager.consultGuide.checkObjAnswer(myobjxlow, MainActivity.this).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
                                       obj();

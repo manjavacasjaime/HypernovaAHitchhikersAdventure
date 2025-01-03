@@ -1,13 +1,9 @@
 package hypernova.hithchhiker.guide.galaxy.levels;
 
 import android.app.Activity;
-import android.graphics.Typeface;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import hypernova.hithchhiker.guide.galaxy.R;
 import hypernova.hithchhiker.guide.galaxy.managers.ValueManager;
 
 public class ObjectiveSeven extends AppCompatActivity {
@@ -18,18 +14,13 @@ public class ObjectiveSeven extends AppCompatActivity {
     }
 
     public String checkObjAnswer(String myObjSeven, Activity activity) {
-        TextView myMoves = (TextView) findViewById(R.id.moves);
-        TextView myLocation = (TextView) findViewById(R.id.location);
-
-        final LinearLayout linearLayout = (LinearLayout) findViewById(R.id.gameearth);
-        final Typeface typeface = ResourcesCompat.getFont(activity.getBaseContext(), R.font.lucida_console);
         TextView secondText = new TextView(activity.getBaseContext());
-        secondText.setTypeface(typeface);
+        secondText.setTypeface(vm.typeface);
 
         // DIRECTIONS GO VERB
         if (myObjSeven.matches("up") || myObjSeven.matches("u") || myObjSeven.matches("go up") || myObjSeven.matches("upstairs") || myObjSeven.matches("go upstairs") || myObjSeven.matches("go u") || myObjSeven.matches("down") || myObjSeven.matches("d") || myObjSeven.matches("go down") || myObjSeven.matches("downstairs") || myObjSeven.matches("go downstairs") || myObjSeven.matches("go d")) {
             secondText.setText("You can't go that way.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("north") || myObjSeven.matches("n") || myObjSeven.matches("go north") || myObjSeven.matches("go n") || myObjSeven.matches("go straight on")) {
             String s = "";
             switch (vm.nowhere.currentLocation) {
@@ -40,8 +31,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                 case 12:
                     if (vm.nowhere.isHouseDoorOpen) {
                         vm.score++;
-                        myMoves.setText("Moves: " + vm.score);
-                        myLocation.setText("Desert House");
+                        vm.myMoves.setText("Moves: " + vm.score);
+                        vm.myLocation.setText("Desert House");
                         s = "Congratulations human.\n\nAt least, you finished the demo in " + vm.score + " moves.\nNot bad for a species that has pizza as a religion.";
                         vm.currentObjective = 8;
                     } else {
@@ -50,8 +41,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 21:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, W");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, W");
                     vm.nowhere.currentLocation = 11;
                     s = "Nowhere\nHeading northeast you still see the house.";
                     if (!vm.nowhere.objectsDropped11.isEmpty()) {
@@ -63,8 +54,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 22:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere");
                     vm.nowhere.currentLocation = 12;
                     s = "In the middle of nowhere\nYou are standing on a place where the whole ground is covered with black stones. The sky is still orange.";
                     if (vm.nowhere.isHouseDoorOpen) {
@@ -81,8 +72,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 23:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, E");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, E");
                     vm.nowhere.currentLocation = 13;
                     s = "Nowhere\nHeading northwest you still see the house.";
                     if (!vm.nowhere.objectsDropped13.isEmpty()) {
@@ -94,14 +85,14 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
             }
             secondText.setText(s);
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("south") || myObjSeven.matches("s") || myObjSeven.matches("go south") || myObjSeven.matches("go s") || myObjSeven.matches("go backwards")) {
             String s = "";
             switch (vm.nowhere.currentLocation) {
                 case 11:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, SW");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, SW");
                     vm.nowhere.currentLocation = 21;
                     if (vm.myself.inventoryPast.contains("egg") || vm.nowhere.objectsDropped11.contains("egg") ||
                         vm.nowhere.objectsDropped12.contains("egg") || vm.nowhere.objectsDropped13.contains("egg") ||
@@ -120,8 +111,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 12:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, S");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, S");
                     vm.nowhere.currentLocation = 22;
                     s = "Nowhere\nFrom this place, the black desert looks immense.\nHeading north you still see the house.";
                     if (!vm.nowhere.objectsDropped22.isEmpty()) {
@@ -133,8 +124,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 13:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, SE");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, SE");
                     vm.nowhere.currentLocation = 23;
                     s = "Nowhere\nNow the house is northwest.";
                     if (!vm.nowhere.objectsDropped23.isEmpty()) {
@@ -151,7 +142,7 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
             }
             secondText.setText(s);
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("west") || myObjSeven.matches("w") || myObjSeven.matches("go west") || myObjSeven.matches("go w") || myObjSeven.matches("go left")) {
             String s = "";
             switch (vm.nowhere.currentLocation) {
@@ -161,8 +152,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 12:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, W");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, W");
                     vm.nowhere.currentLocation = 11;
                     s = "Nowhere\nFrom this place, the black desert looks immense.\nHeading northeast you still see the house.";
                     if (!vm.nowhere.objectsDropped11.isEmpty()) {
@@ -174,8 +165,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 13:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere");
                     vm.nowhere.currentLocation = 12;
                     s = "In the middle of nowhere\nYou are standing on a place where the whole ground is covered with black stones. The sky is still orange.";
                     if (vm.nowhere.isHouseDoorOpen) {
@@ -192,8 +183,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 22:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, SW");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, SW");
                     vm.nowhere.currentLocation = 21;
                     if (vm.myself.inventoryPast.contains("egg") || vm.nowhere.objectsDropped11.contains("egg") ||
                         vm.nowhere.objectsDropped12.contains("egg") || vm.nowhere.objectsDropped13.contains("egg") ||
@@ -212,8 +203,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 23:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, S");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, S");
                     vm.nowhere.currentLocation = 22;
                     s = "Nowhere\nHeading north you still see the house.";
                     if (!vm.nowhere.objectsDropped22.isEmpty()) {
@@ -225,14 +216,14 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
             }
             secondText.setText(s);
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("east") || myObjSeven.matches("e") || myObjSeven.matches("go east") || myObjSeven.matches("go e") || myObjSeven.matches("go right")) {
             String s = "";
             switch (vm.nowhere.currentLocation) {
                 case 11:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere");
                     vm.nowhere.currentLocation = 12;
                     s = "In the middle of nowhere\nYou are standing on a place where the whole ground is covered with black stones. The sky is still orange.";
                     if (vm.nowhere.isHouseDoorOpen) {
@@ -249,8 +240,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 12:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, E");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, E");
                     vm.nowhere.currentLocation = 13;
                     s = "Nowhere\nFrom this place, the black desert looks immense.\nHeading northwest you still see the house.";
                     if (!vm.nowhere.objectsDropped13.isEmpty()) {
@@ -266,8 +257,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 21:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, S");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, S");
                     vm.nowhere.currentLocation = 22;
                     s = "Nowhere\nHeading north you still see the house.";
                     if (!vm.nowhere.objectsDropped22.isEmpty()) {
@@ -279,8 +270,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 22:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, SE");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, SE");
                     vm.nowhere.currentLocation = 23;
                     s = "Nowhere\nNow the house is northwest.";
                     if (!vm.nowhere.objectsDropped23.isEmpty()) {
@@ -292,15 +283,15 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
             }
             secondText.setText(s);
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("northeast") || myObjSeven.matches("ne") || myObjSeven.matches("go northeast") || myObjSeven.matches("go ne")) {
             String s = "";
             switch (vm.nowhere.currentLocation) {
                 case 11:
                     if (vm.nowhere.isHouseDoorOpen) {
                         vm.score++;
-                        myMoves.setText("Moves: " + vm.score);
-                        myLocation.setText("Desert House");
+                        vm.myMoves.setText("Moves: " + vm.score);
+                        vm.myLocation.setText("Desert House");
                         s = "Congratulations human.\n\nAt least, you finished the demo in " + vm.score + " moves.\nNot bad for a species that has pizza as a religion.";
                         vm.currentObjective = 8;
                     } else {
@@ -314,8 +305,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 21:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere");
                     vm.nowhere.currentLocation = 12;
                     s = "In the middle of nowhere\nYou are standing on a place where the whole ground is covered with black stones. The sky is still orange.";
                     if (vm.nowhere.isHouseDoorOpen) {
@@ -332,8 +323,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 22:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, E");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, E");
                     vm.nowhere.currentLocation = 13;
                     s = "Nowhere\nHeading northwest you still see the house.";
                     if (!vm.nowhere.objectsDropped13.isEmpty()) {
@@ -345,7 +336,7 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
             }
             secondText.setText(s);
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("northwest") || myObjSeven.matches("nw") || myObjSeven.matches("go northwest") || myObjSeven.matches("go nw")) {
             String s = "";
             switch (vm.nowhere.currentLocation) {
@@ -357,8 +348,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                 case 13:
                     if (vm.nowhere.isHouseDoorOpen) {
                         vm.score++;
-                        myMoves.setText("Moves: " + vm.score);
-                        myLocation.setText("Desert House");
+                        vm.myMoves.setText("Moves: " + vm.score);
+                        vm.myLocation.setText("Desert House");
                         s = "Congratulations human.\n\nAt least, you finished the demo in " + vm.score + " moves.\nNot bad for a species that has pizza as a religion.";
                         vm.currentObjective = 8;
                     } else {
@@ -367,8 +358,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 22:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, W");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, W");
                     vm.nowhere.currentLocation = 11;
                     s = "Nowhere\nHeading northeast you still see the house.";
                     if (!vm.nowhere.objectsDropped11.isEmpty()) {
@@ -380,8 +371,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 23:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere");
                     vm.nowhere.currentLocation = 12;
                     s = "In the middle of nowhere\nYou are standing on a place where the whole ground is covered with black stones. The sky is still orange.";
                     if (vm.nowhere.isHouseDoorOpen) {
@@ -398,14 +389,14 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
             }
             secondText.setText(s);
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("southeast") || myObjSeven.matches("se") || myObjSeven.matches("go southeast") || myObjSeven.matches("go se")) {
             String s = "";
             switch (vm.nowhere.currentLocation) {
                 case 11:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, S");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, S");
                     vm.nowhere.currentLocation = 22;
                     s = "Nowhere\nHeading north you still see the house.";
                     if (!vm.nowhere.objectsDropped22.isEmpty()) {
@@ -417,8 +408,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 12:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, SE");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, SE");
                     vm.nowhere.currentLocation = 23;
                     s = "Nowhere\nNow the house is northwest.";
                     if (!vm.nowhere.objectsDropped23.isEmpty()) {
@@ -436,7 +427,7 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
             }
             secondText.setText(s);
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("southwest") || myObjSeven.matches("sw") || myObjSeven.matches("go southwest") || myObjSeven.matches("go sw")) {
             String s = "";
             switch (vm.nowhere.currentLocation) {
@@ -448,8 +439,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 12:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, SW");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, SW");
                     vm.nowhere.currentLocation = 21;
                     if (vm.myself.inventoryPast.contains("egg") || vm.nowhere.objectsDropped11.contains("egg") ||
                         vm.nowhere.objectsDropped12.contains("egg") || vm.nowhere.objectsDropped13.contains("egg") ||
@@ -468,8 +459,8 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
                 case 13:
                     vm.score++;
-                    myMoves.setText("Moves: " + vm.score);
-                    myLocation.setText("Nowhere, S");
+                    vm.myMoves.setText("Moves: " + vm.score);
+                    vm.myLocation.setText("Nowhere, S");
                     vm.nowhere.currentLocation = 22;
                     s = "Nowhere\nHeading north you still see the house.";
                     if (!vm.nowhere.objectsDropped22.isEmpty()) {
@@ -481,21 +472,21 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
             }
             secondText.setText(s);
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("exit") || myObjSeven.matches("leave") || ((myObjSeven.contains("go") || myObjSeven.contains("get")) && myObjSeven.contains("out")) || (myObjSeven.contains("exit") && myObjSeven.contains("room"))) {
             secondText.setText("You are already on the outside.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("go")) {
             secondText.setText("This verb needs to be used with a direction.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         }
         // SPEAK VERB
         else if (myObjSeven.contains("speak") || myObjSeven.contains("talk") || myObjSeven.contains("ask")) {
             secondText.setText("There is no one here you can speak with.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("stop")) {  // STOP VERB
             vm.score++;
-            myMoves.setText("Moves: " + vm.score);
+            vm.myMoves.setText("Moves: " + vm.score);
             if (myObjSeven.contains("voices")) {
                 secondText.setText("You are not hearing voices... Not yet.");
             } else if (myObjSeven.contains("time")) {
@@ -507,13 +498,13 @@ public class ObjectiveSeven extends AppCompatActivity {
             } else {
                 secondText.setText("There's nothing you can stop here.");
             }
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("close")) {  // CLOSE VERB
             secondText.setText("This verb needs to be used with a noun.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("close")) {
             vm.score++;
-            myMoves.setText("Moves: " + vm.score);
+            vm.myMoves.setText("Moves: " + vm.score);
             if (myObjSeven.contains("door")) {
                 if (vm.nowhere.currentLocation == 12) {
                     if (vm.nowhere.isHouseDoorOpen) {
@@ -530,13 +521,13 @@ public class ObjectiveSeven extends AppCompatActivity {
             } else {
                 secondText.setText("This thing cannot be closed or it is not in the place.");
             }
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("open")) {  // OPEN VERB
             secondText.setText("This verb needs to be used with a noun.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("open")) {
             vm.score++;
-            myMoves.setText("Moves: " + vm.score);
+            vm.myMoves.setText("Moves: " + vm.score);
             if (myObjSeven.contains("door")) {
                 if (vm.nowhere.currentLocation == 12) {
                     if (!vm.nowhere.isHouseDoorOpen) {
@@ -581,17 +572,17 @@ public class ObjectiveSeven extends AppCompatActivity {
             } else {
                 secondText.setText("This thing cannot be opened or it is not in the place.");
             }
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("enter")) {  // ENTER VERB
             secondText.setText("This verb needs to be used with a place to get in.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("enter")) {
             vm.score++;
-            myMoves.setText("Moves: " + vm.score);
+            vm.myMoves.setText("Moves: " + vm.score);
             if (myObjSeven.contains("house")) {
                 if (vm.nowhere.currentLocation == 12) {
                     if (vm.nowhere.isHouseDoorOpen) {
-                        myLocation.setText("Desert House");
+                        vm.myLocation.setText("Desert House");
                         secondText.setText("Congratulations human.\n\nAt least, you finished the demo in " + vm.score + " moves.\nNot bad for a species that has pizza as a religion.");
                         vm.currentObjective = 8;
                     } else {
@@ -605,28 +596,28 @@ public class ObjectiveSeven extends AppCompatActivity {
             } else {
                 secondText.setText("You cannot get in here or the ubication's name is incorrect.");
             }
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         }
         // TURN OFF VERB
         else if ((myObjSeven.contains("turn") && myObjSeven.contains("off")) || (myObjSeven.contains("shut") && myObjSeven.contains("down"))) {
             secondText.setText("There's nothing you can turn off here.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("turn on") || myObjSeven.contains("turn it on")) {  // TURN ON VERB
             secondText.setText("There's nothing you can turn on here.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("stand") || myObjSeven.contains("get up")) {  // STAND VERB
             vm.score++;
-            myMoves.setText("Moves: " + vm.score);
+            vm.myMoves.setText("Moves: " + vm.score);
             secondText.setText("You are already standing.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         }
         // LIE VERB
         else if (myObjSeven.contains("sit down") || myObjSeven.matches("sit") || myObjSeven.contains("lie")) {
             secondText.setText("The ground doesn't seem that comfortable.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("examine")) {  // EXAMINE VERB
             secondText.setText("This verb needs to be used with a noun.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("examine")) {
             if (myObjSeven.contains("house")) {
                 if (vm.nowhere.currentLocation == 11 || vm.nowhere.currentLocation == 12 ||
@@ -675,15 +666,15 @@ public class ObjectiveSeven extends AppCompatActivity {
             } else {
                 secondText.setText("This thing cannot be examined or it is not in the place.");
             }
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         }
         // TAKE GET VERB
         else if (myObjSeven.matches("take") || myObjSeven.matches("get") || myObjSeven.matches("pick") || myObjSeven.matches("grab")) {
             secondText.setText("This verb needs to be used with a noun.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("take") || myObjSeven.contains("get") || myObjSeven.contains("pick") || myObjSeven.contains("grab")) {
             vm.score++;
-            myMoves.setText("Moves: " + vm.score);
+            vm.myMoves.setText("Moves: " + vm.score);
             if (myObjSeven.contains("stone") || myObjSeven.contains("rock")) {
                 if (vm.nowhere.currentLocation == 21 && !(vm.myself.inventoryPast.contains("egg") || vm.nowhere.isEggBroken ||
                     vm.nowhere.objectsDropped11.contains("egg") || vm.nowhere.objectsDropped12.contains("egg") ||
@@ -777,15 +768,15 @@ public class ObjectiveSeven extends AppCompatActivity {
             } else {
                 secondText.setText("This thing cannot be taken or it is not in the place.");
             }
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         }
         // DROP VERB
         else if (myObjSeven.matches("drop") || myObjSeven.contains("get rid of")) {
             secondText.setText("Just say: Drop (and the object you want to drop).");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("drop")) {
             vm.score++;
-            myMoves.setText("Moves: " + vm.score);
+            vm.myMoves.setText("Moves: " + vm.score);
             int n = 4;
             String s = myObjSeven.substring(n);
             s = s.replace(" the ","");
@@ -818,32 +809,32 @@ public class ObjectiveSeven extends AppCompatActivity {
             } else {
                 secondText.setText("You're not holding the " + s + ".");
             }
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("put") || myObjSeven.contains("place")) {  // PUT VERB
             secondText.setText("There is no container here where you can put an object in.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("help")) {  // HELP VERB
             vm.score++;
-            myMoves.setText("Moves: " + vm.score);
+            vm.myMoves.setText("Moves: " + vm.score);
             secondText.setText("You don't need help.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("help")) {
             secondText.setText("Just say HELP.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         }
         // FOLLOW VERB
         else if (myObjSeven.contains("follow") || myObjSeven.contains("chase") || myObjSeven.contains("find") || myObjSeven.contains("search")) {
             secondText.setText("There is no one here you can follow.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("drink")) {  // DRINK VERB
             secondText.setText("You wish you had water.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("eat")) {  // EAT VERB
             secondText.setText("This verb needs to be used with a noun.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("eat")) {
             vm.score++;
-            myMoves.setText("Moves: " + vm.score);
+            vm.myMoves.setText("Moves: " + vm.score);
             if (myObjSeven.contains("egg") && (vm.myself.inventoryPast.contains("egg") ||
                 (vm.nowhere.currentLocation == 11 && vm.nowhere.objectsDropped11.contains("egg")) ||
                 (vm.nowhere.currentLocation == 12 && vm.nowhere.objectsDropped12.contains("egg")) ||
@@ -867,21 +858,21 @@ public class ObjectiveSeven extends AppCompatActivity {
             } else {
                 secondText.setText("This thing cannot be eaten or it is not in the place.");
             }
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("write")) {  // WRITE VERB
             secondText.setText("You cannot write new notes.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("read")) {  // READ VERB
             secondText.setText("You can't see any note here!");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         }
         // BREAK VERB
         else if (myObjSeven.matches("break") || myObjSeven.matches("hit") || myObjSeven.matches("attack") || myObjSeven.matches("punch") || myObjSeven.matches("fight") || myObjSeven.matches("kick")) {
             secondText.setText("This verb needs to be used with a noun.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("break") || myObjSeven.contains("hit") || myObjSeven.contains("attack") || myObjSeven.contains("punch") || myObjSeven.contains("fight") || myObjSeven.contains("kick")) {
             vm.score++;
-            myMoves.setText("Moves: " + vm.score);
+            vm.myMoves.setText("Moves: " + vm.score);
             if (myObjSeven.contains("house")) {
                 if (vm.nowhere.currentLocation == 12) {
                     secondText.setText("As you punch the house, you hear the wood cracking a little.");
@@ -927,25 +918,25 @@ public class ObjectiveSeven extends AppCompatActivity {
             } else {
                 secondText.setText("This thing cannot be hit or it is not in the place.");
             }
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         }
         // CURTAIN ACTIONS
         else if ((((myObjSeven.contains("draw") || myObjSeven.contains("pull")) && (myObjSeven.contains("back") || myObjSeven.contains("aside"))) || myObjSeven.contains("move")) && myObjSeven.contains("curtain")) {
             if (vm.nowhere.currentLocation == 12) {
                 vm.score++;
-                myMoves.setText("Moves: " + vm.score);
+                vm.myMoves.setText("Moves: " + vm.score);
                 secondText.setText("You can hardly see anything. It is really dark inside.");
             } else {
                 secondText.setText("You have wandered off the house. You better get closer to do that.");
             }
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("curtain")) {
             if (vm.nowhere.currentLocation == 12) {
                 secondText.setText("They are just some dark curtains.");
             } else {
                 secondText.setText("You are kind of far from the house.");
             }
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if ((myObjSeven.contains("look") && myObjSeven.contains("around")) || myObjSeven.matches("l") || myObjSeven.matches("look")) {
             String s = "";
             switch (vm.nowhere.currentLocation) {
@@ -1017,7 +1008,7 @@ public class ObjectiveSeven extends AppCompatActivity {
                     break;
             }
             secondText.setText(s);
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("i") || myObjSeven.matches("inventory")) {
             String inventory = "You have:";
             if (!vm.myself.inventoryPast.isEmpty()) {
@@ -1029,44 +1020,44 @@ public class ObjectiveSeven extends AppCompatActivity {
                 inventory = "You have nothing.";
             }
             secondText.setText(inventory);
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("inventory")) {
             secondText.setText("Just write the letter I or say INVENTORY.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("repeat")) {
             secondText.setText("There is nothing you can repeat.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("sleep")) {
             vm.score++;
-            myMoves.setText("Moves: " + vm.score);
+            vm.myMoves.setText("Moves: " + vm.score);
             secondText.setText("After 20 minutes sleeping, you wake up and everything is still the same. Even the sky is still orange.\nYou just feel thirstier.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("check") && myObjSeven.contains("out")) {
             secondText.setText("Try to LOOK AROUND or EXAMINE an object.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("check") || myObjSeven.contains("review")) {
             secondText.setText("Say EXAMINE and the object you want to check.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("jump") || myObjSeven.contains("climb") || myObjSeven.contains("turn") || myObjSeven.contains("shut") || myObjSeven.contains("look") || myObjSeven.contains("see") || myObjSeven.contains("watch") || myObjSeven.contains("play") || myObjSeven.contains("run") || myObjSeven.contains("walk") || myObjSeven.contains("move") || myObjSeven.contains("give") || myObjSeven.contains("offer")) {
             vm.score++;
-            myMoves.setText("Moves: " + vm.score);
+            vm.myMoves.setText("Moves: " + vm.score);
             secondText.setText("Look around you.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("smell")) {
             secondText.setText("It does not smell as bad as the part of the planet where your house is.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("listen")) {
             secondText.setText("You can barely hear someone crying inside the house.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("wait")) {
             secondText.setText("Time passes...");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("what") && myObjSeven.contains("time") && myObjSeven.contains("is") || myObjSeven.matches("time") || myObjSeven.matches("the time")) {
             secondText.setText("It is sunset.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("diagnostic") || myObjSeven.matches("diagnose")) {
             secondText.setText("This is not available at the moment.");
-            linearLayout.addView(secondText);
+            vm.linearLayout.addView(secondText);
         }
 
         return (String) secondText.getText();

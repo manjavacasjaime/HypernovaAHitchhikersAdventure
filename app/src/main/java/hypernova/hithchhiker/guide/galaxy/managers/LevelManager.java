@@ -25,7 +25,7 @@ public class LevelManager {
 
     public LevelManager(ValueManager valManager) {
         commonAnswers = new CommonAnswers(valManager);
-        consultGuide = new ConsultGuide();
+        consultGuide = new ConsultGuide(valManager);
         objectiveZero = new ObjectiveZero(valManager);
         objectiveOne = new ObjectiveOne(valManager);
         objectiveTwo = new ObjectiveTwo(valManager);
