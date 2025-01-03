@@ -256,7 +256,6 @@ public class MainActivity extends AppCompatActivity {
                                   if (levelManager.objectiveZero.checkObjAnswer(myobjxlow, secondText, mechanicsManager).matches("")) {
                                       secondText.setText("Type RESTART, RESTORE, COMMANDS or QUIT.");
                                       linearLayout.addView(secondText);
-                                      obj();
                                   }
                                   break;
                               case 1:
@@ -266,7 +265,6 @@ public class MainActivity extends AppCompatActivity {
                                       levelManager.consultGuide.checkObjAnswer(myobjxlow, secondText).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
-                                      obj();
                                   }
                                   break;
                               case 2:
@@ -276,7 +274,6 @@ public class MainActivity extends AppCompatActivity {
                                       levelManager.consultGuide.checkObjAnswer(myobjxlow, secondText).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
-                                      obj();
                                   }
                                   break;
                               case 3:
@@ -286,7 +283,6 @@ public class MainActivity extends AppCompatActivity {
                                       levelManager.consultGuide.checkObjAnswer(myobjxlow, secondText).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
-                                      obj();
                                   }
                                   break;
                               case 4:
@@ -296,7 +292,6 @@ public class MainActivity extends AppCompatActivity {
                                       levelManager.consultGuide.checkObjAnswer(myobjxlow, secondText).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
-                                      obj();
                                   }
                                   break;
                               case 5:
@@ -306,7 +301,6 @@ public class MainActivity extends AppCompatActivity {
                                       levelManager.consultGuide.checkObjAnswer(myobjxlow, secondText).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
-                                      obj();
                                   }
                                   break;
                               case 6:
@@ -316,7 +310,6 @@ public class MainActivity extends AppCompatActivity {
                                       levelManager.consultGuide.checkObjAnswer(myobjxlow, secondText).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
-                                      obj();
                                   }
                                   break;
                               case 7:
@@ -326,7 +319,6 @@ public class MainActivity extends AppCompatActivity {
                                       levelManager.consultGuide.checkObjAnswer(myobjxlow, secondText).matches("")) {
                                       secondText.setText("I don't recognize this sentence.");
                                       linearLayout.addView(secondText);
-                                      obj();
                                   }
                                   break;
                           }
@@ -337,6 +329,7 @@ public class MainActivity extends AppCompatActivity {
                           if (!myobjxlow.matches("consult")) {
                               levelManager.consultGuide.isConsultingGuide = false;
                           }
+                          obj();
                       }
 
                       if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL) {
