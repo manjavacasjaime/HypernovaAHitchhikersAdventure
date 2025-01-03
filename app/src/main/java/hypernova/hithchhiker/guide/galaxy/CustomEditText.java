@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.widget.EditText;
 
-import static hypernova.hithchhiker.guide.galaxy.MainActivity.deletingLowbar;
+import static hypernova.hithchhiker.guide.galaxy.MainActivity.isDeletingLowbar;
 
 public class CustomEditText extends EditText {
 
@@ -35,7 +35,7 @@ public class CustomEditText extends EditText {
             int lowbar = s.toString().indexOf('_');
 
             if (lowbar != -1) {
-                deletingLowbar = 1;
+                isDeletingLowbar = true;
                 s.delete(lowbar, lowbar + 1);
             }
         }

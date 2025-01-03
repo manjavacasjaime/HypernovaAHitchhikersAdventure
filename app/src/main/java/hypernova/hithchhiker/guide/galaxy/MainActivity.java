@@ -30,7 +30,16 @@ public class MainActivity extends AppCompatActivity {
     final TextView myMoves = (TextView) findViewById(R.id.moves);
     final TextView myLocation = (TextView) findViewById(R.id.location);
     final Typeface typeface = ResourcesCompat.getFont(MainActivity.this, R.font.lucida_console);
-    public static int deletingLowbar = 0;
+    Handler handler;
+    Runnable myRunnable;
+    boolean isCallbacksRemoved;
+    public static boolean isDeletingLowbar = false;
+    boolean isLowbarDisplayed = false;
+    boolean isEditTouched = false;
+    int cursorPosition = -1;
+    int prevStringLength = 2;
+    boolean isFirstClicked = false;
+    boolean isCapsLocked = false;
     ValueManager valueManager = new ValueManager();
     MechanicsManager mechanicsManager = new MechanicsManager();
     LevelManager levelManager = new LevelManager(valueManager);
@@ -82,20 +91,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void keepLowbarWhileWriting(final EditText objx) {
-        if (deletingLowbar == 0) {
+        if (!isDeletingLowbar) {
             int auxStringLength = objx.getText().toString().length();
             if (auxStringLength > prevStringLength) {
                 prevStringLength = auxStringLength;
 
                 handler.removeCallbacks(myRunnable);
-                callbacksRemoved = true;
-                if (blinkcolor == 0) {
-                    callbacksRemoved = false;
+                isCallbacksRemoved = true;
+                if (!isLowbarDisplayed) {
+                    isCallbacksRemoved = false;
                     blinkLowbar(objx);
                 }
-                if (callbacksRemoved) {
+                if (isCallbacksRemoved) {
                     handler.postDelayed(myRunnable, 750);
-                    callbacksRemoved = false;
+                    isCallbacksRemoved = false;
                 }
 
             } else if (auxStringLength < prevStringLength) {
@@ -107,9 +116,9 @@ public class MainActivity extends AppCompatActivity {
     public void blinkLowbar(final EditText objx) {
         final String text = "_";
         Spannable modifiedText = new SpannableString(text);
-        if (blinkcolor == 1) {
+        if (isLowbarDisplayed) {
             modifiedText.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimaryDark)), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            blinkcolor = 0;
+            isLowbarDisplayed = false;
         } else {
             switch (valueManager.appColor) {
                 case 1:
@@ -122,15 +131,14 @@ public class MainActivity extends AppCompatActivity {
                     modifiedText.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPink)), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     break;
             }
-            blinkcolor = 1;
         }
         Editable s = objx.getText();
         int lowbar = s.toString().indexOf('_');
         if (lowbar != -1) {
-            deletingLowbar = 1;
+            isDeletingLowbar = true;
             s.delete(lowbar, lowbar + 1);
             s.insert(lowbar, modifiedText);
-            deletingLowbar = 0;
+            isDeletingLowbar = false;
             objx.setSelection(lowbar);
         }
 
@@ -152,28 +160,27 @@ public class MainActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().contains("_") && deletingLowbar == 0) {
+                if (!s.toString().contains("_") && !isDeletingLowbar) {
                     int pos = objx.getSelectionStart();
                     s.insert(pos, "_");
                 }
 
                 if (!s.toString().startsWith(">")) {
-                    pos = -1;
-                    edittouched = 0;
-                    firstclicked = 0;
-                    lastposselected = 0;
+                    cursorPosition = -1;
+                    isEditTouched = false;
+                    isFirstClicked = false;
                     objx.setText(">_");
-                    deletingLowbar = 0;
+                    isDeletingLowbar = false;
                     Selection.setSelection(objx.getText(), objx.getText().length());
                 }
 
-                if (!s.toString().endsWith("_") && (edittouched == 0 || lastposselected == 1)) {
+                if (!s.toString().endsWith("_") && (!isEditTouched || cursorPosition == s.length() - 1)) {
                     int lowbar = s.toString().indexOf('_');
                     if (lowbar != -1) {
-                        deletingLowbar = 1;
+                        isDeletingLowbar = true;
                         s.delete(lowbar, lowbar + 1);
                         s.insert(lowbar + 1, "_");
-                        deletingLowbar = 0;
+                        isDeletingLowbar = false;
                     }
                 }
                 keepLowbarWhileWriting(objx);
@@ -184,36 +191,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 int aux = objx.getOffsetForPosition(event.getX(), event.getY());
-                if (aux != pos || deletingLowbar == 1) {
-                    pos = aux;
+                if (aux != cursorPosition || isDeletingLowbar) {
+                    cursorPosition = aux;
                     if (objx.getText().toString().matches(">")) {
                         objx.setText(">_");
-                        deletingLowbar = 0;
+                        isDeletingLowbar = false;
                         if (handler != null) handler.removeCallbacks(myRunnable);
                         blinkLowbar(objx);
 
-                    } else if (pos != 0) {
-                        if (firstclicked == 1) {
-                            edittouched = 1;
+                    } else if (cursorPosition != 0) {
+                        if (isFirstClicked) {
+                            isEditTouched = true;
                             String s = objx.getText().toString();
-                            if (pos != s.length()) {
-                                lastposselected = 0;
-                            }
                             int lowbar = s.indexOf('_');
                             if (lowbar != -1) {
-                                deletingLowbar = 1;
+                                isDeletingLowbar = true;
                                 s = s.substring(0, lowbar) + s.substring(lowbar + 1); // quito lowbar
                             }
 
-                            if (pos == s.length() + 1) pos--;
-                            s = s.substring(0, pos) + "_" + s.substring(pos); // añado lowbar en pos
-                            deletingLowbar = 0;
+                            if (cursorPosition == s.length() + 1) cursorPosition--;
+                            s = s.substring(0, cursorPosition) + "_" + s.substring(cursorPosition); // añado lowbar en cursorPosition
+                            isDeletingLowbar = false;
                             objx.setText(s);
-                            if (pos == s.length() - 1) {
-                                lastposselected = 1;
-                            }
                         } else {
-                            firstclicked++;
+                            isFirstClicked = true;
                         }
                     }
                 }
@@ -226,15 +227,14 @@ public class MainActivity extends AppCompatActivity {
                   public boolean onKey(View v, int keyCode, KeyEvent event) {
                       //KeyListener pilla muy pocas teclas en android mobile,
                       //no coge carácteres por ejemplo
-                      if (keyCode==KeyEvent.KEYCODE_ENTER) {
+                      if (keyCode == KeyEvent.KEYCODE_ENTER) {
                           handler.removeCallbacks(myRunnable);
-                          capsLocked = false;
-                          pos = -1;
-                          edittouched = 0;
-                          firstclicked = 0;
-                          lastposselected = 0;
+                          isCapsLocked = false;
+                          cursorPosition = -1;
+                          isEditTouched = false;
+                          isFirstClicked = false;
 
-                          deletingLowbar = 1;
+                          isDeletingLowbar = true;
                           Editable s = objx.getText();
                           int lowbar = s.toString().indexOf('_');
                           if (lowbar != -1) {
@@ -308,48 +308,48 @@ public class MainActivity extends AppCompatActivity {
                                   break;
                           }
 
-                          if (!(myobjxlow.matches("kill"))) {
+                          if (!myobjxlow.matches("kill")) {
                               levelManager.commonAnswers.isTryingToKill = false;
                           }
-                          if (!(myobjxlow.matches("consult"))) {
+                          if (!myobjxlow.matches("consult")) {
                               levelManager.consultGuide.isConsultingGuide = false;
                           }
                       }
 
-                      if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode==KeyEvent.KEYCODE_DEL) {
+                      if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL) {
                           handler.removeCallbacks(myRunnable);
-                          callbacksRemoved = true;
-                          if (blinkcolor == 0) {
-                              callbacksRemoved = false;
+                          isCallbacksRemoved = true;
+                          if (!isLowbarDisplayed) {
+                              isCallbacksRemoved = false;
                               blinkLowbar(objx);
                           }
                           if (objx.getText().toString().endsWith("_")) {
                               Editable s = objx.getText();
-                              deletingLowbar = 1;
+                              isDeletingLowbar = true;
                               s.delete(s.length() - 2, s.length() - 1);
                               s.insert(s.length() - 1, "_");
-                              deletingLowbar = 0;
+                              isDeletingLowbar = false;
                           }
-                          if (callbacksRemoved) {
+                          if (isCallbacksRemoved) {
                               handler.postDelayed(myRunnable, 750);
-                              callbacksRemoved = false;
+                              isCallbacksRemoved = false;
                           }
                       }
 
                       if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_SHIFT_LEFT) {
                           Log.d(TAG, "ARNOLD1");
-                          if (!capsLocked) {
+                          if (!isCapsLocked) {
                               Log.d(TAG, "ARNOLD2");
                               objx.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD | InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
                               objx.setSingleLine(false);
                               objx.setTypeface(typeface);
-                              capsLocked = true;
+                              isCapsLocked = true;
                           } else {
                               Log.d(TAG, "ARNOLD3");
                               objx.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                               objx.setSingleLine(false);
                               objx.setTypeface(typeface);
-                              capsLocked = false;
+                              isCapsLocked = false;
                           }
 
                           Editable s = objx.getText();

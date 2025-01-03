@@ -38,15 +38,6 @@ public class ValueManager extends AppCompatActivity {
     public int currentObjective; // WHICH OBJECTIVE I AM DOING. ZERO IS GAME OVER
     public int score;
 
-    int blinkcolor = 0; //0 black, 1 grey
-    int pos = -1;
-    int edittouched = 0;
-    int firstclicked = 0;
-    int lastposselected = 0;
-    boolean callbacksRemoved;
-    int prevStringLength = 2;
-    boolean capsLocked = false;
-
     public void initiateVariables() {
         myself.initiateVariables();
         fred.initiateVariables();
