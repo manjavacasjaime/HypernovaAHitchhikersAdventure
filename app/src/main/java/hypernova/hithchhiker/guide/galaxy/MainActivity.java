@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
                     modifiedText.setSpan(new ForegroundColorSpan(ContextCompat.getColor(MainActivity.this, R.color.colorPink)), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     break;
             }
+            isLowbarDisplayed = true;
         }
         Editable s = objx.getText();
         int lowbar = s.toString().indexOf('_');
