@@ -30,12 +30,14 @@ public class ObjectiveFive extends AppCompatActivity {
                 switch (myObjFive) {
                     case "1":
                         icarusChatPhase = 2;
-                        secondText.setText("Yeah... Okay. You could say that. However, Canterman's theories result to be obsolete in the present day. Sigh. But I don't really care.");
+                        secondText.setText("Yeah... Okay. You could say that. However, Canterman's theories result to be obsolete in the present day. Sigh. But I don't really care.\n\n\n" +
+                                "Dialogue Icarus.\n\n1. 'Hi. That's a great book right there.'\n2. 'What do you know about the Travellers?'\n3. 'I'm about to drop an ion bomb at B903, but I guess you don't really care.'\n4. exit.");
                         vm.linearLayout.addView(secondText);
                         break;
                     case "2":
                         icarusChatPhase = 2;
-                        secondText.setText("What do you know about shutting your mouth?\nWhatever you want to tell me, I don't care.");
+                        secondText.setText("What do you know about shutting your mouth?\nWhatever you want to tell me, I don't care.\n\n\n" +
+                                "Dialogue Icarus.\n\n1. 'Hi. That's a great book right there.'\n2. 'What do you know about the Travellers?'\n3. 'I'm about to drop an ion bomb at B903, but I guess you don't really care.'\n4. exit.");
                         vm.linearLayout.addView(secondText);
                         break;
                     case "3":
@@ -196,7 +198,7 @@ public class ObjectiveFive extends AppCompatActivity {
                 secondText.setText("You can't speak with anyone because everybody has left.");
                 vm.linearLayout.addView(secondText);
             } else {
-                if (myObjFive.contains("sully")) {
+                if (myObjFive.contains("sully") || myObjFive.contains("librarian")) {
                     vm.sully.conversationStatus = 1;
                     secondText.setText("Dialogue Sully, the librarian.\n\n1. 'Excuse me. I want to ask for a book.'\n2. 'Why is this cabin bulletproof?'\n3. exit.");
                     vm.linearLayout.addView(secondText);

@@ -89,7 +89,7 @@ public class LudlowLibrary extends AppCompatActivity {
     public void displayPinboardNotes(String note, LinearLayout linearLayout, TextView secondText) {
         switch (note) {
             case "1":
-                secondText.setText("LUDLOW B903\nOPEN AIR\n1994      Buzz Ruzzinsky\n          Live in concert\n10.6.   Stadium\n8:00 P.M.");
+                secondText.setText("LUDLOW B903\nOPEN AIR\n1994      Buzz Ruzzinsky\n          Live in concert\n10.6.     Stadium\n8:00 P.M.");
                 linearLayout.addView(secondText);
                 break;
             case "2":
