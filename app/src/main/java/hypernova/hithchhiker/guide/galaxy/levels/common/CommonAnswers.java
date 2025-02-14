@@ -389,6 +389,9 @@ public class CommonAnswers extends AppCompatActivity {
         } else if (myObjX.contains("42")) {
             secondText.setText("Umh... Seems an interesting number. I wonder where have you heard about it.");
             vm.linearLayout.addView(secondText);
+        } else if (myObjX.contains("where is jenny")) {
+            secondText.setText("The Darkness took her away.");
+            vm.linearLayout.addView(secondText);
         } else if (myObjX.matches("i am satisfied with my care")) {
             secondText.setText("It is an amazing scene which teach us that sometimes we need to let go... So why you can't let go of movie references?");
             vm.linearLayout.addView(secondText);
