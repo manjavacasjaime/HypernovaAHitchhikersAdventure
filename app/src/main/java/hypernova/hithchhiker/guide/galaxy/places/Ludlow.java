@@ -12,6 +12,7 @@ public class Ludlow extends AppCompatActivity {
     public int scoreWhenFredWaiting;
     public boolean isHouseDoorOpen;
     public boolean isHouseWaterDrunk;
+    public boolean isHouseWindowBroken;
     public String currentLocation; // house, street, library
     public ArrayList<String> objectsDroppedHouse = new ArrayList<>();
     public ArrayList<String> objectsDroppedStreet = new ArrayList<>();
@@ -25,6 +26,7 @@ public class Ludlow extends AppCompatActivity {
         scoreWhenFredWaiting = 0;
         isHouseDoorOpen = false;
         isHouseWaterDrunk = false;
+        isHouseWindowBroken = false;
         currentLocation = "house";
         objectsDroppedHouse.clear();
         objectsDroppedStreet.clear();
@@ -37,6 +39,7 @@ public class Ludlow extends AppCompatActivity {
         editor.putInt("ludlow.scoreWhenFredWaiting", scoreWhenFredWaiting);
         editor.putBoolean("ludlow.isHouseDoorOpen", isHouseDoorOpen);
         editor.putBoolean("ludlow.isHouseWaterDrunk", isHouseWaterDrunk);
+        editor.putBoolean("ludlow.isHouseWindowBroken", isHouseWindowBroken);
         editor.putString("ludlow.currentLocation", currentLocation);
 
         Set<String> objectsDroppedHouseSet = new HashSet<>(objectsDroppedHouse);
@@ -54,6 +57,7 @@ public class Ludlow extends AppCompatActivity {
         scoreWhenFredWaiting = sharedPrefs.getInt("ludlow.scoreWhenFredWaiting", 0);
         isHouseDoorOpen = sharedPrefs.getBoolean("ludlow.isHouseDoorOpen", false);
         isHouseWaterDrunk = sharedPrefs.getBoolean("ludlow.isHouseWaterDrunk", false);
+        isHouseWindowBroken = sharedPrefs.getBoolean("ludlow.isHouseWindowBroken", false);
         currentLocation = sharedPrefs.getString("ludlow.currentLocation", "house");
 
         Set<String> objectsDroppedHouseSet = sharedPrefs.getStringSet("ludlow.objectsDroppedHouseSet", emptyset);

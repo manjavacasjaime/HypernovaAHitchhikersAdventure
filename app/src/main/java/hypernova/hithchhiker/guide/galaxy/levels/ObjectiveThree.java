@@ -240,7 +240,15 @@ public class ObjectiveThree extends AppCompatActivity {
         } else if (myObjThree.contains("take") || myObjThree.contains("get") || myObjThree.contains("pick") || myObjThree.contains("grab")) {
             vm.score++;
             vm.myMoves.setText("Moves: " + vm.score);
-            if ((myObjThree.contains("glass") || myObjThree.contains("water")) && vm.ludlow.isHouseWaterDrunk) {
+            if ((myObjThree.contains("broken glass") || myObjThree.contains("crystal")) && vm.ludlow.isHouseWindowBroken) {
+                if (vm.myself.inventory.contains("broken glass")) {
+                    secondText.setText("You already took it.");
+                } else {
+                    vm.myself.inventory.add("broken glass");
+                    secondText.setText("Taken.");
+                }
+                vm.linearLayout.addView(secondText);
+            } else if ((myObjThree.contains("glass") || myObjThree.contains("water")) && vm.ludlow.isHouseWaterDrunk) {
                 secondText.setText("You already drank that.");
                 vm.linearLayout.addView(secondText);
             } else if ((myObjThree.contains("glass") || myObjThree.contains("water")) && !vm.ludlow.isHouseWaterDrunk && !vm.ludlow.objectsDroppedHouse.contains("water")) {
@@ -329,6 +337,27 @@ public class ObjectiveThree extends AppCompatActivity {
                 secondText.setText("This thing cannot be drunk or it is not in the place.");
                 vm.linearLayout.addView(secondText);
             }
+        }
+        // BREAK VERB
+        else if (myObjThree.matches("break") || myObjThree.matches("hit") || myObjThree.matches("attack") || myObjThree.matches("punch") || myObjThree.matches("fight") || myObjThree.matches("kick")) {
+            secondText.setText("This verb needs to be used with a noun.");
+            vm.linearLayout.addView(secondText);
+        } else if (myObjThree.contains("break") || myObjThree.contains("hit") || myObjThree.contains("attack") || myObjThree.contains("punch") || myObjThree.contains("fight") || myObjThree.contains("kick")) {
+            vm.score++;
+            vm.myMoves.setText("Moves: " + vm.score);
+            if (myObjThree.contains("window")) {
+                if (!vm.ludlow.isHouseWindowBroken) {
+                    vm.ludlow.isHouseWindowBroken = true;
+                    secondText.setText("And now the window is broken. It's a mess.");
+                } else {
+                    secondText.setText("The window is already broken.");
+                }
+            } else if (myObjThree.contains("glass") || myObjThree.contains("water")) {
+                secondText.setText("There is no point in breaking a glass of water. If you want to get rid of it, just drink it.");
+            } else {
+                secondText.setText("This thing cannot be hit or it is not in the place.");
+            }
+            vm.linearLayout.addView(secondText);
         } else if (myObjThree.contains("window")) {  // WINDOW ACTIONS, added just in case
             vm.score++;
             vm.myMoves.setText("Moves: " + vm.score);
@@ -336,10 +365,15 @@ public class ObjectiveThree extends AppCompatActivity {
             vm.linearLayout.addView(secondText);
         } else if ((myObjThree.contains("look") && myObjThree.contains("around")) || myObjThree.matches("l") || myObjThree.matches("look")) {
             String intro = "";
-            if (vm.ludlow.isHouseWaterDrunk || vm.myself.inventory.contains("water") || vm.ludlow.objectsDroppedHouse.contains("water")) {
-                intro = "Your house hall\nHere you see a window.\nSomeone is knocking on your house door.";
+            if (vm.ludlow.isHouseWindowBroken) {
+                intro = "Your house hall\nHere you see a broken window";
             } else {
-                intro = "Your house hall\nHere you see a window and a glass of water.\nSomeone is knocking on your house door.";
+                intro = "Your house hall\nHere you see a window";
+            }
+            if (vm.ludlow.isHouseWaterDrunk || vm.myself.inventory.contains("water") || vm.ludlow.objectsDroppedHouse.contains("water")) {
+                intro = intro + ".\nSomeone is knocking on your house door.";
+            } else {
+                intro = intro + " and a glass of water.\nSomeone is knocking on your house door.";
             }
             if (!vm.ludlow.objectsDroppedHouse.isEmpty()) {
                 int n = vm.ludlow.objectsDroppedHouse.size();
@@ -393,7 +427,7 @@ public class ObjectiveThree extends AppCompatActivity {
         } else if (myObjThree.matches("diagnostic") || myObjThree.matches("diagnose")) {
             secondText.setText("This is not available at the moment.");
             vm.linearLayout.addView(secondText);
-        } else if (myObjThree.contains("jump") || myObjThree.contains("climb") || myObjThree.contains("turn") || myObjThree.contains("shut") || myObjThree.contains("look") || myObjThree.contains("see") || myObjThree.contains("watch") || myObjThree.contains("play") || myObjThree.contains("run") || myObjThree.contains("walk") || myObjThree.contains("eat") || myObjThree.contains("move") || myObjThree.contains("put") || myObjThree.contains("give") || myObjThree.contains("offer") || myObjThree.contains("read") || myObjThree.contains("write") || myObjThree.contains("enter") || myObjThree.contains("follow") || myObjThree.contains("fix") || myObjThree.contains("repair") || myObjThree.contains("attack") || myObjThree.contains("hit") || myObjThree.contains("break") || myObjThree.contains("fight") || myObjThree.contains("kick")) {
+        } else if (myObjThree.contains("jump") || myObjThree.contains("climb") || myObjThree.contains("turn") || myObjThree.contains("shut") || myObjThree.contains("look") || myObjThree.contains("see") || myObjThree.contains("watch") || myObjThree.contains("play") || myObjThree.contains("run") || myObjThree.contains("walk") || myObjThree.contains("eat") || myObjThree.contains("move") || myObjThree.contains("put") || myObjThree.contains("give") || myObjThree.contains("offer") || myObjThree.contains("read") || myObjThree.contains("write") || myObjThree.contains("enter") || myObjThree.contains("follow") || myObjThree.contains("fix") || myObjThree.contains("repair")) {
             vm.score++;
             vm.myMoves.setText("Moves: " + vm.score);
             secondText.setText("Look around you.");

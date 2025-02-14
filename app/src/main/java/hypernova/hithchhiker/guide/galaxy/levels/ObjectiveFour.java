@@ -80,7 +80,11 @@ public class ObjectiveFour extends AppCompatActivity {
                 } else {
                     vm.myLocation.setText("Hall, open door");
                 }
-                secondText.setText("Your house hall\nHere you see a window, your house door and your basement door.");
+                if (vm.ludlow.isHouseWindowBroken) {
+                    secondText.setText("Your house hall\nHere you see a broken window, your house door and your basement door.");
+                } else {
+                    secondText.setText("Your house hall\nHere you see a window, your house door and your basement door.");
+                }
             }
             vm.linearLayout.addView(secondText);
         } else if (myObjFour.matches("west") || myObjFour.matches("w") || myObjFour.matches("go west") || myObjFour.matches("go w") || myObjFour.matches("go left")) {
@@ -402,7 +406,17 @@ public class ObjectiveFour extends AppCompatActivity {
         } else if (myObjFour.contains("take") || myObjFour.contains("get") || myObjFour.contains("pick") || myObjFour.contains("grab")) {
             vm.score++;
             vm.myMoves.setText("Moves: " + vm.score);
-            if (myObjFour.contains("glass") || myObjFour.contains("water")) {
+            if (vm.ludlow.currentLocation.equals("house")
+                && (myObjFour.contains("broken glass") || myObjFour.contains("crystal"))
+                && vm.ludlow.isHouseWindowBroken) {
+                if (vm.myself.inventory.contains("broken glass")) {
+                    secondText.setText("You already took it.");
+                } else {
+                    vm.myself.inventory.add("broken glass");
+                    secondText.setText("Taken.");
+                }
+                vm.linearLayout.addView(secondText);
+            } else if (myObjFour.contains("glass") || myObjFour.contains("water")) {
                 if (vm.ludlow.isHouseWaterDrunk) {
                     secondText.setText("Someone already drank that.");
                 } else if (vm.myself.inventory.contains("water")) {
@@ -647,7 +661,12 @@ public class ObjectiveFour extends AppCompatActivity {
             } else if (myObjFour.contains("window")) {
                 if (vm.ludlow.currentLocation.equals("house")) {
                     if (vm.fred.isDead || !vm.fred.isPresent) {
-                        secondText.setText("As you get close to the window you can see the sand and the pieces of rusty metal as a natural part of the landscape.\nEven the idea of getting out disgusts you.");
+                        if (!vm.ludlow.isHouseWindowBroken) {
+                            vm.ludlow.isHouseWindowBroken = true;
+                            secondText.setText("And now the window is broken. It's a mess.");
+                        } else {
+                            secondText.setText("The window is already broken.");
+                        }
                     } else {
                         secondText.setText("Before you do it, Fred points his watch and then he makes a signal indicating to the North.");
                     }
@@ -671,12 +690,17 @@ public class ObjectiveFour extends AppCompatActivity {
         } else if ((myObjFour.contains("look") && myObjFour.contains("around")) || myObjFour.matches("l") || myObjFour.matches("look")) {
             if (vm.ludlow.currentLocation.equals("house")) {
                 String intro = "";
+                if (vm.ludlow.isHouseWindowBroken) {
+                    intro = "Your house hall\nHere you see a broken window";
+                } else {
+                    intro = "Your house hall\nHere you see a window";
+                }
                 if (vm.ludlow.isHouseWaterDrunk || vm.myself.inventory.contains("water")
                         || vm.ludlow.objectsDroppedHouse.contains("water") || vm.ludlow.objectsDroppedStreet.contains("water")
                         || vm.ludlow.objectsDroppedLibrary.contains("water")) {
-                    intro = "Your house hall\nHere you see a window, your house door and your basement door.";
+                    intro = intro + ", your house door and your basement door.";
                 } else {
-                    intro = "Your house hall\nHere you see a window, your house door, your basement door and a glass of water.";
+                    intro = intro + ", your house door, your basement door and a glass of water.";
                 }
                 if (vm.fred.isPresent) {
                     intro = intro + "\nFred is here.";
