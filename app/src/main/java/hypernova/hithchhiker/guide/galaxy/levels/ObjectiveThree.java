@@ -324,19 +324,17 @@ public class ObjectiveThree extends AppCompatActivity {
             if (myObjThree.contains("glass") || myObjThree.contains("water")) {
                 if (vm.ludlow.isHouseWaterDrunk) {
                     secondText.setText("You already drank that.");
-                    vm.linearLayout.addView(secondText);
                 } else if (vm.myself.inventory.contains("water")) {
+                    vm.myself.inventory.remove("water");
                     vm.ludlow.isHouseWaterDrunk = true;
                     secondText.setText("It feels refreshing.");
-                    vm.linearLayout.addView(secondText);
                 } else {
                     secondText.setText("You will have to take it first.");
-                    vm.linearLayout.addView(secondText);
                 }
             } else {
                 secondText.setText("This thing cannot be drunk or it is not in the place.");
-                vm.linearLayout.addView(secondText);
             }
+            vm.linearLayout.addView(secondText);
         }
         // BREAK VERB
         else if (myObjThree.matches("break") || myObjThree.matches("hit") || myObjThree.matches("attack") || myObjThree.matches("punch") || myObjThree.matches("fight") || myObjThree.matches("kick")) {

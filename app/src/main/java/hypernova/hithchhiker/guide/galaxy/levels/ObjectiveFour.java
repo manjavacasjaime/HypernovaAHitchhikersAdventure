@@ -622,6 +622,7 @@ public class ObjectiveFour extends AppCompatActivity {
                 if (vm.ludlow.isHouseWaterDrunk) {
                     secondText.setText("Someone already drank that.");
                 } else if (vm.myself.inventory.contains("water")) {
+                    vm.myself.inventory.remove("water");
                     vm.ludlow.isHouseWaterDrunk = true;
                     secondText.setText("It feels refreshing.");
                 } else if (vm.ludlow.currentLocation.equals("house") && !vm.ludlow.objectsDroppedStreet.contains("water")
@@ -634,11 +635,10 @@ public class ObjectiveFour extends AppCompatActivity {
                 } else {
                     secondText.setText("You can't see any water here!");
                 }
-                vm.linearLayout.addView(secondText);
             } else {
                 secondText.setText("This thing cannot be drunk or it is not in the place.");
-                vm.linearLayout.addView(secondText);
             }
+            vm.linearLayout.addView(secondText);
         }
         // BREAK VERB
         else if (myObjFour.matches("break") || myObjFour.matches("hit") || myObjFour.matches("attack") || myObjFour.matches("punch") || myObjFour.matches("fight") || myObjFour.matches("kick")) {
