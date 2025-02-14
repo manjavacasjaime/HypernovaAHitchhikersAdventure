@@ -67,7 +67,9 @@ public class ObjectiveTwo extends AppCompatActivity {
                 }
             }
             vm.linearLayout.addView(secondText);
-        } else if (myObjTwo.contains("play") && myObjTwo.contains("game")) {  // PLAY VERB, added just in case
+        }
+        // PLAY VERB, added just in case
+        else if (myObjTwo.contains("play") && (myObjTwo.contains("computer") || myObjTwo.contains("console") || myObjTwo.contains("game"))) {
             vm.score++;
             vm.myMoves.setText("Moves: " + vm.score);
             secondText.setText("... You just stopped doing that.");
