@@ -117,6 +117,9 @@ public class CommonAnswers extends AppCompatActivity {
         } else if (myObjX.matches("throw up") || myObjX.matches("vomit")) {
             secondText.setText("Not really a good move.");
             vm.linearLayout.addView(secondText);
+        } else if (myObjX.contains("penis") || myObjX.contains("dick") || myObjX.contains("vagina") || myObjX.contains("pussy")) {
+            secondText.setText("Grow up.");
+            vm.linearLayout.addView(secondText);
         } else if (myObjX.contains("fuck") && myObjX.contains("you")) {
             secondText.setText("No. Fuck you.");
             vm.linearLayout.addView(secondText);
