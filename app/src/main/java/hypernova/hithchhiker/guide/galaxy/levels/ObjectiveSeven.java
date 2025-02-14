@@ -686,9 +686,6 @@ public class ObjectiveSeven extends AppCompatActivity {
                         secondText.setText("Taken.");
                     }
                 }
-            } else if (myObjSeven.contains("egg") && vm.nowhere.currentLocation == 21) {
-                vm.myself.inventoryPast.add("egg");
-                secondText.setText("Taken.");
             } else if (!vm.nowhere.objectsDropped11.isEmpty() || !vm.nowhere.objectsDropped12.isEmpty() ||
                     !vm.nowhere.objectsDropped13.isEmpty() || !vm.nowhere.objectsDropped21.isEmpty() ||
                     !vm.nowhere.objectsDropped22.isEmpty() || !vm.nowhere.objectsDropped23.isEmpty()) {
