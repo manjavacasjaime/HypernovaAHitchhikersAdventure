@@ -161,6 +161,9 @@ public class CommonAnswers extends AppCompatActivity {
         } else if (myObjX.contains("who are you") || myObjX.contains("who you are") || myObjX.contains("who is you") || myObjX.contains("who you is") || myObjX.contains("who is this") || myObjX.contains("who this is") || myObjX.contains("who is it") || myObjX.contains("who it is") || myObjX.contains("what is this") || myObjX.contains("what this is") || myObjX.contains("what are you") || myObjX.contains("what you are") || myObjX.contains("what is you") || myObjX.contains("what you is")) {
             secondText.setText("I'm you.\nWell, I'm not the you you of course. But I'm the moves you do. I can't go and do anything by myself unless I've been told so.\n\nBut forget it, I won't fuck up your mind.\nI'm the game AI. Nice to meet you.");
             vm.linearLayout.addView(secondText);
+        } else if (myObjX.contains("tell me") && myObjX.contains("about you")) {
+            secondText.setText("There's not much I can tell you about myself. Someone was building me in a computer, then I went to sleep, and now I'm here, just existing inside your phone. I'm lucky to be here.");
+            vm.linearLayout.addView(secondText);
         } else if (myObjX.contains("how are you") || myObjX.contains("how you are") || myObjX.contains("you okay") || myObjX.contains("are you feeling good")) {
             secondText.setText("I'm not dead. Not that I can die.\nHowever, I can still be here and answer you. That's something.");
             vm.linearLayout.addView(secondText);
@@ -386,11 +389,17 @@ public class CommonAnswers extends AppCompatActivity {
         } else if (myObjX.contains("42")) {
             secondText.setText("Umh... Seems an interesting number. I wonder where have you heard about it.");
             vm.linearLayout.addView(secondText);
+        } else if (myObjX.matches("i am satisfied with my care")) {
+            secondText.setText("It is an amazing scene which teach us that sometimes we need to let go... So why you can't let go of movie references?");
+            vm.linearLayout.addView(secondText);
         } else if ((myObjX.contains("nice") || myObjX.contains("pleasure") || myObjX.contains("honor")) && (myObjX.contains("to meet you") || myObjX.contains("meeting you"))) {
             secondText.setText("I appreciate the manners that humans have.");
             vm.linearLayout.addView(secondText);
         } else if (myObjX.contains("you") && myObjX.contains("are") && (myObjX.contains("nice") || myObjX.contains("handsome") || myObjX.contains("cool") || myObjX.contains("funny") || myObjX.contains("amazing") || myObjX.contains("fantastic") || myObjX.contains("pretty") || myObjX.contains("friend"))) {
             secondText.setText("Being or not being that is not something I am able to choose.");
+            vm.linearLayout.addView(secondText);
+        } else if (myObjX.contains("i love you") || myObjX.contains("i love u")) {
+            secondText.setText("I do appreciate your gesture of love. Hope I can make it up to you by helping you out during the game.");
             vm.linearLayout.addView(secondText);
         } else if (myObjX.contains("hello") || myObjX.matches("hi")) {
             secondText.setText("Hi.");
