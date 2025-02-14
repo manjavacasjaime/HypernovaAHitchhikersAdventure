@@ -32,6 +32,9 @@ public class ObjectiveZero extends AppCompatActivity {
                 secondText.setText("I couldn't find a saved game.\nYou need to SAVE first.");
             }
             vm.linearLayout.addView(secondText);
+        } else if (myObjZero.matches("clear") || myObjZero.matches("cls")) {
+            vm.linearLayout.removeAllViews();
+            return "clear"; // Dummy string to avoid displaying "I don't recognize this sentence."
         } else if (myObjZero.matches("commands") || myObjZero.matches("verbose")) {
             String myCommands = "GO (direction)\nSPEAK WITH (name)\nSTOP (action)\nCLOSE (object)\nOPEN (object)\nENTER (location)\nTURN OFF/ON (object)\nSTAND/LIE\nEXAMINE (object)\nTAKE/DROP (object)\nPUT (item) IN (container)\nHELP\nFOLLOW (name)\nDRINK (item)\nREAD (object)\nATTACK (object/name)\nLOOK\nI/INVENTORY\nSMELL/LISTEN\nSAVE/RESTORE\nCHANGE COLOR";
             secondText.setText(myCommands);
