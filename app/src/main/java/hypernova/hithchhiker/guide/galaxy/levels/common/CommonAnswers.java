@@ -1,21 +1,23 @@
 package hypernova.hithchhiker.guide.galaxy.levels.common;
 
 import android.content.SharedPreferences;
-import android.support.v4.content.ContextCompat;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
-import hypernova.hithchhiker.guide.galaxy.R;
 import hypernova.hithchhiker.guide.galaxy.managers.MechanicsManager;
 import hypernova.hithchhiker.guide.galaxy.managers.ValueManager;
 
 public class CommonAnswers extends AppCompatActivity {
     ValueManager vm;
     int changeAiConversationStatus = 0;
+    int beetlejuiceCounter = 0;
     public boolean isTryingToKill = false;
+    Handler handler;
+    Runnable myRunnable;
 
     public CommonAnswers(ValueManager valManager) {
         vm = valManager;
@@ -36,6 +38,30 @@ public class CommonAnswers extends AppCompatActivity {
                     break;
                 default:
                     secondText.setText("Write the number of the option you want.\n\n1. Sarah.\n2. Paul.\n3. Abigail.\4. Keep talking with this one.");
+                    break;
+            }
+            vm.linearLayout.addView(secondText);
+        } else if (myObjX.contains("beetlejuice")) {
+            switch (beetlejuiceCounter) {
+                case 0:
+                    beetlejuiceCounter++;
+                    secondText.setText("Shh. Don't even say his name. You don't want his help.");
+                    break;
+                case 1:
+                    beetlejuiceCounter++;
+                    secondText.setText("Do NOT say it again. I'm warning you.");
+                    break;
+                case 2:
+                    secondText.setText("No... No... NOOOOOOOOO!");
+                    vm.currentObjective = 100;
+                    handler = new Handler();
+                    myRunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            mechanicsManager.exitApp();
+                        }
+                    };
+                    handler.postDelayed(myRunnable, 1500);
                     break;
             }
             vm.linearLayout.addView(secondText);

@@ -330,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
                           if (!myobjxlow.matches("consult")) {
                               levelManager.consultGuide.isConsultingGuide = false;
                           }
-                          if (valueManager.currentObjective != 8) {
+                          if (valueManager.currentObjective != 100) {
                               obj();
                           }
                       }

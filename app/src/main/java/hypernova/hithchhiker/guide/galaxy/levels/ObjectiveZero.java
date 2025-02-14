@@ -38,6 +38,7 @@ public class ObjectiveZero extends AppCompatActivity {
             vm.linearLayout.addView(secondText);
         } else if (myObjZero.matches("quit")) {
             secondText.setText("Thanks for playing. <3");
+            vm.currentObjective = 100;
             vm.linearLayout.addView(secondText);
             handler = new Handler();
             myRunnable = new Runnable() {

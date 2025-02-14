@@ -30,7 +30,7 @@ public class ObjectiveSeven extends AppCompatActivity {
                         vm.myMoves.setText("Moves: " + vm.score);
                         vm.myLocation.setText("Desert House");
                         s = "Congratulations human.\n\nAt least, you finished the demo in " + vm.score + " moves.\nNot bad for a species that has pizza as a religion.";
-                        vm.currentObjective = 8;
+                        vm.currentObjective = 100;
                     } else {
                         s = "The door is closed.";
                     }
@@ -289,7 +289,7 @@ public class ObjectiveSeven extends AppCompatActivity {
                         vm.myMoves.setText("Moves: " + vm.score);
                         vm.myLocation.setText("Desert House");
                         s = "Congratulations human.\n\nAt least, you finished the demo in " + vm.score + " moves.\nNot bad for a species that has pizza as a religion.";
-                        vm.currentObjective = 8;
+                        vm.currentObjective = 100;
                     } else {
                         s = "The door is closed.";
                     }
@@ -347,7 +347,7 @@ public class ObjectiveSeven extends AppCompatActivity {
                         vm.myMoves.setText("Moves: " + vm.score);
                         vm.myLocation.setText("Desert House");
                         s = "Congratulations human.\n\nAt least, you finished the demo in " + vm.score + " moves.\nNot bad for a species that has pizza as a religion.";
-                        vm.currentObjective = 8;
+                        vm.currentObjective = 100;
                     } else {
                         s = "The door is closed.";
                     }
@@ -580,7 +580,7 @@ public class ObjectiveSeven extends AppCompatActivity {
                     if (vm.nowhere.isHouseDoorOpen) {
                         vm.myLocation.setText("Desert House");
                         secondText.setText("Congratulations human.\n\nAt least, you finished the demo in " + vm.score + " moves.\nNot bad for a species that has pizza as a religion.");
-                        vm.currentObjective = 8;
+                        vm.currentObjective = 100;
                     } else {
                         secondText.setText("The door is closed.");
                     }
