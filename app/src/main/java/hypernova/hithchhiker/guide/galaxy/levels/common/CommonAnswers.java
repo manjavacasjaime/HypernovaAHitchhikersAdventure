@@ -179,6 +179,9 @@ public class CommonAnswers extends AppCompatActivity {
         } else if (myObjX.contains("where") && myObjX.contains("am") && myObjX.contains("i")) {
             secondText.setText("YOUR location is written at the top of the screen.");
             vm.linearLayout.addView(secondText);
+        } else if (myObjX.contains("what") && myObjX.contains("date") && myObjX.contains("is") || myObjX.matches("date") || myObjX.matches("the date")) {
+            secondText.setText("It's April 16, 2019.");
+            vm.linearLayout.addView(secondText);
         } else if ((myObjX.contains("are") || myObjX.contains("did")) && myObjX.contains("you") && (myObjX.contains("from") || myObjX.contains("born")) && myObjX.contains("here")) {
             secondText.setText("No. I'm not from around here.");
             vm.linearLayout.addView(secondText);
