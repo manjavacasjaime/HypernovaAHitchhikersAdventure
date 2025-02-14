@@ -109,7 +109,7 @@ public class ObjectiveSix extends AppCompatActivity {
                     vm.myLocation.setText("Nowhere");
                     secondText.setText("\n.\n.\n.             ...you fade out\n.\n\n" + vm.myself.name + ".\nIt's October 26, 2008. You are in B903.\nIt's been 286 years, 11 months and 8 days since the last hitchhiker died.\n\nIn the middle of nowhere\nYou are standing on a place where the whole ground is covered with black stones. The sky is still orange.\nHeading NORTH you see a house with the door open.\nThe house is black as well and all its curtains are drawn.");
                     vm.linearLayout.addView(secondText);
-                    vm.currentObjective = 10;
+                    vm.currentObjective = 7;
                 } else {
                     secondText.setText("You need to PUT the fuse IN one of the three containers placed under each painting.\nThere are some instructions that you can read next to the door.");
                     vm.linearLayout.addView(secondText);

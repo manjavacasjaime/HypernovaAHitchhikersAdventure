@@ -14,7 +14,7 @@ public class ObjectiveOne extends AppCompatActivity {
     }
 
     public String checkObjAnswer(String myObjOne, TextView secondText) {
-        if (myObjOne.matches("test606 obj7")) {
+        if (myObjOne.matches("test606 obj4")) {
             vm.score = 12;
             vm.myMoves.setText("Moves: " + vm.score);
             vm.myLocation.setText("Library, door");
