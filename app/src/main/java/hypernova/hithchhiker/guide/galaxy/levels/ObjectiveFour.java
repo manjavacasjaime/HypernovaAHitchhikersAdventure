@@ -80,11 +80,14 @@ public class ObjectiveFour extends AppCompatActivity {
                 } else {
                     vm.myLocation.setText("Hall, open door");
                 }
+                String intro = "";
                 if (vm.ludlow.isHouseWindowBroken) {
-                    secondText.setText("Your house hall\nHere you see a broken window, your house door and your basement door.");
+                    intro = "Your house hall\nHere you see a broken window, your house door and your basement door.";
                 } else {
-                    secondText.setText("Your house hall\nHere you see a window, your house door and your basement door.");
+                    intro = "Your house hall\nHere you see a window, your house door and your basement door.";
                 }
+                intro = intro + "\nHeading North you see the Street.";
+                secondText.setText(intro);
             }
             vm.linearLayout.addView(secondText);
         } else if (myObjFour.matches("west") || myObjFour.matches("w") || myObjFour.matches("go west") || myObjFour.matches("go w") || myObjFour.matches("go left")) {
@@ -702,6 +705,7 @@ public class ObjectiveFour extends AppCompatActivity {
                 } else {
                     intro = intro + ", your house door, your basement door and a glass of water.";
                 }
+                intro = intro + "\nHeading North you see the Street.";
                 if (vm.fred.isPresent) {
                     intro = intro + "\nFred is here.";
                 }
