@@ -334,6 +334,13 @@ public class ObjectiveSix extends AppCompatActivity {
                         secondText.setText("It works. You can easily take it.");
                     }
                     vm.linearLayout.addView(secondText);
+                } else if (myObjSix.contains("container")) {
+                    if (vm.lwLibrary.hasChosenCorrectDoor) {
+                        secondText.setText("The three of them have a designated number (1, 2, 3).");
+                    } else {
+                        secondText.setText("The three of them have a designated number (1, 2, 3), and it looks like you can place some kind of battery inside.");
+                    }
+                    vm.linearLayout.addView(secondText);
                 } else if (myObjSix.contains("door")) {
                     secondText.setText("The door looks sealed. The text 'the unfortunate one' seems to be written with fury.");
                     vm.linearLayout.addView(secondText);
