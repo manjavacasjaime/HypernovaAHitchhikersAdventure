@@ -614,6 +614,9 @@ public class ObjectiveFive extends AppCompatActivity {
             vm.myMoves.setText("Moves: " + vm.score);
             secondText.setText("After 20 minutes sleeping, you wake up and everything is still the same. Amazing strategy.");
             vm.linearLayout.addView(secondText);
+        } else if (myObjFive.contains("burn")) {
+            secondText.setText("In order to burn something, you need to find a lighter.");
+            vm.linearLayout.addView(secondText);
         } else if (myObjFive.contains("check") && myObjFive.contains("out")) {
             secondText.setText("Try to LOOK AROUND or EXAMINE an object.");
             vm.linearLayout.addView(secondText);

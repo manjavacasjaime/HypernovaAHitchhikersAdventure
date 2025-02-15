@@ -9,6 +9,7 @@ import hypernova.hithchhiker.guide.galaxy.characters.Abigail;
 import hypernova.hithchhiker.guide.galaxy.characters.Fred;
 import hypernova.hithchhiker.guide.galaxy.characters.Henry;
 import hypernova.hithchhiker.guide.galaxy.characters.Icarus;
+import hypernova.hithchhiker.guide.galaxy.characters.Jorge;
 import hypernova.hithchhiker.guide.galaxy.characters.Kenny;
 import hypernova.hithchhiker.guide.galaxy.characters.Myself;
 import hypernova.hithchhiker.guide.galaxy.characters.Shannon;
@@ -27,6 +28,7 @@ public class ValueManager extends AppCompatActivity {
     public int appColor; // 1 grey, 2 green, 3 pink
     public Myself myself;
     public Fred fred;
+    public Jorge jorge;
     public Abigail abigail = new Abigail();
     public Icarus icarus = new Icarus();
     public Shannon shannon = new Shannon();
@@ -51,6 +53,7 @@ public class ValueManager extends AppCompatActivity {
         appColor = sharedPrefs.getInt("appColor", 1);
         myself = new Myself(sharedPreferences);
         fred = new Fred(sharedPreferences);
+        jorge = new Jorge(sharedPreferences);
         myBasement = new MyBasement(sharedPreferences);
         ludlow = new Ludlow(sharedPreferences);
         lwLibrary = new LudlowLibrary(sharedPreferences);
@@ -60,6 +63,7 @@ public class ValueManager extends AppCompatActivity {
     public void initiateVariables() {
         myself.initiateVariables();
         fred.initiateVariables();
+        jorge.initiateVariables();
         myBasement.initiateVariables();
         ludlow.initiateVariables();
         lwLibrary.initiateVariables();
@@ -73,6 +77,7 @@ public class ValueManager extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPrefs.edit();
         myself.save();
         fred.save();
+        jorge.save();
         myBasement.save();
         ludlow.save();
         lwLibrary.save();
@@ -92,6 +97,7 @@ public class ValueManager extends AppCompatActivity {
     public void restore() {
         myself.restore();
         fred.restore();
+        jorge.restore();
         myBasement.restore();
         ludlow.restore();
         lwLibrary.restore();

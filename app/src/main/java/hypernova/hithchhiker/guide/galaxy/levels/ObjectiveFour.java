@@ -17,7 +17,22 @@ public class ObjectiveFour extends AppCompatActivity {
     }
 
     public String checkObjAnswer(String myObjFour, TextView secondText) {
-        if (vm.fred.isPresent && vm.ludlow.currentLocation.equals("house") && (vm.score - vm.ludlow.scoreWhenFredWaiting >= 5)) {
+        if (vm.jorge.conversationStatus == 1) {  // CONVERSATION JORGE
+            String intro;
+            if (myObjFour.length() < 50) {
+                intro = "'That's it? At least put your heart on it.\nAnyways, I need this lighter's flame to start up my car, so I'm taking it.'";
+            } else if(myObjFour.length() < 100) {
+                intro = "'It was a good try, but not good enough.\nAnyways, I need this lighter's flame to start up my car, so I'm taking it.'";
+            } else if(myObjFour.length() < 150) {
+                intro = "'Okay okay. I see we are bringing out the big guns.\nUnfortunately I need this lighter's flame to start up my car, so I'm taking it.'";
+            } else {
+                intro = "'Oh my... GOD. It was the most beautiful, touching, breath-taking poem I have ever heard. You really put a lot of heart on it.\nUnfortunately I need this lighter's flame to start up my car, so I'm taking it.'";
+            }
+            vm.jorge.hasTakenLighter = true;
+            vm.jorge.conversationStatus = 0;
+            secondText.setText(intro + "\n\nJorge takes the lighter, then he leaves.");
+            vm.linearLayout.addView(secondText);
+        } else if (vm.fred.isPresent && vm.ludlow.currentLocation.equals("house") && (vm.score - vm.ludlow.scoreWhenFredWaiting >= 5)) {
             vm.fred.isPresent = false;
             if (!vm.ludlow.isHouseWaterDrunk && !vm.myself.inventory.contains("water") && !vm.ludlow.objectsDroppedHouse.contains("water")) {
                 vm.ludlow.isHouseWaterDrunk = true;
@@ -36,7 +51,7 @@ public class ObjectiveFour extends AppCompatActivity {
             vm.currentObjective = 0;
         }
         // CHECK IS STANDING, added just in case
-        else if (!vm.myself.isStanding && !(myObjFour.contains("stand") || myObjFour.contains("get up") || myObjFour.contains("sit down") || myObjFour.matches("sit") || myObjFour.contains("lie") || myObjFour.contains("stop") || myObjFour.contains("examine") || (myObjFour.contains("look") && myObjFour.contains("around")) || myObjFour.matches("l") || myObjFour.matches("look") || myObjFour.matches("i") || myObjFour.matches("inventory") || myObjFour.matches("sleep"))) {
+        else if (!vm.myself.isStanding && !(myObjFour.contains("stand") || myObjFour.contains("get up") || myObjFour.contains("sit down") || myObjFour.matches("sit") || myObjFour.contains("lie") || myObjFour.contains("stop") || myObjFour.contains("examine") || (myObjFour.contains("look") && myObjFour.contains("around")) || myObjFour.matches("l") || myObjFour.matches("look") || myObjFour.matches("i") || myObjFour.matches("inventory") || myObjFour.matches("sleep") || myObjFour.contains("burn"))) {
             secondText.setText("Better stand up first.");
             vm.linearLayout.addView(secondText);
         }
@@ -612,6 +627,9 @@ public class ObjectiveFour extends AppCompatActivity {
                     secondText.setText("Fred is right here.");
                 }
                 vm.linearLayout.addView(secondText);
+            } else if (myObjFour.contains("jorge")) {
+                secondText.setText("Jorge is now so far away you cannot even see him.");
+                vm.linearLayout.addView(secondText);
             } else {
                 secondText.setText("This person's name is incorrect or he/she cannot be followed.");
                 vm.linearLayout.addView(secondText);
@@ -764,6 +782,16 @@ public class ObjectiveFour extends AppCompatActivity {
             vm.score++;
             vm.myMoves.setText("Moves: " + vm.score);
             secondText.setText("After 20 minutes sleeping, you wake up and everything is still the same. Amazing strategy.");
+            vm.linearLayout.addView(secondText);
+        } else if (myObjFour.contains("burn")) {
+            if (vm.jorge.hasTakenLighter) {
+                secondText.setText("Sorry. Jorge has just taken the lighter that was here.");
+            } else {
+                vm.jorge.conversationStatus = 1;
+                secondText.setText("You need a lighter first... Lucky you! You have just found one on the ground.\n" +
+                        "As you try to grab it, your annoying neighbour Jorge screams at you.\n\n" +
+                        "'Hey, hey, HEY! That lighter is mine. Well it is not mine mine, but I did set my eyes on it first. I may be able to spare the lighter if you give me a nice poem. It's been so long since I heard a good one. Hit me with your best shot!'");
+            }
             vm.linearLayout.addView(secondText);
         } else if (myObjFour.contains("check") && myObjFour.contains("out")) {
             secondText.setText("Try to LOOK AROUND or EXAMINE an object.");

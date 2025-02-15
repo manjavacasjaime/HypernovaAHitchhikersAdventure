@@ -791,6 +791,9 @@ public class ObjectiveSix extends AppCompatActivity {
             vm.myMoves.setText("Moves: " + vm.score);
             secondText.setText("It will be inappropriate because Abigail and Fred are waiting you to open the metal door.");
             vm.linearLayout.addView(secondText);
+        } else if (myObjSix.contains("burn")) {
+            secondText.setText("In order to burn something, you need to find a lighter.");
+            vm.linearLayout.addView(secondText);
         } else if (myObjSix.contains("check") && myObjSix.contains("out")) {
             secondText.setText("Try to LOOK AROUND or EXAMINE an object.");
             vm.linearLayout.addView(secondText);

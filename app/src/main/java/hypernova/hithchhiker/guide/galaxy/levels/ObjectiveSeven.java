@@ -1039,6 +1039,9 @@ public class ObjectiveSeven extends AppCompatActivity {
             vm.myMoves.setText("Moves: " + vm.score);
             secondText.setText("After 20 minutes sleeping, you wake up and everything is still the same. Even the sky is still orange.\nYou just feel thirstier.");
             vm.linearLayout.addView(secondText);
+        } else if (myObjSeven.contains("burn")) {
+            secondText.setText("In order to burn something, you need to find a lighter.");
+            vm.linearLayout.addView(secondText);
         } else if (myObjSeven.contains("check") && myObjSeven.contains("out")) {
             secondText.setText("Try to LOOK AROUND or EXAMINE an object.");
             vm.linearLayout.addView(secondText);
