@@ -819,8 +819,22 @@ public class ObjectiveSeven extends AppCompatActivity {
         else if (myObjSeven.contains("follow") || myObjSeven.contains("chase") || myObjSeven.contains("find") || myObjSeven.contains("search")) {
             secondText.setText("There is no one here you can follow.");
             vm.linearLayout.addView(secondText);
-        } else if (myObjSeven.contains("drink")) {  // DRINK VERB
-            secondText.setText("You wish you had water.");
+        } else if (myObjSeven.matches("drink")) {  // DRINK VERB
+            secondText.setText("This verb needs to be used with a noun.");
+            vm.linearLayout.addView(secondText);
+        } else if (myObjSeven.contains("drink")) {
+            vm.score++;
+            vm.myMoves.setText("Moves: " + vm.score);
+            if (myObjSeven.contains("glass") || myObjSeven.contains("water")) {
+                if (vm.myself.inventory.contains("water")) {
+                    vm.myself.inventory.remove("water");
+                    secondText.setText("It feels refreshing.");
+                } else {
+                    secondText.setText("There's no water in your inventory.");
+                }
+            } else {
+                secondText.setText("This thing cannot be drunk or it is not in the place.");
+            }
             vm.linearLayout.addView(secondText);
         } else if (myObjSeven.matches("eat")) {  // EAT VERB
             secondText.setText("This verb needs to be used with a noun.");

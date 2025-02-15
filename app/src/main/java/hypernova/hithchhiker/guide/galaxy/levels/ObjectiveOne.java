@@ -22,6 +22,7 @@ public class ObjectiveOne extends AppCompatActivity {
             vm.myself.isStanding = true;
             vm.ludlow.currentLocation = "library";
             vm.myself.isNeckChipInstalled = true;
+            vm.myself.inventory.add("water");
             vm.currentObjective = 4;
         }
         // DIRECTIONS GO VERB

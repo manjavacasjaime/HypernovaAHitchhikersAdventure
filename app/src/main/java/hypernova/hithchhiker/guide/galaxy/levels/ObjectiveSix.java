@@ -576,8 +576,22 @@ public class ObjectiveSix extends AppCompatActivity {
                 secondText.setText("This person's name is incorrect or he/she cannot be followed.");
                 vm.linearLayout.addView(secondText);
             }
-        } else if (myObjSix.contains("drink")) {  // DRINK VERB
-            secondText.setText("There is nothing you can drink here.");
+        } else if (myObjSix.matches("drink")) {  // DRINK VERB
+            secondText.setText("This verb needs to be used with a noun.");
+            vm.linearLayout.addView(secondText);
+        } else if (myObjSix.contains("drink")) {
+            vm.score++;
+            vm.myMoves.setText("Moves: " + vm.score);
+            if (myObjSix.contains("glass") || myObjSix.contains("water")) {
+                if (vm.myself.inventory.contains("water")) {
+                    vm.myself.inventory.remove("water");
+                    secondText.setText("It feels refreshing.");
+                } else {
+                    secondText.setText("There's no water in your inventory.");
+                }
+            } else {
+                secondText.setText("This thing cannot be drunk or it is not in the place.");
+            }
             vm.linearLayout.addView(secondText);
         } else if (myObjSix.contains("write")) {  // WRITE VERB
             secondText.setText("You cannot write new notes.");

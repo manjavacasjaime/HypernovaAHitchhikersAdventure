@@ -479,8 +479,22 @@ public class ObjectiveFive extends AppCompatActivity {
                     vm.linearLayout.addView(secondText);
                 }
             }
-        } else if (myObjFive.contains("drink")) {  // DRINK VERB
-            secondText.setText("There is nothing you can drink here.");
+        } else if (myObjFive.matches("drink")) {  // DRINK VERB
+            secondText.setText("This verb needs to be used with a noun.");
+            vm.linearLayout.addView(secondText);
+        } else if (myObjFive.contains("drink")) {
+            vm.score++;
+            vm.myMoves.setText("Moves: " + vm.score);
+            if (myObjFive.contains("glass") || myObjFive.contains("water")) {
+                if (vm.myself.inventory.contains("water")) {
+                    vm.myself.inventory.remove("water");
+                    secondText.setText("It feels refreshing.");
+                } else {
+                    secondText.setText("There's no water in your inventory.");
+                }
+            } else {
+                secondText.setText("This thing cannot be drunk or it is not in the place.");
+            }
             vm.linearLayout.addView(secondText);
         } else if (myObjFive.contains("write")) {  // WRITE VERB
             secondText.setText("You cannot write new notes.");
