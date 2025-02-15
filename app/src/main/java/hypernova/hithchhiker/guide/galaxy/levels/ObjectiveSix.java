@@ -102,7 +102,12 @@ public class ObjectiveSix extends AppCompatActivity {
                 vm.myMoves.setText("Moves: " + vm.score);
                 vm.lwLibrary.currentLocation = "room D";
                 vm.myLocation.setText("Library, room D");
-                secondText.setText("Room D\nEverything is still the same.\nHeading SOUTH is the Library's hall.\nAbigail and Fred are still here.");
+                String intro = "Room D\nEverything is still the same.\n";
+                if (vm.lwLibrary.hasChosenCorrectDoor) {
+                    intro = intro + "Heading NORTH you can go to the next room.";
+                }
+                intro = intro + "Heading SOUTH is the Library's hall.\nAbigail and Fred are still here.";
+                secondText.setText(intro);
                 vm.linearLayout.addView(secondText);
             } else {
                 if (vm.lwLibrary.hasChosenCorrectDoor) {
@@ -344,7 +349,11 @@ public class ObjectiveSix extends AppCompatActivity {
                     }
                     vm.linearLayout.addView(secondText);
                 } else if (myObjSix.contains("door")) {
-                    secondText.setText("The door looks sealed. The text 'the unfortunate one' seems to be written with fury.");
+                    if (vm.lwLibrary.hasChosenCorrectDoor) {
+                        secondText.setText("The door is open. The text 'the unfortunate one' seems to be written with fury.");
+                    } else {
+                        secondText.setText("The door looks sealed. The text 'the unfortunate one' seems to be written with fury.");
+                    }
                     vm.linearLayout.addView(secondText);
                 } else {
                     secondText.setText("This thing cannot be examined or it is not in the place.");
@@ -757,6 +766,9 @@ public class ObjectiveSix extends AppCompatActivity {
                     intro = intro + "There are some instructions next to the door.\n";
                 } else {
                     intro = intro + "There is a fuse with some instructions next to the door.\n";
+                }
+                if (vm.lwLibrary.hasChosenCorrectDoor) {
+                    intro = intro + "Heading NORTH you can go to the next room.";
                 }
                 intro = intro + "Heading SOUTH is the Library's hall.\nAbigail and Fred are here.";
                 if (!vm.lwLibrary.objectsDroppedRoomD.isEmpty()) {
