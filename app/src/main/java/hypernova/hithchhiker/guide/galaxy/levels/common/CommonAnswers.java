@@ -51,7 +51,7 @@ public class CommonAnswers extends AppCompatActivity {
                     beetlejuiceCounter++;
                     secondText.setText("Do NOT say it again. I'm warning you.");
                     break;
-                case 2:
+                default:
                     secondText.setText("No... No... NOOOOOOOOO!");
                     vm.currentObjective = 100;
                     handler = new Handler();

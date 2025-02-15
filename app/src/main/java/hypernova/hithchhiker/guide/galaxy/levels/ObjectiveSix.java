@@ -8,6 +8,8 @@ import hypernova.hithchhiker.guide.galaxy.managers.ValueManager;
 public class ObjectiveSix extends AppCompatActivity {
     ValueManager vm;
     int stoppetonConversationStatus = 0;
+    int fredAttackedCounter = 0;
+    int abigailAttackedCounter = 0;
     boolean isFirstTimeBackInHall = true;
 
     public ObjectiveSix(ValueManager valManager) {
@@ -21,7 +23,7 @@ public class ObjectiveSix extends AppCompatActivity {
             switch (myObjSix) {
                 case "1":
                     vm.myLocation.setText("Unknown");
-                    secondText.setText("Stoppeton remained being a popular hero.\nIt didn't take long till war lords from other Bubbles wanted to hire him as a mercenary in order to infiltrate the enemy bases using his powers.\nIt is said that Stoppeton got involved in 9 out of the 12 wars that were happening in that moment at the universe.\nTired of this bountyhaunter life, he stopped the time once again to steal the treasures from the war lords and disappear.\nNobody knows where he is or what he did the rest of his life. Today we remember " + vm.myself.name + " " + vm.myself.surname + " as the human he was.\nHopefully, we will finish the adventure whenever we meet again.\nBest regards.\nFred."
+                    secondText.setText("Stoppeton remained being a popular hero.\nIt didn't take long till war lords from other Bubbles wanted to hire him as a mercenary in order to infiltrate the enemy bases using his powers.\nIt is said that Stoppeton got involved in 9 out of the 12 wars that were happening in that moment at the universe.\nTired of this bounty haunter life, he stopped the time once again to steal the treasures from the war lords and disappear.\nNobody knows where he is or what he did the rest of his life. Today we remember " + vm.myself.name + " " + vm.myself.surname + " as the human he was.\nHopefully, we will finish the adventure whenever we meet again.\nBest regards.\nFred."
                             + vm.dieOptions);
                     vm.linearLayout.addView(secondText);
                     vm.currentObjective = 0;
@@ -176,7 +178,7 @@ public class ObjectiveSix extends AppCompatActivity {
             } else if (myObjSix.contains("time")) {
                 if (stoppetonConversationStatus == 0) {
                     stoppetonConversationStatus = 1;
-                    secondText.setText("Oh my God. OH MY GOD! You have had powers after all this time.\nScrew the Travellers. Who needs to travel in space if you can travel in time. Now you have become... STOPPETON, THE TIME 'PAUSER'. Now choose:\n\n1. Live your life with this powers like a God.\n2. Ignore your unique skill and continue your journey.");
+                    secondText.setText("Oh my God. OH MY GOD! You have had powers after all this time.\nScrew the Travellers. Who needs to travel in space if you can travel in time. Now you have become... STOPPETON, THE TIME 'PAUSER'. Now choose:\n\n1. Live your life with these powers like a God.\n2. Ignore your unique skill and continue your journey.");
                 } else {
                     secondText.setText("That's useless.");
                 }
@@ -659,11 +661,44 @@ public class ObjectiveSix extends AppCompatActivity {
                 }
             } else {
                 if (myObjSix.contains("abigail")) {
-                    secondText.setText("She stops your hand.\n'Easy boy! Don't make me cut your hand off.'");
+                    switch (abigailAttackedCounter) {
+                        case 0:
+                            abigailAttackedCounter++;
+                            secondText.setText("She stops your hand.\n'Easy boy! Don't make me cut your hand off.'");
+                            break;
+                        case 1:
+                            abigailAttackedCounter++;
+                            secondText.setText("Abigail: '...'");
+                            break;
+                        case 2:
+                            abigailAttackedCounter++;
+                            secondText.setText("Abigail: 'I'm warning you, " + vm.myself.name + ".'");
+                            break;
+                        default:
+                            vm.myLocation.setText("Dead");
+                            secondText.setText("'You asked for it. You got it.'\n\nAs you start smiling, proud of your act of violence, Abigail takes out her gun and points it to your head."
+                                    + "\nThe gun is a custom designed blaster pistol with small gold attachments. As pretty as it is, it blows brains out like any other gun."
+                                    + "\nYou died."
+                                    + vm.dieOptions);
+                            vm.currentObjective = 0;
+                            break;
+                    }
                 } else if (myObjSix.contains("fred") || myObjSix.contains("friend")) {
-                    secondText.setText("After you slap Fred, Abigail looks at you with a smile.");
+                    switch (fredAttackedCounter) {
+                        case 0:
+                            fredAttackedCounter++;
+                            secondText.setText("After you slap Fred, Abigail looks at you with a smile.");
+                            break;
+                        case 1:
+                            fredAttackedCounter++;
+                            secondText.setText("After you slap Fred, you can feel his self-esteem drastically dropping.");
+                            break;
+                        default:
+                            secondText.setText("Now you're just being an asshole.");
+                            break;
+                    }
                 } else if (myObjSix.contains("painting")) {
-                    secondText.setText("Abigail: 'Hey Hey Hey!'\n'This paintings have been here for decades and one of them must be this 'unfortunate one'. Figure that out instead of acting like an ape.'");
+                    secondText.setText("Abigail: 'Hey Hey Hey!'\n'These paintings have been here for decades and one of them must be this 'unfortunate one'. Figure that out instead of acting like an ape.'");
                 } else if (myObjSix.contains("fuse")) {
                     secondText.setText("It sparks you.");
                 } else if (myObjSix.contains("door")) {
