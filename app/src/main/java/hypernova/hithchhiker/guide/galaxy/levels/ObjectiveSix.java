@@ -638,44 +638,34 @@ public class ObjectiveSix extends AppCompatActivity {
             if (vm.lwLibrary.currentLocation.equals("hall")) {
                 if (myObjSix.contains("people") || myObjSix.contains("person") || myObjSix.contains("sully") || myObjSix.contains("librarian")) {
                     secondText.setText("There's no one here you can attack.");
-                    vm.linearLayout.addView(secondText);
                 } else if (myObjSix.contains("window")) {
                     if (!vm.lwLibrary.hasBrokenWindow) {
                         vm.lwLibrary.hasBrokenWindow = true;
                         secondText.setText("And now the window is broken. It's a mess.");
-                        vm.linearLayout.addView(secondText);
                     } else {
                         secondText.setText("The window is already broken.");
-                        vm.linearLayout.addView(secondText);
                     }
                 } else if (myObjSix.contains("cabin") || myObjSix.contains("shelve") || myObjSix.contains("door")) {
                     secondText.setText("You are all alone and hitting stuff. You should be proud.");
-                    vm.linearLayout.addView(secondText);
                 } else {
                     secondText.setText("This thing cannot be hit or it is not in the place.");
-                    vm.linearLayout.addView(secondText);
                 }
             } else {
                 if (myObjSix.contains("abigail")) {
                     secondText.setText("She stops your hand.\n'Easy boy! Don't make me cut your hand off.'");
-                    vm.linearLayout.addView(secondText);
                 } else if (myObjSix.contains("fred") || myObjSix.contains("friend")) {
                     secondText.setText("After you slap Fred, Abigail looks at you with a smile.");
-                    vm.linearLayout.addView(secondText);
                 } else if (myObjSix.contains("painting")) {
                     secondText.setText("Abigail: 'Hey Hey Hey!'\n'This paintings have been here for decades and one of them must be this 'unfortunate one'. Figure that out instead of acting like an ape.'");
-                    vm.linearLayout.addView(secondText);
                 } else if (myObjSix.contains("fuse")) {
                     secondText.setText("It sparks you.");
-                    vm.linearLayout.addView(secondText);
                 } else if (myObjSix.contains("door")) {
                     secondText.setText("The sound of metal being hit is really cool, but useless.");
-                    vm.linearLayout.addView(secondText);
                 } else {
                     secondText.setText("This thing cannot be hit or it is not in the place.");
-                    vm.linearLayout.addView(secondText);
                 }
             }
+            vm.linearLayout.addView(secondText);
         }
         // WINDOW ACTIONS
         else if ((myObjSix.contains("fix") || myObjSix.contains("repair")) && myObjSix.contains("window")) {

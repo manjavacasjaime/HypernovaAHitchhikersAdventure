@@ -527,42 +527,35 @@ public class ObjectiveFive extends AppCompatActivity {
             if (myObjFive.contains("people") || myObjFive.contains("person") || myObjFive.contains("sully") || myObjFive.contains("librarian")) {
                 if (vm.lwLibrary.hasPeopleLeft) {
                     secondText.setText("There's no one here you can attack.");
-                    vm.linearLayout.addView(secondText);
                 } else {
                     vm.lwLibrary.hasPeopleLeft = true;
                     vm.lwLibrary.scoreWhenPeopleLeave = vm.score;
                     secondText.setText("After showing your true violent self, everybody leaves the place running.\nYou are left here alone.");
-                    vm.linearLayout.addView(secondText);
                 }
             } else if (myObjFive.contains("window")) {
                 if (!vm.lwLibrary.hasBrokenWindow && vm.lwLibrary.hasPeopleLeft) {
                     vm.lwLibrary.hasBrokenWindow = true;
                     secondText.setText("And now the window is broken. It's a mess.");
-                    vm.linearLayout.addView(secondText);
-                } if (vm.lwLibrary.hasBrokenWindow) {
+                } else if (vm.lwLibrary.hasBrokenWindow) {
                     secondText.setText("The window is already broken.");
-                    vm.linearLayout.addView(secondText);
                 } else {
                     vm.lwLibrary.hasBrokenWindow = true;
                     vm.lwLibrary.hasPeopleLeft = true;
                     vm.lwLibrary.scoreWhenPeopleLeave = vm.score;
                     secondText.setText("You broke the window. After showing your true violent self, everybody leaves the place running.\nYou are left here alone.");
-                    vm.linearLayout.addView(secondText);
                 }
             } else if (myObjFive.contains("cabin") || myObjFive.contains("shelve") || myObjFive.contains("door")) {
                 if (vm.lwLibrary.hasPeopleLeft) {
                     secondText.setText("You are all alone and hitting stuff. You should be proud.");
-                    vm.linearLayout.addView(secondText);
                 } else {
                     vm.lwLibrary.hasPeopleLeft = true;
                     vm.lwLibrary.scoreWhenPeopleLeave = vm.score;
                     secondText.setText("After showing your true violent self, everybody leaves the place running.\nYou are left here alone.");
-                    vm.linearLayout.addView(secondText);
                 }
             } else {
                 secondText.setText("This thing cannot be hit or it is not in the place.");
-                vm.linearLayout.addView(secondText);
             }
+            vm.linearLayout.addView(secondText);
         }
         // WINDOW ACTIONS
         else if ((myObjFive.contains("fix") || myObjFive.contains("repair")) && myObjFive.contains("window")) {
