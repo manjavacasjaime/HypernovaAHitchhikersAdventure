@@ -25,6 +25,7 @@ public class ObjectiveFour extends AppCompatActivity {
             } else {
                 secondText.setText("After waiting a while, Fred goes North in order to arrive to the library.");
             }
+            vm.ludlow.isHouseDoorOpen = true;
             vm.myLocation.setText("Hall, open door");
             vm.linearLayout.addView(secondText);
         } else if (vm.fred.isDead && (vm.score - scoreWhenFredKilling >= 3)) {
